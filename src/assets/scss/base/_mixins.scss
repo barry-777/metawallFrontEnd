@@ -1,0 +1,35 @@
+@use "sass:math";
+
+@mixin mobileS {
+  @media (max-width: 320px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin pad {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin ipadPro {
+  @media (min-height: 1194px) {
+    @content;
+  }
+}
+
+@mixin desktop($max-width) {
+	@media (max-width: '#{$max-width}px') {
+		@content;
+  }
+}
+
+@function px($px) {
+	@return math.div($px, 16) * 1rem
+}
