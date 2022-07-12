@@ -2,12 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/'
+    path: '/index'
     // component: () => import('/src/components/HelloWorld.vue')
   },
   {
-    path: '/index'
-    // component: () => import('/src/components/HelloWorld.vue')
+    path: '/auth',
+    component: () => import('@/views/AuthBase.vue')
   }
 ]
 

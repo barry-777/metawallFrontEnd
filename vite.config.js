@@ -11,8 +11,12 @@ export default defineConfig({
     alias({
       entries: [
         {
-          find: '@src',
+          find: '@',
           replacement: resolve(rootDir, 'src')
+        },
+        {
+          find: '@img',
+          replacement: resolve(rootDir, 'src/assets/img')
         }
       ]
     })

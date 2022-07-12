@@ -2,55 +2,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 html {
-  font-family: Noto Sans TC,黑體-繁,Apple LiGothic Medium,PingFang,微軟正黑體,Microsoft JhengHei,WenQuanYi Zen Hei,helvetica,Arial,sans-serif;
-  font-size: 16px;
-  color: $color-primary;
+  font-family: Noto Sans TC, 黑體-繁, Apple LiGothic Medium, PingFang, 微軟正黑體,Microsoft JhengHei, WenQuanYi Zen Hei, helvetica, Arial, sans-serif;
+  font-size: px(16);
   font-weight: $light;
 }
 
 html,
 body {
+  width: 100vw;
   margin: 0;
   padding: 0;
 }
 
-.content {
+body {
+  overflow-x: hidden;
+}
+
+#app {
   width: 100%;
-  min-height: calc(100vh - 60px);
-  // background-color: $color-gray-2;
-  padding: 0 18px;
+}
+
+.container-box {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-}
-
-.container {
-  width: 870px;
-  max-width: 100%;
-  margin: 0 auto;
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  
-  @include mobile {
-    margin-bottom: 90px;
+  padding: 5vw;
+  background-color: $c-gray-6;
+  @include pad {
+    .container {
+      padding: 50px 5vw;
+    }
   }
 }
 
-main {
-  width: 61%; //530
-
-  @include mobile {
-    width: 100%;
-    max-width: 530px;
-    margin: 0 auto;
+input, textarea {
+  width: 100%;
+  display: block;
+  background-color: #fff;
+  border: 2px solid $c-black;
+  font-size: px(18);
+  padding: 8px 15px;
+  &::placeholder {
+    font-size: px(18);
+    color: $c-gray-4;
+    opacity: 1;
+    transition: opacity .4s;
+  }
+  &:focus {
+    &::placeholder {
+      opacity: 0;
+    }
   }
 }
 
-aside {
-  width: 36%; //310
-  margin-left: 15px;
+.err-text {
+  width: 100%;
+  font-weight: $medium;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  text-align: center;
+  color: $c-error;
+}
 
-  @include mobile {
-    display: none;
+.base-button {
+  width: 100%;
+  min-height: 50px;
+  font-weight: $medium;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  background-color: $c-first;
+  color: $c-white;
+  box-shadow: -2px 2px 0 0 $c-black;
+  border-radius: 8px;
+  border: 2px solid $c-black;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background-color .6s, color .2s, transform .4s;
+  &:hover:not(.disable) {
+    background-color: darken($c-first, 8%);
+    color: $c-white;
+    transform: translateY(-2px);
+  }
+  &.simple {
+    background-color: $c-white;
+    color: $c-black;
+    &:hover:not(.disable) {
+      background-color: darken($c-white, 8%);
+      color: $c-black;
+    }
+  }
+  &.disable {
+    cursor: not-allowed;
   }
 }

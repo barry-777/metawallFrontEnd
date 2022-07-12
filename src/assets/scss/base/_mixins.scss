@@ -24,7 +24,7 @@
   }
 }
 
-@mixin desktop($max-width) {
+@mixin rwdSet($max-width) {
 	@media (max-width: '#{$max-width}px') {
 		@content;
   }
