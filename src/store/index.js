@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-// import router from '../router/index'
+import router from '../router/index'
 import axios from 'axios'
 import { checkConsole } from '../services/helper'
 
@@ -9,14 +9,34 @@ export const useCommonStore = defineStore('commonStore', {
     token: null,
     isLoading: false,
     isLogin: false,
-    errMsg: ''
+    errMsg: '',
+    user_id: '',
+    userInfo: {}
   }),
   // computed
   getters: {},
   // methods
   actions: {
-    // 登入訊息
-    authSetting(payload) {
+    // 登入測試
+    authTryLogin() {
+      const token = localStorage.getItem('token')
+      const user_id = localStorage.getItem('user_id')
+      const tokenExpiration = localStorage.getItem('tokenExpiration')
+      const expiresIn = +tokenExpiration - new Date().getTime()
+
+      if (expiresIn < 0) {
+        return (this.isLogin = false)
+      }
+
+      if (token && user_id) {
+        this.isLogin = true
+        return true
+      }
+
+      this.isLogin = false
+    },
+    // 設定登入訊息
+    authSet(payload) {
       const expiresIn = 1000 * 3600 * 24
       const expirationDate = new Date().getTime() + expiresIn
       const { token, user } = payload
@@ -26,7 +46,7 @@ export const useCommonStore = defineStore('commonStore', {
       localStorage.setItem('tokenExpiration', expirationDate)
     },
     // 註冊會員
-    async signUp(payload) {
+    async authSignUp(payload) {
       try {
         this.errMsg = ''
         this.isLoading = true
@@ -44,7 +64,7 @@ export const useCommonStore = defineStore('commonStore', {
       }
     },
     // 登入會員
-    async login(payload) {
+    async authLogin(payload) {
       try {
         this.errMsg = ''
         this.isLoading = true
@@ -53,14 +73,23 @@ export const useCommonStore = defineStore('commonStore', {
         const res = await axios.post(api, { email, password })
         const data = res.data.data
         // 設定訊息
-        this.authSetting(data)
+        this.authSet(data)
         this.isLoading = false
+        this.isLogin = true
+        router.push('/posts-wall')
         checkConsole('登入成功', data)
       } catch (err) {
         this.errMsg = err.response.data.message
         this.isLoading = false
         checkConsole('登入失敗', err)
       }
+    },
+    // 登出會員
+    authLogout() {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user_id')
+      localStorage.removeItem('tokenExpiration')
+      router.push('/auth')
     }
   }
 })

@@ -70,7 +70,7 @@ const confirmPassword = ref('')
 // store 資料
 const commonStore = useCommonStore()
 const { errMsg } = storeToRefs(commonStore)
-const { signUp, login } = commonStore
+const { authSignUp, authLogin } = commonStore
 
 // 重新設定
 const resetValue = () => {
@@ -107,7 +107,7 @@ const signUpEvent = async () => {
     confirmPassword: confirmPassword.value
   }
 
-  const result = await signUp(payload)
+  const result = await authSignUp(payload)
   if (result) {
     slideToTarget(0)
   }
@@ -128,7 +128,7 @@ const loginEvent = async () => {
     password: password.value
   }
 
-  login(payload)
+  authLogin(payload)
 }
 
 // swiper 事件
