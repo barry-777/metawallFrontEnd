@@ -111,11 +111,15 @@ input, textarea {
 }
 
 .base-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 50px;
   font-weight: $medium;
   letter-spacing: 1px;
   line-height: 1.4;
+  padding: 8px 20px;
   background-color: $c-first;
   color: $c-white;
   box-shadow: -2px 2px 0 0 $c-black;
