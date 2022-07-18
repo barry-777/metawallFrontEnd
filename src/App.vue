@@ -1,7 +1,19 @@
-<script setup></script>
-
 <template>
   <router-view></router-view>
+  <Transition name="fade">
+    <LoadingBox v-if="showLoading" />
+  </Transition>
+  <Transition name="fade-alert">
+    <AlertBox v-if="showAlert" />
+  </Transition>
 </template>
 
-<style lang="scss"></style>
+<script setup>
+import LoadingBox from '@/components/LoadingBox.vue'
+import AlertBox from '@/components/AlertBox.vue'
+import { useModalStore } from '@/stores/modal'
+import { storeToRefs } from 'pinia'
+
+const modalStore = useModalStore()
+const { showLoading, showAlert } = storeToRefs(modalStore)
+</script>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useCommonStore } from '@/store/index.js'
+import { useUserStore } from '@/stores/user.js'
 
 const routes = [
   {
@@ -16,7 +16,7 @@ const routes = [
     children: [
       {
         path: '/posts-wall',
-        component: () => import('@/views/PostsWall.vue'),
+        component: () => import('@/components/PostsWall.vue'),
         meta: { requiresAuth: true }
       }
     ]
@@ -40,15 +40,12 @@ const router = createRouter({
 })
 
 router.beforeEach(to => {
-  const commonStore = useCommonStore()
-  const { authTryLogin } = commonStore
+  const userStore = useUserStore()
+  const { tryLogin } = userStore
 
-  // 測試登入
-  authTryLogin()
+  if (tryLogin() && to.path === '/auth') return '/posts-wall'
 
-  if (commonStore.isLogin && to.path === '/auth') return '/posts-wall'
-
-  if (!commonStore.isLogin && to.meta.requiresAuth) return '/auth'
+  if (!tryLogin() && to.meta.requiresAuth) return '/auth'
   else return true
 })
 
