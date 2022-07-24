@@ -7,22 +7,27 @@
       </div>
       <div class="g">
         <div class="ghost-copy">
-          <div class="one"></div>
-          <div class="two"></div>
-          <div class="three"></div>
-          <div class="four"></div>
+          <div class="one" />
+          <div class="two" />
+          <div class="three" />
+          <div class="four" />
         </div>
         <div class="ghost">
           <div class="face">
-            <div class="eye"></div>
-            <div class="eye-right"></div>
-            <div class="mouth"></div>
+            <div class="eye" />
+            <div class="eye-right" />
+            <div class="mouth" />
           </div>
         </div>
-        <div class="shadow"></div>
+        <div class="shadow" />
       </div>
       <div class="go-back">
-        <router-link to="/posts-wall" class="base-button simple"> 返回首頁 </router-link>
+        <router-link
+          to="/posts-wall"
+          class="base-button simple"
+        >
+          返回首頁
+        </router-link>
       </div>
     </div>
   </section>

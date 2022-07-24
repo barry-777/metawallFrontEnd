@@ -3,10 +3,10 @@
     <div class="full-container">
       <div class="full-inner">
         <div class="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <div />
+          <div />
+          <div />
+          <div />
         </div>
       </div>
     </div>

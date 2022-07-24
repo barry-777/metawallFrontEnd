@@ -19,7 +19,7 @@ axios.defaults.retryDelay = 1000
 useReq.interceptors.request.use(
   config => {
     if (localStorage.getItem('token')) {
-      config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+      config.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
     }
     return config
   },
@@ -75,7 +75,7 @@ useReq.interceptors.response.use(
       config.__retryCount += 1
 
       // Create new promise to handle
-      let backOff = new Promise(function (resolve) {
+      const backOff = new Promise(function (resolve) {
         setTimeout(function () {
           openAlert('error', '伺服器沒有即時回應，正在嘗試重新請求服務...')
           resolve()

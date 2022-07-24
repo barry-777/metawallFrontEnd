@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <router-view />
   <Transition name="fade">
     <LoadingBox v-if="showLoading" />
   </Transition>

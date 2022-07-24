@@ -1,21 +1,30 @@
 <template>
   <section class="side-bar">
     <div class="container">
-      <button class="base-button" type="button">張貼動態</button>
+      <button
+        class="base-button"
+        type="button"
+      >
+        張貼動態
+      </button>
       <ul>
         <li>
           <router-link to="/auth">
             <div>
-              <user-photo></user-photo>
+              <user-photo :photo="userStore.avatar" />
             </div>
-            <p v-if="userStore.name">{{ userStore.name }}</p>
-            <p v-else>使用者名稱</p>
+            <p v-if="userStore.name">
+              {{ userStore.name }}
+            </p>
+            <p v-else>
+              使用者名稱
+            </p>
           </router-link>
         </li>
         <li>
           <router-link to="/auth">
             <div>
-              <i class="fa-regular fa-bell"></i>
+              <i class="fa-regular fa-bell" />
             </div>
             <p>追蹤名單</p>
           </router-link>
@@ -23,7 +32,7 @@
         <li>
           <router-link to="/auth">
             <div>
-              <i class="fa-regular fa-thumbs-up"></i>
+              <i class="fa-regular fa-thumbs-up" />
             </div>
             <p>我按讚的文章</p>
           </router-link>
@@ -31,7 +40,7 @@
         <li>
           <router-link to="/auth">
             <div>
-              <i class="fa-regular fa-comment"></i>
+              <i class="fa-regular fa-comment" />
             </div>
             <p>我留言的貼文</p>
           </router-link>
@@ -57,6 +66,8 @@ const userStore = useUserStore()
   padding: 30px 20px 20px 20px;
   border: 2px solid $c-black;
   background-color: $c-white;
+  position: sticky;
+  top: 30px;
   > .container {
     width: 100%;
   }

@@ -1,8 +1,16 @@
 <template>
-  <div class="alert-box" :class="showAlertCls">
+  <div
+    class="alert-box"
+    :class="showAlertCls"
+  >
     <div class="alert-container move-obj">
       <template v-if="showAlertText.length">
-        <p v-for="t in showAlertText" :key="t">{{ t }}</p>
+        <p
+          v-for="t in showAlertText"
+          :key="t"
+        >
+          {{ t }}
+        </p>
       </template>
     </div>
   </div>

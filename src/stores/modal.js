@@ -11,13 +11,13 @@ export const useModalStore = defineStore('modalStore', {
   }),
   // methods
   actions: {
-    openLoading() {
+    openLoading () {
       this.showLoading = true
     },
-    closeLoading() {
+    closeLoading () {
       this.showLoading = false
     },
-    openAlert(cls, ...info) {
+    openAlert (cls, ...info) {
       if (this.showAlert) return
       this.showAlert = true
       this.showAlertCls = cls
