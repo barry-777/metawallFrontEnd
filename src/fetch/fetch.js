@@ -30,7 +30,6 @@ export function getCurrentUser () {
 
 // 取得所有貼文 -> user_id
 export function getPostsById (user_id) {
-  // user_id
   return useReq({
     url: `${apiPath}/api/posts/user/${user_id}`,
     method: 'get'

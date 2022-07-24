@@ -23,7 +23,7 @@
         <div class="content">
           <div class="top">
             <div class="user-photo-outer">
-              <user-photo :photo="post.user.avatar" />
+              <UserPhoto :photo="post.user.avatar" />
             </div>
             <div class="user-name">
               <p>{{ post.user.name }}</p>
@@ -55,7 +55,7 @@
               <!-- 留言 -->
               <div>
                 <div class="user-photo-outer">
-                  <user-photo :photo="userStore.avatar" />
+                  <UserPhoto :photo="userStore.avatar" />
                 </div>
                 <div class="input-outer">
                   <input
@@ -69,65 +69,53 @@
               </div>
             </div>
             <!-- 留言牆 -->
-            <div class="comments">
+            <div
+              v-if="post.comments"
+              class="comments"
+            >
               <ul>
-                <li>
+                <li
+                  v-for="comment in post.comments"
+                  :key="comment._id"
+                >
                   <div class="div-wrap">
                     <div class="user-photo-outer">
-                      <user-photo :photo="userStore.avatar" />
+                      <UserPhoto :photo="comment.user.avatar" />
                     </div>
                     <div class="comment-outer">
                       <div class="name">
-                        留言者名稱
+                        {{ comment.user.name }}
                       </div>
                       <div class="date">
-                        留言日期
+                        {{ dateFormat(comment.createdAt) }}
                       </div>
                       <div class="comment">
-                        留言一留言一
+                        {{ comment.content }}
                       </div>
                     </div>
                   </div>
-                </li>
-                <li>
-                  <div class="div-wrap">
-                    <div class="user-photo-outer">
-                      <user-photo :photo="userStore.avatar" />
-                    </div>
-                    <div class="comment-outer">
-                      <div class="name">
-                        留言者名稱
+                  <template v-if="comment.commentReplies">
+                    <div
+                      v-for="commonReply in comment.commentReplies"
+                      :key="commonReply._id"
+                      class="div-wrap2"
+                    >
+                      <div class="user-photo-outer">
+                        <UserPhoto :photo="commonReply.user.avatar" />
                       </div>
-                      <div class="date">
-                        留言日期
-                      </div>
-                      <div class="comment">
-                        留言二留言二
-                      </div>
-                      <!-- 使用燈箱回覆，後端ＡＰＩ代補 -->
-                      <div class="other-comment">
-                        <button type="button">
-                          回覆
-                        </button>
+                      <div class="comment-outer">
+                        <div class="name">
+                          {{ commonReply.user.name }}
+                        </div>
+                        <div class="date">
+                          {{ dateFormat(commonReply.createdAt) }}
+                        </div>
+                        <div class="comment">
+                          {{ commonReply.content }}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="div-wrap2">
-                    <div class="user-photo-outer">
-                      <user-photo :photo="userStore.avatar" />
-                    </div>
-                    <div class="comment-outer">
-                      <div class="name">
-                        留言者名稱
-                      </div>
-                      <div class="date">
-                        留言日期
-                      </div>
-                      <div class="comment">
-                        留言二留言二
-                      </div>
-                    </div>
-                  </div>
+                  </template>
                 </li>
               </ul>
             </div>
