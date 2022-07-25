@@ -34,12 +34,18 @@
             <div class="inner-t">
               {{ post.content }}
             </div>
-            <div class="inner-photo">
+            <div
+              v-if="post.images.length"
+              class="inner-photo"
+            >
               <img
                 :src="post.images[0]"
                 alt=""
               >
-              <div>
+              <div
+                v-if="post.images.length > 1"
+                @click="imagesBoxHandle(post.images)"
+              >
                 <i class="fa-regular fa-square-plus" />
                 <p>MORE</p>
               </div>
@@ -124,11 +130,18 @@
       </div>
     </template>
   </div>
+  <Transition name="fade-model">
+    <ImagesBox
+      v-if="showImagesBox"
+      :images="imagesBoxValue"
+    />
+  </Transition>
 </template>
 
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
-// import { onMounted } from 'vue'
+import ImagesBox from '@/components/ImagesBox.vue'
+import { ref } from 'vue'
 import { getPostsByRoute } from '@/fetch/fetch'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
@@ -142,7 +155,8 @@ const route = useRoute()
 const userStore = useUserStore()
 const postStore = usePostStore()
 const modalStore = useModalStore()
-const { openLoading, closeLoading } = modalStore
+const { openLoading, closeLoading, controlImagesBox } = modalStore
+const { showImagesBox } = storeToRefs(modalStore)
 const { posts, postSort } = storeToRefs(postStore)
 
 // 取得所有貼文
@@ -154,6 +168,13 @@ const getPosts = async () => {
   closeLoading()
 }
 getPosts()
+
+// 多張照片燈箱
+const imagesBoxValue = ref({})
+const imagesBoxHandle = (value) => {
+  imagesBoxValue.value = value
+  controlImagesBox(true)
+}
 </script>
 
 <style scoped lang="scss">

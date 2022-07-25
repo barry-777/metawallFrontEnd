@@ -2,6 +2,10 @@ import useReq from '../services/useReq'
 
 const apiPath = import.meta.env.VITE_APP_API
 
+// "https://i.imgur.com/We83yRK.jpg"
+// "https://i.imgur.com/KzdqVQh.jpg"
+// "https://i.imgur.com/YTdDDuo.png"
+
 // 登入
 export function postLogin (data) {
   return useReq({

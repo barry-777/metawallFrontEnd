@@ -50,26 +50,53 @@ body {
   }
 }
 
-.clip-enter-from,
-.clip-leave-to {
+.fade-model-enter-from,
+.fade-model-leave-to {
   opacity: 0;
-  transition: opacity .6s .2s;
-  .move-obj {
+  transition: opacity .8s .2s;
+  .close-button {
     opacity: 0;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    transition: opacity .6s, clip-path .6s
+    transform: translateY(-10px);
+  }
+  .main-target {
+    opacity: 0;
+    clip-path: inset(0 50% 0 50%);
   }
 }
 
-.clip-enter-to,
-.clip-leave-from {
+.fade-model-enter-to,
+.fade-model-leave-from {
   opacity: 1;
-  transition: opacity .6s;
-  .move-obj {
+  transition: opacity 1s;
+  .close-button {
     opacity: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 115%, 0 100%);
-    transition: opacity .6s .2s, clip-path .6s .4s;
+    transform: translateY(0px);
+    transition: .6s .6s;
   }
+  .main-target {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transition: opacity .6s .4s, clip-path .6s .4s;
+  }
+}
+
+// swiper
+:root {
+  --swiper-navigation-size: 32px !important;
+  --swiper-theme-color: #fff !important;
+  --swiper-pagination-bullet-horizontal-gap: 5px !important;
+}
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+  left: 0px !important;
+}
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+  right: 0px !important;
+}
+.swiper-horizontal>.swiper-pagination-bullets, 
+.swiper-pagination-bullets.swiper-pagination-horizontal, 
+.swiper-pagination-custom, 
+.swiper-pagination-fraction {
+  bottom: 0px !important;
 }
 
 #app {
@@ -147,6 +174,23 @@ input, textarea {
   }
 }
 
+.close-button {
+  width: 50px;
+  height: 50px;
+  background-color: $c-gray-4;
+  color: $c-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  i {
+    font-size: px(20);
+  }
+}
+
 .full-box {
   width: 100vw;
   position: fixed;
@@ -157,18 +201,35 @@ input, textarea {
   background-color: rgba(0, 0, 0, .5);
   backdrop-filter: blur(3px);
   z-index: 999;
+  .full-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
   .full-container {
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    padding: 2vw;
   }
   .full-inner {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 1;
+  }
+  .close-button {
+    position: relative;
+    z-index: 2;
+  }
+  .main-target {
+    position: relative;
+    z-index: 2;
   }
 }

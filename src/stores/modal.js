@@ -7,10 +7,19 @@ export const useModalStore = defineStore('modalStore', {
     showLoading: false,
     showAlert: false,
     showAlertText: [],
-    showAlertCls: ''
+    showAlertCls: '',
+    showImagesBox: false
   }),
   // methods
   actions: {
+    lockScroll () {
+      const body = document.querySelector('body')
+      body.style.overflow = 'hidden'
+    },
+    unLockScroll () {
+      const body = document.querySelector('body')
+      body.style.removeProperty('overflow')
+    },
     openLoading () {
       this.showLoading = true
     },
@@ -29,6 +38,15 @@ export const useModalStore = defineStore('modalStore', {
         this.showAlertCls = ''
         this.showAlertText = []
       }, 2000)
+    },
+    controlImagesBox (control) {
+      if (control) {
+        this.lockScroll()
+        this.showImagesBox = true
+      } else {
+        this.unLockScroll()
+        this.showImagesBox = false
+      }
     }
   }
 })
