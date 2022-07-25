@@ -190,7 +190,7 @@ const imagesBoxHandle = (value) => {
   border: 2px solid $c-black;
   border-bottom: 4px solid $c-black;
   box-shadow: 0 3px 5px rgba($c-black, 0.3);
-  padding: 20px 18px;
+  padding: 25px 22px;
   &:not(:first-child) {
     margin-top: 25px;
   }
@@ -237,6 +237,7 @@ const imagesBoxHandle = (value) => {
   align-items: stretch;
   margin-top: 10px;
   > img {
+    width: calc(100% - 160px);
     border-radius: 10px;
     border: 2px solid $c-black;
   }
@@ -245,6 +246,7 @@ const imagesBoxHandle = (value) => {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-shrink: 0;
     width: 150px;
     padding: 15px;
     margin-left: 10px;
