@@ -1,12 +1,28 @@
 <template>
   <section class="side-bar">
     <div class="container">
-      <button
-        class="base-button"
-        type="button"
+      <router-link
+        v-if="route.path !== '/post-upload'"
+        to="/post-upload"
       >
-        張貼動態
-      </button>
+        <button
+          class="base-button"
+          type="button"
+        >
+          新增動態
+        </button>
+      </router-link>
+      <router-link
+        v-else
+        to="/posts-wall"
+      >
+        <button
+          class="base-button"
+          type="button"
+        >
+          回首頁
+        </button>
+      </router-link>
       <ul>
         <li>
           <router-link to="/auth">
@@ -53,7 +69,9 @@
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
 import { useUserStore } from '@/stores/user'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const userStore = useUserStore()
 </script>
 
@@ -70,6 +88,9 @@ const userStore = useUserStore()
   top: 30px;
   > .container {
     width: 100%;
+  }
+  a {
+    display: block;
   }
   li {
     width: 100%;

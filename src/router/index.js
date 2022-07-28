@@ -16,7 +16,12 @@ const routes = [
     children: [
       {
         path: '/posts-wall',
-        component: () => import('@/components/PostsWall.vue'),
+        component: () => import('@/views/PostsWall.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/post-upload',
+        component: () => import('@/components/PostUpload.vue'),
         meta: { requiresAuth: true }
       }
     ]

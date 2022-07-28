@@ -6,6 +6,18 @@ const apiPath = import.meta.env.VITE_APP_API
 // "https://i.imgur.com/KzdqVQh.jpg"
 // "https://i.imgur.com/YTdDDuo.png"
 
+// 上傳圖片 to imgur
+export function postUploadImage (data) {
+  return useReq({
+    url: `${apiPath}/api/upload`,
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    data
+  })
+}
+
 // 登入
 export function postLogin (data) {
   return useReq({
@@ -32,7 +44,7 @@ export function getCurrentUser () {
   })
 }
 
-// 取得所有貼文 -> user_id
+// 取得使用者貼文 -> user_id
 export function getPostsById (user_id) {
   return useReq({
     url: `${apiPath}/api/posts/user/${user_id}`,
@@ -50,9 +62,38 @@ export function getPostsByRoute (query) {
     if (i === 0) sendUrl += `?${key}=${query[key]}`
     else sendUrl += `&${key}=${query[key]}`
   })
-  // console.log(sendUrl)
   return useReq({
     url: sendUrl,
     method: 'get'
+  })
+}
+
+// 上傳一則貼文
+export function postOnePost (data) {
+  return useReq({
+    url: `${apiPath}/api/post/1`,
+    method: 'post',
+    data
+  })
+}
+
+// 編輯一則貼文
+export function patchOnePost (data) {
+  const { _id, content, images } = data
+  return useReq({
+    url: `${apiPath}/api/post/1/${_id}`,
+    method: 'patch',
+    data: {
+      content,
+      images
+    }
+  })
+}
+
+// 刪除貼文
+export function deleteOnePost (id) {
+  return useReq({
+    url: `${apiPath}/api/post/1/${id}`,
+    method: 'delete'
   })
 }

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useModalStore } from '@/stores/modal'
 
 const modalStore = useModalStore()
-const { openAlert } = modalStore
+const { openAlert, closeLoading } = modalStore
 
 // 判斷環境
 const isDev = import.meta.env.VITE_ENV === 'dev'
@@ -31,6 +31,7 @@ useReq.interceptors.request.use(
     return config
   },
   error => {
+    closeLoading()
     if (isDev) console.error(`❌ 發生錯誤：${error}`)
     return Promise.reject(error)
   }
@@ -45,6 +46,8 @@ useReq.interceptors.response.use(
     return result
   },
   error => {
+    closeLoading()
+
     if (isDev) {
       console.log(
         `❌ ${error.response.status}: ${error.response.data.message}`,
