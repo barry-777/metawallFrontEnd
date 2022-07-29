@@ -95,7 +95,7 @@
           <img
             v-for="(image, index) in sendData.images"
             :key="'image' + index"
-            :src="image"
+            :src="image.link"
             alt=""
           >
         </div>
@@ -128,13 +128,13 @@
           </button>
         </div>
         <div
-          v-if="imagesPrePath.length"
+          v-if="imagesPrePath?.length"
           class="images"
         >
           <img
-            v-for="(image, index) in imagesPrePath"
+            v-for="(path, index) in imagesPrePath"
             :key="'image' + index"
-            :src="image"
+            :src="path"
             alt=""
           >
         </div>
@@ -179,7 +179,7 @@ import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
-import { postUploadImage, postOnePost, patchOnePost } from '@/fetch/fetch'
+import { postUploadImage, deleteUploadImage, postOnePost, patchOnePost } from '@/fetch/fetch'
 import router from '@/router/index'
 import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
@@ -235,10 +235,12 @@ const preloadImageHandle = (e) => {
   })
 }
 // 清除圖片
+const needDeleteImages = ref([])
 const clearImageHandle = () => {
   imagesPrePath.value = []
   imagesFile.value = []
   if (sendData.value.images) {
+    needDeleteImages.value = sendData.value.images
     sendData.value.images = []
   }
 }
@@ -272,6 +274,12 @@ const patchSubmit = async () => {
     return false
   }
   openLoading()
+  // 請求刪除需要移除的圖片
+  if (needDeleteImages.value?.length) {
+    for await (const image of needDeleteImages.value) {
+      await deleteUploadImage(image.hash)
+    }
+  }
   if (imagesFile.value?.length) {
     const form = new FormData()
     imagesFile.value.forEach((file) => {

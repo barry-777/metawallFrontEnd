@@ -18,6 +18,14 @@ export function postUploadImage (data) {
   })
 }
 
+// 刪除圖片 to imgur
+export function deleteUploadImage (hash) {
+  return useReq({
+    url: `${apiPath}/api/delete_upload/${hash}`,
+    method: 'delete'
+  })
+}
+
 // 登入
 export function postLogin (data) {
   return useReq({

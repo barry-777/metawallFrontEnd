@@ -19,9 +19,11 @@ export const usePostStore = defineStore('postStore', {
   // methods
   actions: {
     async updateQuery (data) {
-      Object.assign(this.postQuery, data)
+      // 傳入陣列
+      Object.assign(this.postQuery, ...data)
     },
     async pushPosts (data) {
+      // 傳入陣列
       this.posts.push(...data)
     },
     async updatePosts (data) {

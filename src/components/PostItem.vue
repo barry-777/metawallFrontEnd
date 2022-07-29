@@ -26,7 +26,7 @@
                 <li @click="patchPostHandle(props.post)">
                   編輯貼文
                 </li>
-                <li @click="deletePostHandle(props.post._id)">
+                <li @click="deletePostHandle(props.post)">
                   刪除貼文
                 </li>
               </ul>
@@ -45,25 +45,25 @@
             class="inner-photo"
           >
             <div
-              v-if="props.post.images[0]"
+              v-if="props.post.images[0]?.link"
               class="img-control"
             >
               <img
-                :src="props.post.images[0]"
+                :src="props.post.images[0].link"
                 alt=""
               >
             </div>
             <div
-              v-if="props.post.images[1]"
+              v-if="props.post.images[1]?.link"
               class="img-control"
             >
               <img
-                :src="props.post.images[1]"
+                :src="props.post.images[1].link"
                 alt=""
               >
             </div>
             <div
-              v-if="props.post.images.length >= 2"
+              v-if="props.post.images?.length >= 2"
               class="img-more"
               @click="$emit('images-value', props.post.images)"
             >
@@ -170,7 +170,7 @@ import { dateFormat } from '@/services/helper'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router'
-import { deleteOnePost, getPostsByRoute } from '@/fetch/fetch'
+import { getPostsByRoute, deleteOnePost, deleteUploadImage } from '@/fetch/fetch'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/post'
@@ -199,10 +199,13 @@ const patchPostHandle = async (post) => {
   await updatePatchData(post)
   router.push('/post-upload')
 }
-const deletePostHandle = async (id) => {
+const deletePostHandle = async (post) => {
   openLoading()
-  await deleteOnePost(id)
-  await updateQuery(route.query)
+  for await (const image of post.images) {
+    await deleteUploadImage(image.hash)
+  }
+  await deleteOnePost(post._id)
+  await updateQuery([route.query])
   const results = await getPostsByRoute(postQuery.value)
   await updatePosts(results.data.data)
   closeLoading()

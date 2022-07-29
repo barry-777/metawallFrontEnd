@@ -27,7 +27,7 @@
               :key="'image' + index"
             >
               <img
-                :src="image"
+                :src="image.link"
                 alt=""
               >
             </swiper-slide>
