@@ -20,7 +20,9 @@
               {{ dateFormat(comment.createdAt) }}
             </div>
             <div class="comment">
-              {{ comment.content }}
+              <!-- eslint-disable vue/no-v-html -->
+              <div v-html="comment.content" />
+              <!--eslint-enable-->
             </div>
           </div>
         </div>
@@ -41,7 +43,9 @@
                 {{ dateFormat(commonReply.createdAt) }}
               </div>
               <div class="comment">
-                {{ commonReply.content }}
+                <!-- eslint-disable vue/no-v-html -->
+                <div v-html="commonReply.content" />
+                <!--eslint-enable-->
               </div>
             </div>
           </div>

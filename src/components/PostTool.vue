@@ -47,6 +47,10 @@ const commentData = ref({
   content: ''
 })
 const postCommentHandle = async (post_id) => {
+  if (commentData.value.content === '<p></p>' || commentData.value.content === '') {
+    openAlert('error', '填寫內容不得為空白！')
+    return false
+  }
   openLoading('新增留言中')
   const { data } = await postOneComment(post_id, commentData.value)
   commentData.value.content = ''
@@ -71,7 +75,7 @@ const editor = useEditor({
     })
   ],
   onUpdate: ({ editor }) => {
-    commentData.value.content = editor.getText()
+    commentData.value.content = editor.getHTML()
   }
 })
 </script>

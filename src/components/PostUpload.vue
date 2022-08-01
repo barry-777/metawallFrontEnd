@@ -185,7 +185,8 @@ import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
 
 const sendData = ref({
-  // 先宣告為陣列做判斷
+  // 先宣告做判斷
+  content: '',
   images: []
 })
 // store 資料
@@ -247,7 +248,7 @@ const clearImageHandle = () => {
 
 // 確認送出
 const postSubmit = async () => {
-  if (sendData.value.content === '<p></p>' || sendData.value.content === undefined || sendData.value.content === '<h2></h2>') {
+  if (sendData.value.content === '<p></p>' || sendData.value.content === '' || sendData.value.content === '<h2></h2>') {
     openAlert('error', '填寫內容不得為空白！')
     return false
   }
@@ -269,7 +270,7 @@ const postSubmit = async () => {
 
 // 編輯完成
 const patchSubmit = async () => {
-  if (sendData.value.content === '<p></p>' || sendData.value.content === undefined || sendData.value.content === '<h2></h2>') {
+  if (sendData.value.content === '<p></p>' || sendData.value.content === '' || sendData.value.content === '<h2></h2>') {
     openAlert('error', '填寫內容不得為空白！')
     return false
   }

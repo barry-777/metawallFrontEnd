@@ -34,11 +34,10 @@
           </div>
         </div>
         <div class="middle">
-          <div
-            ref="contentDom"
-            class="inner-t"
-          >
-            <!-- 注入編輯器格式 -->
+          <div class="inner-t">
+            <!-- eslint-disable vue/no-v-html -->
+            <div v-html="props.post.content" />
+            <!--eslint-enable-->
           </div>
           <div
             v-if="props.post.images?.length"
@@ -144,12 +143,7 @@ const deletePostHandle = async (post) => {
   openAlert('success', '刪除貼文成功！')
 }
 
-// 注入編輯器
-const contentDom = ref(null)
 onMounted(() => {
-  if (hasData.value) {
-    contentDom.value.innerHTML = props.post.content
-  }
   document.body.addEventListener('click', (e) => {
     if (!e.target.classList.contains('post-control') && !e.target.closest('.post-control')) {
       showPostControl.value = false
