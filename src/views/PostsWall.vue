@@ -6,7 +6,7 @@
           v-for="post in posts"
           :key="post._id"
           :post="post"
-          @images-value="imagesBoxHandle"
+          @images-value="imagesBoxHandler"
         />
       </template>
       <template v-else>
@@ -104,7 +104,7 @@ onMounted(() => {
 
 // 開啟更多照片燈箱
 const emitImages = ref(null)
-const imagesBoxHandle = (value) => {
+const imagesBoxHandler = (value) => {
   emitImages.value = value
   controlImagesBox(true)
 }

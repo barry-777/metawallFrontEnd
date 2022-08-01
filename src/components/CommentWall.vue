@@ -24,6 +24,17 @@
               <div v-html="comment.content" />
               <!--eslint-enable-->
             </div>
+            <div
+              v-if="comment.user._id === userStore.user_id"
+              class="control-panel"
+            >
+              <button type="button">
+                編輯
+              </button>
+              <button type="button">
+                刪除
+              </button>
+            </div>
           </div>
         </div>
         <template v-if="comment.commentReplies">
@@ -47,6 +58,17 @@
                 <div v-html="commonReply.content" />
                 <!--eslint-enable-->
               </div>
+              <div
+                v-if="commonReply.user._id === userStore.user_id"
+                class="control-panel"
+              >
+                <button type="button">
+                  編輯
+                </button>
+                <button type="button">
+                  刪除
+                </button>
+              </div>
             </div>
           </div>
         </template>
@@ -58,6 +80,9 @@
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
 import { dateFormat } from '@/services/helper'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
 
 defineProps({
   comments: Array
@@ -107,16 +132,6 @@ li {
   padding-top: 20px;
   padding-left: 50px;
 }
-.other-comment-input {
-  width: 100%;
-  display: flex;
-  align-items: stretch;
-  padding-left: 15px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 10;
-}
 .comment-outer {
   width: 100%;
 }
@@ -135,17 +150,18 @@ li {
   line-height: 1.4;
   letter-spacing: 1.2px;
 }
-.other-comment {
+.control-panel {
   width: 100%;
   display: flex;
-  align-items: center;
-  margin-top: 10px;
+  margin-top: 25px;
   button {
-    font-size: px(14);
     font-weight: $medium;
-    color: $c-gray-6;
+    color: $c-gray-4;
     user-select: none;
     cursor: pointer;
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
   }
 }
 </style>

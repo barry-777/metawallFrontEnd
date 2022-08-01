@@ -2,10 +2,6 @@ import useReq from '../services/useReq'
 
 const apiPath = import.meta.env.VITE_APP_API
 
-// "https://i.imgur.com/We83yRK.jpg"
-// "https://i.imgur.com/KzdqVQh.jpg"
-// "https://i.imgur.com/YTdDDuo.png"
-
 // 上傳圖片 to imgur
 export function postUploadImage (data) {
   return useReq({
@@ -111,6 +107,24 @@ export function postOneComment (post_id, data) {
   return useReq({
     url: `${apiPath}/api/comment/1/${post_id}`,
     method: 'post',
+    data
+  })
+}
+
+// 編輯留言
+export function patchOneComment (comment_id, data) {
+  return useReq({
+    url: `${apiPath}/api/comment/1/${comment_id}`,
+    method: 'patch',
+    data
+  })
+}
+
+// 刪除留言
+export function deleteOneComment (comment_id, data) {
+  return useReq({
+    url: `${apiPath}/api/comment/1/${comment_id}`,
+    method: 'delete',
     data
   })
 }

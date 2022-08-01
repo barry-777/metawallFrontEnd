@@ -115,14 +115,14 @@
                 type="file"
                 accept="image/*"
                 multiple="multiple"
-                @change="preloadImageHandle"
+                @change="preloadImageHandler"
               >
             </label>
           </button>
           <button
             class="image-clear"
             type="button"
-            @click="clearImageHandle"
+            @click="clearImageHandler"
           >
             清除所有圖片
           </button>
@@ -223,7 +223,7 @@ const editor = useEditor({
 const imagesPrePath = ref([])
 const imagesFile = ref([])
 // 預覽圖檔
-const preloadImageHandle = (e) => {
+const preloadImageHandler = (e) => {
   if (!e.target.files.length) return
   Array.prototype.forEach.call(e.target.files, function (file) {
     const fileSize = Math.ceil(file.size / 1024)
@@ -237,7 +237,7 @@ const preloadImageHandle = (e) => {
 }
 // 清除圖片
 const needDeleteImages = ref([])
-const clearImageHandle = () => {
+const clearImageHandler = () => {
   imagesPrePath.value = []
   imagesFile.value = []
   if (sendData.value.images) {

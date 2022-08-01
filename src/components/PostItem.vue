@@ -23,10 +23,10 @@
             />
             <div v-if="showPostControl">
               <ul>
-                <li @click="patchPostHandle(props.post)">
+                <li @click="patchPostHandler(props.post)">
                   編輯貼文
                 </li>
-                <li @click="deletePostHandle(props.post)">
+                <li @click="deletePostHandler(props.post)">
                   刪除貼文
                 </li>
               </ul>
@@ -73,7 +73,6 @@
         </div>
         <div class="bottom">
           <PostTool :post="props.post" />
-          <!-- 留言牆 -->
           <CommentWall :comments="props.post.comments" />
         </div>
       </div>
@@ -126,11 +125,11 @@ hasData.value = Object.keys(props.post).length !== 0
 
 // 控制 編輯貼文 || 刪除貼文 視窗
 const showPostControl = ref(false)
-const patchPostHandle = async (post) => {
+const patchPostHandler = async (post) => {
   await updatePatchData(post)
   router.push('/post-upload')
 }
-const deletePostHandle = async (post) => {
+const deletePostHandler = async (post) => {
   openLoading('刪除貼文中')
   for await (const image of post.images) {
     await deleteUploadImage(image.hash)

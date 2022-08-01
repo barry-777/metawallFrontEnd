@@ -14,7 +14,7 @@
         <editor-content :editor="editor" />
         <button
           type="button"
-          @click="postCommentHandle(props.post._id)"
+          @click="postCommentHandler(props.post._id)"
         >
           留言
         </button>
@@ -42,11 +42,11 @@ const props = defineProps({
   post: Object
 })
 
-// 上傳一則留言
+// 新增一則留言
 const commentData = ref({
   content: ''
 })
-const postCommentHandle = async (post_id) => {
+const postCommentHandler = async (post_id) => {
   if (commentData.value.content === '<p></p>' || commentData.value.content === '') {
     openAlert('error', '填寫內容不得為空白！')
     return false
