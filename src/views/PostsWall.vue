@@ -18,13 +18,7 @@
     <div
       ref="loadDetector"
       class="loading-detector"
-    >
-      <div
-        class="is-loading"
-      >
-        <!-- <Loader /> -->
-      </div>
-    </div>
+    />
   </div>
   <Transition name="fade-model">
     <ImagesBox

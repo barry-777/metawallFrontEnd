@@ -37,6 +37,11 @@ export const usePostStore = defineStore('postStore', {
     // 重設編輯貼文資料
     async resetPatchData () {
       this.patchData = {}
+    },
+    // 新增一則留言
+    async addComment (post_id, data) {
+      const index = this.posts.findIndex(post => post._id === post_id)
+      this.posts[index].comments.unshift(data)
     }
   },
   persist: {

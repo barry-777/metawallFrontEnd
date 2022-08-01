@@ -101,7 +101,7 @@ body {
   bottom: 0px !important;
 }
 
-// tiptap+
+// tiptap
 .editor-tool {
   display: flex;
   align-items: center;
@@ -124,7 +124,7 @@ body {
 .ProseMirror {
   width: 100%;
   min-height: 120px;
-  padding: 10px 15px;
+  padding: 12px 15px;
   background-color: $c-white;
   border: 2px solid $c-black;
   outline: none;
@@ -142,7 +142,8 @@ body {
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  p {
     line-height: 1.1;
   }
 
@@ -187,12 +188,16 @@ body {
     margin: 2rem 0;
   }
 }
+.ProseMirror p.is-empty:first-child::before,
 .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
   color: $c-gray-4;
   pointer-events: none;
   height: 0;
+}
+.post .ProseMirror {
+  min-height: 50px;
 }
 
 #app {

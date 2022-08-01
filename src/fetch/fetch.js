@@ -76,7 +76,7 @@ export function getPostsByRoute (query) {
   })
 }
 
-// 上傳一則貼文
+// 新增貼文
 export function postOnePost (data) {
   return useReq({
     url: `${apiPath}/api/post/1`,
@@ -85,7 +85,7 @@ export function postOnePost (data) {
   })
 }
 
-// 編輯一則貼文
+// 編輯貼文
 export function patchOnePost (data) {
   const { _id, content, images } = data
   return useReq({
@@ -99,9 +99,18 @@ export function patchOnePost (data) {
 }
 
 // 刪除貼文
-export function deleteOnePost (id) {
+export function deleteOnePost (post_id) {
   return useReq({
-    url: `${apiPath}/api/post/1/${id}`,
+    url: `${apiPath}/api/post/1/${post_id}`,
     method: 'delete'
+  })
+}
+
+// 新增留言
+export function postOneComment (post_id, data) {
+  return useReq({
+    url: `${apiPath}/api/comment/1/${post_id}`,
+    method: 'post',
+    data
   })
 }

@@ -73,79 +73,9 @@
           </div>
         </div>
         <div class="bottom">
-          <div class="tool">
-            <!-- 讚 -->
-            <div>
-              <i class="fa-regular fa-thumbs-up" />
-              <p>100</p>
-            </div>
-            <!-- 留言 -->
-            <div>
-              <div class="user-photo-outer">
-                <UserPhoto :photo="props.post.user.avatar" />
-              </div>
-              <div class="input-outer">
-                <input
-                  type="text"
-                  placeholder="留言 ..."
-                >
-                <button type="button">
-                  留言
-                </button>
-              </div>
-            </div>
-          </div>
+          <PostTool :post="props.post" />
           <!-- 留言牆 -->
-          <div
-            v-if="props.post.comments"
-            class="comments"
-          >
-            <ul>
-              <li
-                v-for="comment in props.post.comments"
-                :key="comment._id"
-              >
-                <div class="div-wrap">
-                  <div class="user-photo-outer">
-                    <UserPhoto :photo="comment.user.avatar" />
-                  </div>
-                  <div class="comment-outer">
-                    <div class="name">
-                      {{ comment.user.name }}
-                    </div>
-                    <div class="date">
-                      {{ dateFormat(comment.createdAt) }}
-                    </div>
-                    <div class="comment">
-                      {{ comment.content }}
-                    </div>
-                  </div>
-                </div>
-                <template v-if="comment.commentReplies">
-                  <div
-                    v-for="commonReply in comment.commentReplies"
-                    :key="commonReply._id"
-                    class="div-wrap2"
-                  >
-                    <div class="user-photo-outer">
-                      <UserPhoto :photo="commonReply.user.avatar" />
-                    </div>
-                    <div class="comment-outer">
-                      <div class="name">
-                        {{ commonReply.user.name }}
-                      </div>
-                      <div class="date">
-                        {{ dateFormat(commonReply.createdAt) }}
-                      </div>
-                      <div class="comment">
-                        {{ commonReply.content }}
-                      </div>
-                    </div>
-                  </div>
-                </template>
-              </li>
-            </ul>
-          </div>
+          <CommentWall :comments="props.post.comments" />
         </div>
       </div>
     </template>
@@ -166,6 +96,8 @@
 
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
+import CommentWall from '@/components/CommentWall.vue'
+import PostTool from '@/components/PostTool.vue'
 import { dateFormat } from '@/services/helper'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
@@ -305,6 +237,8 @@ onMounted(() => {
 }
 .middle {
   width: 100%;
+  min-height: 150px;
+  padding-left: 10px;
   margin-top: 15px;
 }
 .inner-t {
@@ -364,124 +298,6 @@ onMounted(() => {
 }
 .bottom {
   width: 100%;
-}
-.tool {
-  width: 100%;
-  margin-top: 25px;
-  padding-left: 15px;
-}
-.tool > div:nth-child(1) {
-  display: inline-flex;
-  align-content: center;
-  user-select: none;
-  cursor: pointer;
-  i {
-    font-size: px(25);
-    color: $c-first;
-  }
-  p {
-    font-weight: $medium;
-    margin-top: 5px;
-    margin-left: 7px;
-  }
-}
-.tool > div:nth-child(2) {
-  width: 100%;
-  display: flex;
-  align-items: stretch;
-  margin-top: 20px;
-}
-.input-outer {
-  width: 100%;
-  display: flex;
-  button {
-    width: 150px;
-    height: 100%;
-    font-size: px(18);
-    font-weight: $medium;
-    background-color: $c-first;
-    color: $c-white;
-    padding: 10px;
-    border: 2px solid $c-black;
-    border-left: none;
-    user-select: none;
-    transition: background-color 0.6s, color 0.2s, transform 0.4s;
-    cursor: pointer;
-    &:hover {
-      background-color: darken($c-first, 8%);
-    }
-  }
-}
-.comments {
-  width: 100%;
-  padding-left: 40px;
-  margin-top: 25px;
-  position: relative;
-  ul {
-    width: 100%;
-  }
-  li {
-    width: 100%;
-    padding: 15px;
-    background-color: $c-gray-1;
-    border-radius: 10px;
-    &:not(:first-child) {
-      margin-top: 15px;
-    }
-  }
-  .div-wrap {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-  }
-  .div-wrap2 {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    padding-top: 20px;
-    padding-left: 50px;
-  }
-  .other-comment-input {
-    width: 100%;
-    display: flex;
-    align-items: stretch;
-    padding-left: 15px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 10;
-  }
-  .comment-outer {
-    width: 100%;
-  }
-  .name {
-    font-size: px(14);
-    font-weight: $medium;
-  }
-  .date {
-    font-size: px(12);
-    color: $c-gray-4;
-    margin-top: 8px;
-  }
-  .comment {
-    font-size: px(14);
-    margin-top: 12px;
-    line-height: 1.4;
-    letter-spacing: 1.2px;
-  }
-  .other-comment {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    button {
-      font-size: px(14);
-      font-weight: $medium;
-      color: $c-gray-6;
-      user-select: none;
-      cursor: pointer;
-    }
-  }
 }
 // 無貼文樣式
 .post.only {
