@@ -251,7 +251,7 @@ const postSubmit = async () => {
     openAlert('error', '填寫內容不得為空白！')
     return false
   }
-  openLoading()
+  openLoading('上傳貼文中')
   if (imagesFile.value?.length) {
     const form = new FormData()
     imagesFile.value.forEach((file) => {
@@ -273,7 +273,7 @@ const patchSubmit = async () => {
     openAlert('error', '填寫內容不得為空白！')
     return false
   }
-  openLoading()
+  openLoading('更新貼文中')
   // 請求刪除需要移除的圖片
   if (needDeleteImages.value?.length) {
     for await (const image of needDeleteImages.value) {

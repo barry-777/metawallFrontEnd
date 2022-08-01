@@ -184,10 +184,9 @@ const loginEvent = async () => {
     return
   }
 
-  openLoading()
+  openLoading('登入中')
   const { data } = await postLogin(loginValue)
   if (data.status === true) {
-    openAlert('success', '登入成功！')
     setAuth({
       token: data.data.token
     })
@@ -202,11 +201,13 @@ const loginEvent = async () => {
       // 清空錯誤
       errorMessage.all.length = 0
     }
+    closeLoading()
+    openAlert('success', '登入成功！')
   } else {
+    closeLoading()
     openAlert('error', '登入失敗，請洽管理員')
     errorMessage.all.push(data.message)
   }
-  closeLoading()
 }
 
 // 註冊
@@ -244,16 +245,17 @@ const signUpEvent = async () => {
     return
   }
 
-  openLoading()
+  openLoading('註冊中')
   const { data } = await postSignUp(registerValue)
   if (data.status === true) {
+    closeLoading()
     openAlert('success', '註冊成功！')
     slideToTarget(0)
   } else {
+    closeLoading()
     openAlert('error', '註冊失敗，請洽管理員')
     errorMessage.all.push(data.message)
   }
-  closeLoading()
 }
 
 // swiper 事件

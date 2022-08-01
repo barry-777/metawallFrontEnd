@@ -200,7 +200,7 @@ const patchPostHandle = async (post) => {
   router.push('/post-upload')
 }
 const deletePostHandle = async (post) => {
-  openLoading()
+  openLoading('刪除貼文中')
   for await (const image of post.images) {
     await deleteUploadImage(image.hash)
   }

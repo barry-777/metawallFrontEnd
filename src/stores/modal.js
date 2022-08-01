@@ -5,6 +5,7 @@ export const useModalStore = defineStore('modalStore', {
   // data
   state: () => ({
     showLoading: false,
+    showLoadingText: '載入中',
     showAlert: false,
     showAlertText: [],
     showAlertCls: '',
@@ -20,10 +21,12 @@ export const useModalStore = defineStore('modalStore', {
       const body = document.querySelector('body')
       body.style.removeProperty('overflow')
     },
-    openLoading () {
+    openLoading (text) {
+      if (text) this.showLoadingText = text
       this.showLoading = true
     },
     closeLoading () {
+      this.showLoadingText = '載入中'
       this.showLoading = false
     },
     openAlert (cls, ...info) {

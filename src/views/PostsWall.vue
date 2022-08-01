@@ -48,7 +48,7 @@ const route = useRoute()
 // store 資料
 const modalStore = useModalStore()
 const postStore = usePostStore()
-const { openLoading, closeLoading, controlImagesBox } = modalStore
+const { openAlert, openLoading, closeLoading, controlImagesBox } = modalStore
 const { updatePosts, updateQuery, pushPosts } = postStore
 const { showImagesBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
@@ -60,7 +60,7 @@ const isStopScroll = ref(false)
 
 // 取得所有貼文
 const getPosts = async () => {
-  openLoading()
+  openLoading('取得貼文中')
 
   isStopScroll.value = true
   if (posts.value?.length) postPage.value += 1
@@ -74,7 +74,7 @@ const getPosts = async () => {
     isStopScroll.value = true
     postPage.value -= 1
     closeLoading()
-    console.log(`已全部載入完成 目前頁數: ${postPage.value}`)
+    openAlert('success', '已查看所有貼文')
     return false
   }
 

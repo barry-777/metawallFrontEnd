@@ -8,10 +8,20 @@
           <div />
           <div />
         </div>
+        <p v-if="showLoadingText">
+          {{ showLoadingText }}
+        </p>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { useModalStore } from '@/stores/modal'
+import { storeToRefs } from 'pinia'
+const modalStore = useModalStore()
+const { showLoadingText } = storeToRefs(modalStore)
+</script>
 
 <style scoped lang="scss">
 @import '../assets/scss/base/variables';
@@ -45,6 +55,22 @@
 .lds-ellipsis div:nth-child(4) {
   left: 56px;
   animation: lds-ellipsis3 0.6s infinite;
+}
+p {
+  width: 100%;
+  font-size: px(15);
+  font-weight: $medium;
+  color: $c-white;
+  text-align: center;
+  animation: text 0.7s infinite;
+}
+@keyframes text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes lds-ellipsis1 {
   0% {
