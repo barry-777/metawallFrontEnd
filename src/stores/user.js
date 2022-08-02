@@ -46,7 +46,7 @@ export const useUserStore = defineStore('userStore', {
       this.isLogin = false
     },
     // 更新會員資料
-    updateUser (payload) {
+    patchUser (payload) {
       this.$patch({
         ...payload
       })

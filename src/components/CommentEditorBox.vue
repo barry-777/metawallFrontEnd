@@ -76,7 +76,7 @@ const modalStore = useModalStore()
 const postStore = usePostStore()
 const userStore = useUserStore()
 const { openLoading, closeLoading, openAlert, openCommentEditorBox } = modalStore
-const { updateCommentData, addReplyData, updateReplyData } = postStore
+const { patchCommentData, addReplyData, patchReplyData } = postStore
 const { showCommentEditorType, showCommentEditorTemp } = storeToRefs(modalStore)
 const { user_id, name, avatar } = storeToRefs(userStore)
 
@@ -109,7 +109,7 @@ const patchCommentHandler = async (comment) => {
     content: comment.content
   })
   console.log(data.data)
-  await updateCommentData(comment._id, comment.post, data.data)
+  await patchCommentData(comment._id, comment.post, data.data)
   closeLoading()
   openCommentEditorBox(false)
   openAlert('success', '更新留言成功！')
@@ -135,14 +135,14 @@ const postReplyHandler = async (comment) => {
 
 // 編輯回覆留言
 const patchReplyHandler = async (reply) => {
-  openLoading('更新留言中')
+  openLoading('更新回覆中')
   const { data } = await patchOneReply(reply._id, {
     content: tempData.value.content
   })
-  await updateReplyData(reply._id, reply.comment, reply.post, data.data)
+  await patchReplyData(reply._id, reply.comment, reply.post, data.data)
   closeLoading()
   openCommentEditorBox(false)
-  openAlert('success', '更新留言成功！')
+  openAlert('success', '更新回覆成功！')
 }
 </script>
 

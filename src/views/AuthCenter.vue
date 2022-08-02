@@ -19,14 +19,14 @@ import { getCurrentUser } from '@/fetch/fetch'
 // store 資料
 const userStore = useUserStore()
 // const modalStore = useModalStore()
-const { updateUser } = userStore
+const { patchUser } = userStore
 // const { openLoading, closeLoading } = modalStore
 
 // 取得個人資料
 const getProfile = async () => {
   const { data } = await getCurrentUser()
   if (data.status) {
-    updateUser({
+    patchUser({
       user_id: data.data._id,
       name: data.data.name,
       avatar: data.data.avatar

@@ -111,7 +111,7 @@ const modalStore = useModalStore()
 const userStore = useUserStore()
 const postStore = usePostStore()
 const { openLoading, closeLoading, openAlert } = modalStore
-const { updatePosts, updateQuery, updatePatchData } = postStore
+const { patchPosts, patchQuery, patchTempPostData } = postStore
 const { postQuery } = storeToRefs(postStore)
 
 const props = defineProps({
@@ -126,7 +126,7 @@ hasData.value = Object.keys(props.post).length !== 0
 // 控制 編輯貼文 || 刪除貼文 視窗
 const showPostControl = ref(false)
 const patchPostHandler = async (post) => {
-  await updatePatchData(post)
+  await patchTempPostData(post)
   router.push('/post-upload')
 }
 const deletePostHandler = async (post) => {
@@ -135,9 +135,9 @@ const deletePostHandler = async (post) => {
     await deleteUploadImage(image.hash)
   }
   await deleteOnePost(post._id)
-  await updateQuery([route.query])
+  await patchQuery([route.query])
   const results = await getPostsByRoute(postQuery.value)
-  await updatePosts(results.data.data)
+  await patchPosts(results.data.data)
   closeLoading()
   openAlert('success', '刪除貼文成功！')
 }

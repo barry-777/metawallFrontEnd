@@ -49,7 +49,7 @@ const route = useRoute()
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const { openAlert, openLoading, closeLoading, openImagesBox } = modalStore
-const { updatePosts, updateQuery, pushPosts, resetPatchData } = postStore
+const { patchPosts, patchQuery, addPosts, resetPatchData } = postStore
 const { showImagesBox, showCommentEditorBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
 
@@ -65,7 +65,7 @@ const getPosts = async () => {
   isStopScroll.value = true
   if (posts.value?.length) postPage.value += 1
 
-  await updateQuery([route.query, { p: postPage.value }])
+  await patchQuery([route.query, { p: postPage.value }])
   const { data } = await getPostsByRoute(postQuery.value)
 
   // 判斷是否已經載入完全部貼文
@@ -80,10 +80,10 @@ const getPosts = async () => {
 
   // 判斷是否已抓取過資料
   if (posts.value?.length) {
-    await pushPosts(data.data)
+    await addPosts(data.data)
     isStopScroll.value = false
   } else {
-    await updatePosts(data.data)
+    await patchPosts(data.data)
     isStopScroll.value = false
   }
 
