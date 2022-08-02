@@ -145,3 +145,12 @@ export function patchOneReply (reply_id, data) {
     data
   })
 }
+
+// 刪除回覆留言
+export function deleteOneReply (reply_id, data) {
+  return useReq({
+    url: `${apiPath}/api/comment/reply/1/${reply_id}`,
+    method: 'delete',
+    data
+  })
+}

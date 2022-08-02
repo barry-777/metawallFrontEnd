@@ -42,7 +42,7 @@
               </button>
               <button
                 type="button"
-                @click="deleteCommentHandler(comment._id, comment.post)"
+                @click="deleteCommentHandler(comment)"
               >
                 刪除
               </button>
@@ -80,7 +80,10 @@
                 >
                   編輯
                 </button>
-                <button type="button">
+                <button
+                  type="button"
+                  @click="deleteReplyHandler(commonReply)"
+                >
                   刪除
                 </button>
               </div>
@@ -98,12 +101,12 @@ import { dateFormat } from '@/services/helper'
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/post'
 import { useModalStore } from '@/stores/modal'
-import { deleteOneComment } from '@/fetch/fetch'
+import { deleteOneComment, deleteOneReply } from '@/fetch/fetch'
 
 const userStore = useUserStore()
 const postStore = usePostStore()
 const modalStore = useModalStore()
-const { deleteCommentData } = postStore
+const { deleteCommentData, deleteReplyData } = postStore
 const { openLoading, closeLoading, openAlert, openCommentEditorBox } = modalStore
 
 defineProps({
@@ -111,12 +114,21 @@ defineProps({
 })
 
 // 刪除留言
-const deleteCommentHandler = async (comment_id, post_id) => {
+const deleteCommentHandler = async (comment) => {
   openLoading('刪除留言中')
-  await deleteOneComment(comment_id)
-  await deleteCommentData(comment_id, post_id)
+  await deleteOneComment(comment._id)
+  await deleteCommentData(comment._id, comment.post)
   closeLoading()
   openAlert('success', '刪除留言成功！')
+}
+
+// 刪除回覆留言
+const deleteReplyHandler = async (reply) => {
+  openLoading('刪除回覆中')
+  await deleteOneReply(reply._id)
+  await deleteReplyData(reply._id, reply.comment, reply.post)
+  closeLoading()
+  openAlert('success', '刪除回覆成功！')
 }
 </script>
 

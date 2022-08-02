@@ -67,6 +67,13 @@ export const usePostStore = defineStore('postStore', {
       const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
       const replyIndex = this.posts[postIndex].comments[commentIndex].commentReplies.findIndex(reply => reply._id === reply_id)
       this.posts[postIndex].comments[commentIndex].commentReplies.splice(replyIndex, 1, data)
+    },
+    // 刪除回覆留言
+    async deleteReplyData (reply_id, comment_id, post_id) {
+      const postIndex = this.posts.findIndex(post => post._id === post_id)
+      const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
+      const replyIndex = this.posts[postIndex].comments[commentIndex].commentReplies.findIndex(reply => reply._id === reply_id)
+      this.posts[postIndex].comments[commentIndex].commentReplies.splice(replyIndex, 1)
     }
   },
   persist: {
