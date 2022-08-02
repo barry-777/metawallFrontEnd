@@ -54,6 +54,12 @@ export const usePostStore = defineStore('postStore', {
       const postIndex = this.posts.findIndex(post => post._id === post_id)
       const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
       this.posts[postIndex].comments.splice(commentIndex, 1)
+    },
+    // 回覆留言
+    async addReplyData (post_id, comment_id, data) {
+      const postIndex = this.posts.findIndex(post => post._id === post_id)
+      const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
+      this.posts[postIndex].comments[commentIndex].commentReplies.unshift(data)
     }
   },
   persist: {

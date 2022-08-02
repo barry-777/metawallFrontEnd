@@ -30,15 +30,19 @@ import UserPhoto from '@/components/UserPhoto.vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
-import { ref } from 'vue'
 import { postOneComment } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
+import { useUserStore } from '@/stores/user'
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const modalStore = useModalStore()
 const postStore = usePostStore()
+const userStore = useUserStore()
 const { openLoading, closeLoading, openAlert } = modalStore
 const { addCommentData } = postStore
+const { user_id, name, avatar } = storeToRefs(userStore)
 
 const props = defineProps({
   post: Object
@@ -59,9 +63,9 @@ const postCommentHandler = async (post_id) => {
   editor.value.commands.clearContent()
   // 暫存當前使用者
   data.data.user = {
-    _id: props.post.user._id,
-    avatar: props.post.user.avatar,
-    name: props.post.user.name
+    _id: user_id,
+    avatar,
+    name
   }
   await addCommentData(data.data.post, data.data)
   closeLoading()

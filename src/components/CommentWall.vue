@@ -30,6 +30,12 @@
             >
               <button
                 type="button"
+                @click="openCommentEditorBox(true, 'postReply', comment)"
+              >
+                回覆
+              </button>
+              <button
+                type="button"
                 @click="openCommentEditorBox(true, 'patchComment', comment)"
               >
                 編輯

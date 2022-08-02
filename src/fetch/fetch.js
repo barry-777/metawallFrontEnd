@@ -127,3 +127,12 @@ export function deleteOneComment (comment_id) {
     method: 'delete'
   })
 }
+
+// 新增回覆留言
+export function postOneReply (post_id, comment_id, data) {
+  return useReq({
+    url: `${apiPath}/api/comment/reply/1/${post_id}/${comment_id}`,
+    method: 'post',
+    data
+  })
+}

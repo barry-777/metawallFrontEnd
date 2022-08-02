@@ -144,7 +144,7 @@ const errorMessage = reactive({ all: [] })
 const userStore = useUserStore()
 const modalStore = useModalStore()
 const { openLoading, closeLoading, openAlert } = modalStore
-const { setAuth, patchUser } = userStore
+const { setAuth, updateUser } = userStore
 
 // 重新設定
 const resetValue = () => {
@@ -192,7 +192,7 @@ const loginEvent = async () => {
     })
     const { data: userData } = await getCurrentUser()
     if (userData.status === true) {
-      patchUser({
+      updateUser({
         user_id: userData.data._id,
         name: userData.data.name,
         avatar: userData.data.avatar
