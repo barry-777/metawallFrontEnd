@@ -56,10 +56,17 @@ export const usePostStore = defineStore('postStore', {
       this.posts[postIndex].comments.splice(commentIndex, 1)
     },
     // 回覆留言
-    async addReplyData (post_id, comment_id, data) {
+    async addReplyData (comment_id, post_id, data) {
       const postIndex = this.posts.findIndex(post => post._id === post_id)
       const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
       this.posts[postIndex].comments[commentIndex].commentReplies.unshift(data)
+    },
+    // 編輯回覆留言
+    async updateReplyData (reply_id, comment_id, post_id, data) {
+      const postIndex = this.posts.findIndex(post => post._id === post_id)
+      const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
+      const replyIndex = this.posts[postIndex].comments[commentIndex].commentReplies.findIndex(reply => reply._id === reply_id)
+      this.posts[postIndex].comments[commentIndex].commentReplies.splice(replyIndex, 1, data)
     }
   },
   persist: {

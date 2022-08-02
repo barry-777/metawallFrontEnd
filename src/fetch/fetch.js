@@ -136,3 +136,12 @@ export function postOneReply (post_id, comment_id, data) {
     data
   })
 }
+
+// 編輯回覆留言
+export function patchOneReply (reply_id, data) {
+  return useReq({
+    url: `${apiPath}/api/comment/reply/1/${reply_id}`,
+    method: 'patch',
+    data
+  })
+}

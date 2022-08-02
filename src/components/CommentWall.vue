@@ -74,7 +74,10 @@
                 v-if="commonReply.user._id === userStore.user_id"
                 class="control-panel"
               >
-                <button type="button">
+                <button
+                  type="button"
+                  @click="openCommentEditorBox(true, 'patchReply', commonReply)"
+                >
                   編輯
                 </button>
                 <button type="button">

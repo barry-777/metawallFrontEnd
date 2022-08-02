@@ -50,6 +50,7 @@
               v-else-if="showCommentEditorType === 'patchReply'"
               class="base-button"
               type="button"
+              @click="patchReplyHandler(tempData)"
             >
               送出
             </button>
@@ -67,7 +68,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
 import { useUserStore } from '@/stores/user'
-import { patchOneComment, postOneReply } from '@/fetch/fetch'
+import { patchOneComment, postOneReply, patchOneReply } from '@/fetch/fetch'
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 
@@ -75,7 +76,7 @@ const modalStore = useModalStore()
 const postStore = usePostStore()
 const userStore = useUserStore()
 const { openLoading, closeLoading, openAlert, openCommentEditorBox } = modalStore
-const { updateCommentData, addReplyData } = postStore
+const { updateCommentData, addReplyData, updateReplyData } = postStore
 const { showCommentEditorType, showCommentEditorTemp } = storeToRefs(modalStore)
 const { user_id, name, avatar } = storeToRefs(userStore)
 
@@ -126,10 +127,22 @@ const postReplyHandler = async (comment) => {
     avatar,
     name
   }
-  await addReplyData(comment.post, comment._id, data.data)
+  await addReplyData(comment._id, comment.post, data.data)
   closeLoading()
   openCommentEditorBox(false)
   openAlert('success', '回覆留言成功！')
+}
+
+// 編輯回覆留言
+const patchReplyHandler = async (reply) => {
+  openLoading('更新留言中')
+  const { data } = await patchOneReply(reply._id, {
+    content: tempData.value.content
+  })
+  await updateReplyData(reply._id, reply.comment, reply.post, data.data)
+  closeLoading()
+  openCommentEditorBox(false)
+  openAlert('success', '更新留言成功！')
 }
 </script>
 
