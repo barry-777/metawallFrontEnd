@@ -49,7 +49,7 @@ const route = useRoute()
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const { openAlert, openLoading, closeLoading, openImagesBox } = modalStore
-const { patchPosts, patchQuery, addPosts, resetPatchData } = postStore
+const { patchPosts, patchQuery, addPosts, resetPosts, resetTempPostData } = postStore
 const { showImagesBox, showCommentEditorBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
 
@@ -61,10 +61,8 @@ const isStopScroll = ref(false)
 // 取得所有貼文
 const getPosts = async () => {
   openLoading('取得貼文中')
-
   isStopScroll.value = true
   if (posts.value?.length) postPage.value += 1
-
   await patchQuery([route.query, { p: postPage.value }])
   const { data } = await getPostsByRoute(postQuery.value)
 
@@ -89,6 +87,7 @@ const getPosts = async () => {
 
   closeLoading()
 }
+resetPosts()
 getPosts()
 
 // 載入更多
@@ -97,7 +96,6 @@ const scrollLoading = async () => {
   const { top } = loadDetector.value.getBoundingClientRect()
   const windowHeight = window.innerHeight
   if (!isStopScroll.value && top < windowHeight && !isLoaded.value) {
-    console.log('scroll!!')
     await getPosts()
   }
 }
@@ -105,11 +103,14 @@ const scrollLoading = async () => {
 onMounted(() => {
   window.addEventListener('scroll', scrollLoading)
   // 重置編輯暫存
-  resetPatchData()
+  resetTempPostData()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', scrollLoading)
+  postPage.value = 1
+  isLoaded.value = false
+  isStopScroll.value = false
 })
 
 // 開啟更多照片燈箱

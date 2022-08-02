@@ -30,12 +30,15 @@ export const usePostStore = defineStore('postStore', {
       this.posts.length = 0
       Object.assign(this.posts, data)
     },
+    async resetPosts () {
+      this.posts.length = 0
+    },
     // 更新編輯貼文資料
     async patchTempPostData (data) {
       Object.assign(this.tempPostData, data)
     },
     // 重設編輯貼文資料
-    async resetPatchData () {
+    async resetTempPostData () {
       this.tempPostData = {}
     },
     // 新增留言
@@ -79,6 +82,6 @@ export const usePostStore = defineStore('postStore', {
   persist: {
     key: 'post-temp',
     storage: window.localStorage,
-    paths: ['patchData']
+    paths: ['tempPostData']
   }
 })

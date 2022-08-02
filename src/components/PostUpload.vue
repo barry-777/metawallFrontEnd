@@ -193,12 +193,12 @@ const sendData = ref({
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const { openLoading, closeLoading, openAlert } = modalStore
-const { patchData, resetPatchData } = postStore
+const { tempPostData, resetTempPostData } = postStore
 
 // 編輯模式處理
-const isPatchMode = !!patchData._id
+const isPatchMode = !!tempPostData._id
 if (isPatchMode) {
-  sendData.value = patchData
+  sendData.value = tempPostData
 }
 
 // 編輯器處理
@@ -291,7 +291,7 @@ const patchSubmit = async () => {
   }
   // console.log('編輯的資料：', sendData.value)
   await patchOnePost(sendData.value)
-  await resetPatchData()
+  await resetTempPostData()
   router.push('/posts-wall')
   closeLoading()
   openAlert('success', '編輯成功！')
