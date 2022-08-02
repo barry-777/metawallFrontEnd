@@ -2,17 +2,17 @@
   <div class="full-box">
     <div
       class="full-bg"
-      @click="controlImagesBox(false)"
+      @click="openImagesBox(false)"
     />
     <div class="full-container">
       <div class="full-inner">
         <div
           class="close-button"
-          @click="controlImagesBox(false)"
+          @click="openImagesBox(false)"
         >
           <i class="fa-solid fa-xmark" />
         </div>
-        <div class="main-target">
+        <div class="main-inner">
           <swiper
             :modules="[Navigation, Pagination, EffectFade]"
             :speed="1000"
@@ -49,13 +49,13 @@ import { useModalStore } from '@/stores/modal'
 import { onMounted } from 'vue'
 
 const modalStore = useModalStore()
-const { controlImagesBox } = modalStore
+const { openImagesBox } = modalStore
 const props = defineProps({
   images: Array
 })
 
 onMounted(() => {
-  const element = document.querySelector('.main-target')
+  const element = document.querySelector('.main-inner')
   element.addEventListener('click', function (e) {
     e.stopPropagation()
   })
@@ -67,7 +67,7 @@ onMounted(() => {
 .swiper-slide {
   padding: 35px;
 }
-.main-target {
+.main-inner {
   width: 100%;
   max-width: 800px;
   img {

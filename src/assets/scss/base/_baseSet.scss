@@ -33,7 +33,7 @@ body {
 .fade-alert-leave-to {
   opacity: 0;
   transition: opacity .6s .2s;
-  .move-obj {
+  .main-inner {
     opacity: 0;
     transform: translateY(10px);
   }
@@ -43,7 +43,7 @@ body {
 .fade-alert-leave-from {
   opacity: 1;
   transition: opacity .6s;
-  .move-obj {
+  .main-inner {
     opacity: 1;
     transform: translateZ(0);
     transition: opacity .6s .2s, transform .6s .2s;
@@ -58,7 +58,7 @@ body {
     opacity: 0;
     transform: translateY(-10px);
   }
-  .main-target {
+  .main-inner {
     opacity: 0;
     clip-path: inset(0 50% 0 50%);
   }
@@ -73,7 +73,7 @@ body {
     transform: translateY(0px);
     transition: .6s .6s;
   }
-  .main-target {
+  .main-inner {
     opacity: 1;
     clip-path: inset(0 0 0 0);
     transition: opacity .6s .4s, clip-path .6s .4s;
@@ -196,8 +196,11 @@ body {
   pointer-events: none;
   height: 0;
 }
-.post .ProseMirror {
+.comment-editor .ProseMirror {
   min-height: 50px;
+}
+.comment-box-editor .ProseMirror {
+  min-height: 200px;
 }
 
 #app {
@@ -333,7 +336,7 @@ textarea {
     position: relative;
     z-index: 2;
   }
-  .main-target {
+  .main-inner {
     position: relative;
     z-index: 2;
   }

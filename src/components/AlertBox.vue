@@ -1,17 +1,18 @@
 <template>
   <div
+    v-if="showAlertText?.length"
     class="alert-box"
     :class="showAlertCls"
   >
-    <div class="alert-container move-obj">
-      <template v-if="showAlertText.length">
+    <div class="alert-container">
+      <div class="main-inner">
         <p
           v-for="t in showAlertText"
           :key="t"
         >
           {{ t }}
         </p>
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -32,12 +33,12 @@ const { showAlertText, showAlertCls } = modalStore
   transform: translateX(-50%);
   z-index: 50;
   &.success {
-    .alert-container {
+    .main-inner {
       background-color: $c-success;
     }
   }
   &.error {
-    .alert-container {
+    .main-inner {
       background-color: $c-error;
     }
   }
@@ -45,11 +46,15 @@ const { showAlertText, showAlertCls } = modalStore
 .alert-container {
   width: auto;
   height: auto;
-  padding: 12px 20px;
-  display: flex;
-  align-content: center;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba($c-black, 0.5);
+  .main-inner {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-content: center;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba($c-black, 0.5);
+  }
   p {
     font-size: px(18);
     font-weight: $medium;

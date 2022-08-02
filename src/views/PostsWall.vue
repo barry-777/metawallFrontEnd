@@ -26,11 +26,17 @@
       :images="emitImages"
     />
   </Transition>
+  <Transition name="fade-model">
+    <CommentEditorBox
+      v-if="showCommentEditorBox"
+    />
+  </Transition>
 </template>
 
 <script setup>
 import PostItem from '@/components/PostItem.vue'
 import ImagesBox from '@/components/ImagesBox.vue'
+import CommentEditorBox from '@/components/CommentEditorBox.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { getPostsByRoute } from '@/fetch/fetch'
 import { storeToRefs } from 'pinia'
@@ -42,9 +48,9 @@ const route = useRoute()
 // store 資料
 const modalStore = useModalStore()
 const postStore = usePostStore()
-const { openAlert, openLoading, closeLoading, controlImagesBox } = modalStore
-const { updatePosts, updateQuery, pushPosts } = postStore
-const { showImagesBox } = storeToRefs(modalStore)
+const { openAlert, openLoading, closeLoading, openImagesBox } = modalStore
+const { updatePosts, updateQuery, pushPosts, resetPatchData } = postStore
+const { showImagesBox, showCommentEditorBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
 
 const postPage = ref(1)
@@ -95,18 +101,22 @@ const scrollLoading = async () => {
     await getPosts()
   }
 }
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', scrollLoading)
-})
+
 onMounted(() => {
   window.addEventListener('scroll', scrollLoading)
+  // 重置編輯暫存
+  resetPatchData()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', scrollLoading)
 })
 
 // 開啟更多照片燈箱
 const emitImages = ref(null)
 const imagesBoxHandler = (value) => {
   emitImages.value = value
-  controlImagesBox(true)
+  openImagesBox(true)
 }
 </script>
 

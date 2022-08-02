@@ -38,10 +38,22 @@ export const usePostStore = defineStore('postStore', {
     async resetPatchData () {
       this.patchData = {}
     },
-    // 新增一則留言
-    async addComment (post_id, data) {
+    // 新增留言
+    async addCommentData (post_id, data) {
       const index = this.posts.findIndex(post => post._id === post_id)
       this.posts[index].comments.unshift(data)
+    },
+    // 編輯留言
+    async updateCommentData (comment_id, post_id, data) {
+      const postIndex = this.posts.findIndex(post => post._id === post_id)
+      const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
+      this.posts[postIndex].comments.splice(commentIndex, 1, data)
+    },
+    // 刪除留言
+    async deleteCommentData (comment_id, post_id) {
+      const postIndex = this.posts.findIndex(post => post._id === post_id)
+      const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
+      this.posts[postIndex].comments.splice(commentIndex, 1)
     }
   },
   persist: {

@@ -121,10 +121,9 @@ export function patchOneComment (comment_id, data) {
 }
 
 // 刪除留言
-export function deleteOneComment (comment_id, data) {
+export function deleteOneComment (comment_id) {
   return useReq({
     url: `${apiPath}/api/comment/1/${comment_id}`,
-    method: 'delete',
-    data
+    method: 'delete'
   })
 }

@@ -11,7 +11,9 @@
         <UserPhoto :photo="props.post.user.avatar" />
       </div>
       <div class="input-outer">
-        <editor-content :editor="editor" />
+        <div class="comment-editor">
+          <editor-content :editor="editor" />
+        </div>
         <button
           type="button"
           @click="postCommentHandler(props.post._id)"
@@ -36,7 +38,7 @@ import { usePostStore } from '@/stores/post'
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const { openLoading, closeLoading, openAlert } = modalStore
-const { addComment } = postStore
+const { addCommentData } = postStore
 
 const props = defineProps({
   post: Object
@@ -61,11 +63,11 @@ const postCommentHandler = async (post_id) => {
     avatar: props.post.user.avatar,
     name: props.post.user.name
   }
-  await addComment(data.data.post, data.data)
+  await addCommentData(data.data.post, data.data)
   closeLoading()
   openAlert('success', '新增成功')
 }
-// 編輯器處理(留言)
+// 編輯器處理
 const editor = useEditor({
   content: commentData.value.content,
   extensions: [

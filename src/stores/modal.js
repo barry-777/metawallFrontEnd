@@ -9,7 +9,10 @@ export const useModalStore = defineStore('modalStore', {
     showAlert: false,
     showAlertText: [],
     showAlertCls: '',
-    showImagesBox: false
+    showImagesBox: false,
+    showCommentEditorBox: false,
+    showCommentEditorType: '',
+    showCommentEditorTemp: {}
   }),
   // methods
   actions: {
@@ -42,13 +45,27 @@ export const useModalStore = defineStore('modalStore', {
         this.showAlertText = []
       }, 2000)
     },
-    controlImagesBox (control) {
+    openImagesBox (control) {
       if (control) {
         this.lockScroll()
         this.showImagesBox = true
       } else {
         this.unLockScroll()
         this.showImagesBox = false
+      }
+    },
+    openCommentEditorBox (control, type, data) {
+      // type: patchComment, postReply, patchReply
+      if (control) {
+        this.lockScroll()
+        this.showCommentEditorType = type
+        this.showCommentEditorBox = true
+        if (data) this.showCommentEditorTemp = data
+      } else {
+        this.unLockScroll()
+        this.showCommentEditorBox = false
+        this.showCommentEditorType = ''
+        this.showCommentEditorTemp = {}
       }
     }
   }

@@ -28,10 +28,16 @@
               v-if="comment.user._id === userStore.user_id"
               class="control-panel"
             >
-              <button type="button">
+              <button
+                type="button"
+                @click="openCommentEditorBox(true, 'patchComment', comment)"
+              >
                 編輯
               </button>
-              <button type="button">
+              <button
+                type="button"
+                @click="deleteCommentHandler(comment._id, comment.post)"
+              >
                 刪除
               </button>
             </div>
@@ -81,12 +87,28 @@
 import UserPhoto from '@/components/UserPhoto.vue'
 import { dateFormat } from '@/services/helper'
 import { useUserStore } from '@/stores/user'
+import { usePostStore } from '@/stores/post'
+import { useModalStore } from '@/stores/modal'
+import { deleteOneComment } from '@/fetch/fetch'
 
 const userStore = useUserStore()
+const postStore = usePostStore()
+const modalStore = useModalStore()
+const { deleteCommentData } = postStore
+const { openLoading, closeLoading, openAlert, openCommentEditorBox } = modalStore
 
 defineProps({
   comments: Array
 })
+
+// 刪除留言
+const deleteCommentHandler = async (comment_id, post_id) => {
+  openLoading('刪除留言中')
+  await deleteOneComment(comment_id)
+  await deleteCommentData(comment_id, post_id)
+  closeLoading()
+  openAlert('success', '刪除留言成功！')
+}
 </script>
 
 <style scoped lang="scss">
