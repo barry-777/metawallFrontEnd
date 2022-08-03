@@ -1,28 +1,13 @@
 <template>
   <section class="side-bar">
     <div class="container">
-      <router-link
-        v-if="route.path !== '/post-upload'"
-        to="/post-upload"
+      <button
+        class="base-button"
+        type="button"
+        @click="openPostUploadBox(true)"
       >
-        <button
-          class="base-button"
-          type="button"
-        >
-          新增動態
-        </button>
-      </router-link>
-      <router-link
-        v-else
-        to="/posts-wall"
-      >
-        <button
-          class="base-button"
-          type="button"
-        >
-          回首頁
-        </button>
-      </router-link>
+        新增動態
+      </button>
       <ul>
         <li>
           <router-link to="/auth">
@@ -69,10 +54,11 @@
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
 import { useUserStore } from '@/stores/user'
-import { useRoute } from 'vue-router'
+import { useModalStore } from '@/stores/modal'
 
-const route = useRoute()
 const userStore = useUserStore()
+const modalStore = useModalStore()
+const { openPostUploadBox } = modalStore
 </script>
 
 <style scoped lang="scss">

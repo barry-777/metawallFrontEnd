@@ -27,6 +27,11 @@
     />
   </Transition>
   <Transition name="fade-model">
+    <PostUploadBox
+      v-if="showPostUploadBox"
+    />
+  </Transition>
+  <Transition name="fade-model">
     <CommentEditorBox
       v-if="showCommentEditorBox"
     />
@@ -36,6 +41,7 @@
 <script setup>
 import PostItem from '@/components/PostItem.vue'
 import ImagesBox from '@/components/ImagesBox.vue'
+import PostUploadBox from '@/components/PostUploadBox.vue'
 import CommentEditorBox from '@/components/CommentEditorBox.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { getPostsByRoute } from '@/fetch/fetch'
@@ -49,8 +55,8 @@ const route = useRoute()
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const { openAlert, openLoading, closeLoading, openImagesBox } = modalStore
-const { patchPosts, patchQuery, addPosts, resetPosts, resetTempPostData } = postStore
-const { showImagesBox, showCommentEditorBox } = storeToRefs(modalStore)
+const { patchPosts, resetPosts, patchQuery, addPosts, resetTempPostData } = postStore
+const { showImagesBox, showPostUploadBox, showCommentEditorBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
 
 const postPage = ref(1)
@@ -60,6 +66,7 @@ const isStopScroll = ref(false)
 
 // 取得所有貼文
 const getPosts = async () => {
+  console.log(posts.value)
   openLoading('取得貼文中')
   isStopScroll.value = true
   if (posts.value?.length) postPage.value += 1
@@ -87,7 +94,6 @@ const getPosts = async () => {
 
   closeLoading()
 }
-resetPosts()
 getPosts()
 
 // 載入更多
@@ -108,6 +114,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', scrollLoading)
+  resetPosts()
   postPage.value = 1
   isLoaded.value = false
   isStopScroll.value = false

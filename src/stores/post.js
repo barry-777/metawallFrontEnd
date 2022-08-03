@@ -12,7 +12,8 @@ export const usePostStore = defineStore('postStore', {
     // s => 資料排序
     postQuery: {
       q: '',
-      s: 'new'
+      s: 'new',
+      p: 1
     },
     tempPostData: {}
   }),
@@ -29,6 +30,10 @@ export const usePostStore = defineStore('postStore', {
     async patchPosts (data) {
       this.posts.length = 0
       Object.assign(this.posts, data)
+    },
+    async patchPost (data) {
+      const index = this.posts.findIndex(post => post._id === data._id)
+      Object.assign(this.posts[index], data)
     },
     async resetPosts () {
       this.posts.length = 0
@@ -78,10 +83,5 @@ export const usePostStore = defineStore('postStore', {
       const replyIndex = this.posts[postIndex].comments[commentIndex].commentReplies.findIndex(reply => reply._id === reply_id)
       this.posts[postIndex].comments[commentIndex].commentReplies.splice(replyIndex, 1)
     }
-  },
-  persist: {
-    key: 'post-temp',
-    storage: window.localStorage,
-    paths: ['tempPostData']
   }
 })

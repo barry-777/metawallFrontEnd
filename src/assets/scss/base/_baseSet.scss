@@ -61,6 +61,9 @@ body {
   .main-inner {
     opacity: 0;
     clip-path: inset(0 50% 0 50%);
+    > * {
+      opacity: 0;
+    }
   }
 }
 
@@ -77,6 +80,10 @@ body {
     opacity: 1;
     clip-path: inset(0 0 0 0);
     transition: opacity .6s .4s, clip-path .6s .4s;
+    > * {
+      opacity: 1;
+      transition: .8s .6s;
+    }
   }
 }
 
@@ -128,65 +135,10 @@ body {
   background-color: $c-white;
   border: 2px solid $c-black;
   outline: none;
-  > * + * {
-    margin-top: 0.75em;
-  }
-
-  ul,
-  ol {
-    padding: 0 1rem;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    line-height: 1.1;
-  }
-
-  h2 {
-    font-size: px(20);
-    font-weight: $bold;
-  }
-
-  strong {
-    font-weight: $medium;
-  }
-
-  em {
-    font-style: italic;
-  }
-
-  pre {
-    background: $c-black;
-    color: $c-white;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    code {
-      color: inherit;
-      padding: 0;
-      background: none;
-      font-size: 0.8rem;
-    }
-  }
-
-  mark {
-    background-color: $c-yellow;
-  }
-
-  blockquote {
-    padding-left: 1rem;
-    border-left: 2px solid rgba($c-black, 0.1);
-  }
-
-  hr {
-    border: none;
-    border-top: 2px solid rgba($c-black, 0.1);
-    margin: 2rem 0;
-  }
+  @include setEditor()
+}
+.serEditorCss {
+  @include setEditor()
 }
 .ProseMirror p.is-empty:first-child::before,
 .ProseMirror p.is-editor-empty:first-child::before {

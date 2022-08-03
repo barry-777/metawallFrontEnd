@@ -33,3 +33,65 @@
 @function px($px) {
 	@return math.div($px, 16) * 1rem
 }
+
+@mixin setEditor() {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: px(20);
+    font-weight: $bold;
+  }
+
+  strong {
+    font-weight: $medium;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  pre {
+    background: $c-black;
+    color: $c-white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+
+  mark {
+    background-color: $c-yellow;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba($c-black, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba($c-black, 0.1);
+    margin: 2rem 0;
+  }
+}

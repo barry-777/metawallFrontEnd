@@ -31,7 +31,7 @@ const { showAlertText, showAlertCls } = modalStore
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 50;
+  z-index: 9999;
   &.success {
     .main-inner {
       background-color: $c-success;

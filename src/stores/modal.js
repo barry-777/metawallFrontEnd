@@ -10,6 +10,7 @@ export const useModalStore = defineStore('modalStore', {
     showAlertText: [],
     showAlertCls: '',
     showImagesBox: false,
+    showPostUploadBox: false,
     showCommentEditorBox: false,
     showCommentEditorType: '',
     showCommentEditorTemp: {}
@@ -52,6 +53,15 @@ export const useModalStore = defineStore('modalStore', {
       } else {
         this.unLockScroll()
         this.showImagesBox = false
+      }
+    },
+    openPostUploadBox (control) {
+      if (control) {
+        this.lockScroll()
+        this.showPostUploadBox = true
+      } else {
+        this.unLockScroll()
+        this.showPostUploadBox = false
       }
     },
     openCommentEditorBox (control, type, data) {

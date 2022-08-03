@@ -18,11 +18,6 @@ const routes = [
         path: '/posts-wall',
         component: () => import('@/views/PostsWall.vue'),
         meta: { requiresAuth: true }
-      },
-      {
-        path: '/post-upload',
-        component: () => import('@/components/PostUpload.vue'),
-        meta: { requiresAuth: true }
       }
     ]
   },
@@ -44,7 +39,7 @@ const router = createRouter({
   }
 })
 
-router.beforeEach(to => {
+router.beforeEach((to, from) => {
   const userStore = useUserStore()
   const { tryLogin } = userStore
 

@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="middle">
-          <div class="inner-t">
+          <div class="inner-t serEditorCss">
             <!-- eslint-disable vue/no-v-html -->
             <div v-html="props.post.content" />
             <!--eslint-enable-->
@@ -99,7 +99,6 @@ import PostTool from '@/components/PostTool.vue'
 import { dateFormat } from '@/services/helper'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import router from '@/router'
 import { getPostsByRoute, deleteOnePost, deleteUploadImage } from '@/fetch/fetch'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
@@ -110,7 +109,7 @@ const route = useRoute()
 const modalStore = useModalStore()
 const userStore = useUserStore()
 const postStore = usePostStore()
-const { openLoading, closeLoading, openAlert } = modalStore
+const { openLoading, closeLoading, openAlert, openPostUploadBox } = modalStore
 const { patchPosts, patchQuery, patchTempPostData } = postStore
 const { postQuery } = storeToRefs(postStore)
 
@@ -123,12 +122,16 @@ defineEmits(['images-value'])
 const hasData = ref(null)
 hasData.value = Object.keys(props.post).length !== 0
 
-// 控制 編輯貼文 || 刪除貼文 視窗
+// 控制視窗
 const showPostControl = ref(false)
+
+// 編輯貼文
 const patchPostHandler = async (post) => {
   await patchTempPostData(post)
-  router.push('/post-upload')
+  openPostUploadBox(true)
 }
+
+// 刪除貼文
 const deletePostHandler = async (post) => {
   openLoading('刪除貼文中')
   for await (const image of post.images) {

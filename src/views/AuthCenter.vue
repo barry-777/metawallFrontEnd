@@ -13,14 +13,11 @@
 import { onMounted } from 'vue'
 import SideBar from '@/components/SideBar.vue'
 import { useUserStore } from '@/stores/user'
-// import { useModalStore } from '@/stores/modal'
 import { getCurrentUser } from '@/fetch/fetch'
 
 // store 資料
 const userStore = useUserStore()
-// const modalStore = useModalStore()
 const { patchUser } = userStore
-// const { openLoading, closeLoading } = modalStore
 
 // 取得個人資料
 const getProfile = async () => {
@@ -33,6 +30,7 @@ const getProfile = async () => {
     })
   }
 }
+
 onMounted(async () => {
   if (!userStore.user_id) {
     await getProfile()
