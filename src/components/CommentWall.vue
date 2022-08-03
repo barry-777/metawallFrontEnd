@@ -25,7 +25,6 @@
               <!--eslint-enable-->
             </div>
             <div
-              v-if="comment.user._id === userStore.user_id"
               class="control-panel"
             >
               <button
@@ -35,12 +34,14 @@
                 回覆
               </button>
               <button
+                v-if="comment.user._id === userStore.user_id"
                 type="button"
                 @click="openCommentEditorBox(true, 'patchComment', comment)"
               >
                 編輯
               </button>
               <button
+                v-if="comment.user._id === userStore.user_id"
                 type="button"
                 @click="deleteCommentHandler(comment)"
               >
