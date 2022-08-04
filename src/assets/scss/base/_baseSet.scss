@@ -371,6 +371,14 @@ textarea {
   box-shadow: 0 2px 10px rgba($c-black, .25);
 }
 
+.common-title {
+  width: 100%;
+  font-size: px(20);
+  font-weight: $bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
 .user-photo-outer {
   width: 45px;
   height: 45px;

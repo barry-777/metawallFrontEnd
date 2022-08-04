@@ -65,6 +65,14 @@ export function patchPostLikes (post_id, mode) {
   })
 }
 
+// 取得使用者收藏的貼文
+export function getLikePosts (user_id) {
+  return useReq({
+    url: `${apiPath}/api/posts/likes/${user_id}`,
+    method: 'get'
+  })
+}
+
 // 取得使用者貼文 -> user_id
 export function getPostsById (user_id) {
   return useReq({

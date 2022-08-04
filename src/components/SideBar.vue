@@ -31,7 +31,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/auth">
+          <router-link :to="`/user/likes/${userStore.user_id}`">
             <div>
               <i class="fa-solid fa-heart" />
             </div>

@@ -16,15 +16,26 @@ const routes = [
     children: [
       {
         path: '/posts',
-        component: () => import('@/views/PostsWall.vue'),
-        meta: { requiresAuth: true }
-      },
-      {
-        path: '/posts-likes',
-        component: () => import('@/views/PostsWall.vue'),
+        component: () => import('@/components/PostsWall.vue'),
         meta: { requiresAuth: true }
       }
     ]
+  },
+  {
+    path: '/user',
+    component: () => import('@/views/AuthCenter.vue'),
+    children: [
+      {
+        path: '/user/likes/:user_id',
+        component: () => import('@/components/UserLike.vue'),
+        meta: { requiresAuth: true }
+      }
+    ]
+  },
+  {
+    path: '/notfound',
+    component: () => import('@/views/NotFound.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path: '/:pathMatch(.*)*',

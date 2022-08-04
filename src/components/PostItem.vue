@@ -85,7 +85,7 @@
       </div>
       <div class="content">
         <div class="no-t">
-          目前尚無貼文，試著張貼動態吧！
+          目前尚無貼文！
         </div>
       </div>
     </template>

@@ -40,7 +40,13 @@ export const usePostStore = defineStore('postStore', {
     // 新增留言
     async addCommentData (post_id, data) {
       const index = this.posts.findIndex(post => post._id === post_id)
-      this.posts[index].comments.unshift(data)
+      const ary = this.posts[index]
+      if (ary.comments) {
+        ary.comments.unshift(data)
+      } else {
+        ary.comments = []
+        ary.comments.push(data)
+      }
     },
     // 編輯留言
     async patchCommentData (comment_id, post_id, data) {
@@ -58,8 +64,13 @@ export const usePostStore = defineStore('postStore', {
     async addReplyData (comment_id, post_id, data) {
       const postIndex = this.posts.findIndex(post => post._id === post_id)
       const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
-      console.log(postIndex, commentIndex)
-      this.posts[postIndex].comments[commentIndex].commentReplies.unshift(data)
+      const ary = this.posts[postIndex].comments[commentIndex]
+      if (ary.commentReplies) {
+        ary.commentReplies.unshift(data)
+      } else {
+        ary.commentReplies = []
+        ary.commentReplies.push(data)
+      }
     },
     // 編輯回覆留言
     async patchReplyData (reply_id, comment_id, post_id, data) {
