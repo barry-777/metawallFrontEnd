@@ -52,6 +52,7 @@ import PostUploadBox from '@/components/PostUploadBox.vue'
 import PostLikesBox from '@/components/PostLikesBox.vue'
 import CommentEditorBox from '@/components/CommentEditorBox.vue'
 import { storeToRefs } from 'pinia'
+import { onBeforeUnmount, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router/index'
 import { getLikePosts } from '@/fetch/fetch'
@@ -68,6 +69,7 @@ const { showImagesBox, showPostUploadBox, showPostLikesBox, showCommentEditorBox
 const { posts } = storeToRefs(postStore)
 const { user_id, name } = storeToRefs(userStore)
 const { openAlert, openLoading, closeLoading } = modalStore
+const { resetPosts } = postStore
 
 const getLikePostsHandler = async (user_id) => {
   openLoading('取得收藏貼文中！')
@@ -79,6 +81,15 @@ const getLikePostsHandler = async (user_id) => {
 }
 
 getLikePostsHandler(route.params.user_id)
+
+watch(() => route.params.user_id, (nV, oV) => {
+  resetPosts()
+  getLikePostsHandler(route.params.user_id)
+})
+
+onBeforeUnmount(() => {
+  resetPosts()
+})
 </script>
 
 <style scoped lang="scss"></style>

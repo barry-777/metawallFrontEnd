@@ -6,13 +6,15 @@
     <template v-if="hasData">
       <div class="content">
         <div class="top">
-          <div class="user-photo-outer">
-            <UserPhoto :photo="props.post.user.avatar" />
-          </div>
-          <div class="user-name">
-            <p>{{ props.post.user.name }}</p>
-            <p>{{ dateFormat(props.post.createdAt) }}</p>
-          </div>
+          <router-link :to="`/user/likes/${props.post.user._id}`">
+            <div class="user-photo-outer">
+              <UserPhoto :photo="props.post.user.avatar" />
+            </div>
+            <div class="user-name">
+              <p>{{ props.post.user.name }}</p>
+              <p>{{ dateFormat(props.post.createdAt) }}</p>
+            </div>
+          </router-link>
           <div
             v-if="props.post.user._id === userStore.user_id"
             class="post-control"
@@ -169,6 +171,15 @@ onMounted(() => {
 .top {
   display: flex;
   align-items: flex-start;
+  a {
+    display: inline-flex;
+    align-items: flex-start;
+    &:hover {
+      p:nth-child(1) {
+        color: $c-first;
+      }
+    }
+  }
   p:nth-child(1) {
     font-size: px(14);
     font-weight: $medium;
@@ -177,7 +188,7 @@ onMounted(() => {
   p:nth-child(2) {
     font-size: px(12);
     color: $c-gray-4;
-    margin-top: 5px;
+    margin-top: 8px;
   }
 }
 .post-control {

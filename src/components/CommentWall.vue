@@ -13,11 +13,15 @@
             <UserPhoto :photo="comment.user.avatar" />
           </div>
           <div class="comment-outer">
-            <div class="name">
-              {{ comment.user.name }}
-            </div>
-            <div class="date">
-              {{ dateFormat(comment.createdAt) }}
+            <div>
+              <router-link :to="`/user/likes/${comment.user._id}`">
+                <div class="name">
+                  {{ comment.user.name }}
+                </div>
+                <div class="date">
+                  {{ dateFormat(comment.createdAt) }}
+                </div>
+              </router-link>
             </div>
             <div class="comment">
               <!-- eslint-disable vue/no-v-html -->
@@ -60,11 +64,15 @@
               <UserPhoto :photo="commonReply.user.avatar" />
             </div>
             <div class="comment-outer">
-              <div class="name">
-                {{ commonReply.user.name }}
-              </div>
-              <div class="date">
-                {{ dateFormat(commonReply.createdAt) }}
+              <div>
+                <router-link :to="`/user/likes/${commonReply.user._id}`">
+                  <div class="name">
+                    {{ commonReply.user.name }}
+                  </div>
+                  <div class="date">
+                    {{ dateFormat(commonReply.createdAt) }}
+                  </div>
+                </router-link>
               </div>
               <div class="comment">
                 <!-- eslint-disable vue/no-v-html -->
@@ -168,10 +176,19 @@ li {
 }
 .comment-outer {
   width: 100%;
+  a {
+    display: inline-block;
+    &:hover {
+      .name {
+        color: $c-first
+      }
+    }
+  }
 }
 .name {
   font-size: px(14);
   font-weight: $medium;
+  position: relative;
 }
 .date {
   font-size: px(12);
