@@ -32,6 +32,11 @@
     />
   </Transition>
   <Transition name="fade-model">
+    <PostLikesBox
+      v-if="showPostLikesBox"
+    />
+  </Transition>
+  <Transition name="fade-model">
     <CommentEditorBox
       v-if="showCommentEditorBox"
     />
@@ -42,11 +47,12 @@
 import PostItem from '@/components/PostItem.vue'
 import ImagesBox from '@/components/ImagesBox.vue'
 import PostUploadBox from '@/components/PostUploadBox.vue'
+import PostLikesBox from '@/components/PostLikesBox.vue'
 import CommentEditorBox from '@/components/CommentEditorBox.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
-import { getPostsByRoute } from '@/fetch/fetch'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
+import { getPostsByRoute } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
 
@@ -56,7 +62,7 @@ const modalStore = useModalStore()
 const postStore = usePostStore()
 const { openAlert, openLoading, closeLoading, openImagesBox } = modalStore
 const { patchPosts, resetPosts, patchQuery, addPosts, resetTempPostData } = postStore
-const { showImagesBox, showPostUploadBox, showCommentEditorBox } = storeToRefs(modalStore)
+const { showImagesBox, showPostUploadBox, showPostLikesBox, showCommentEditorBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
 
 const postPage = ref(1)

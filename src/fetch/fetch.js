@@ -48,6 +48,14 @@ export function getCurrentUser () {
   })
 }
 
+// 取得收藏貼文的使用者
+export function getPostLikesList (post_id) {
+  return useReq({
+    url: `${apiPath}/api/likes?post_id=${post_id}`,
+    method: 'get'
+  })
+}
+
 // 收藏 與 取消收藏
 export function patchPostLikes (post_id, mode) {
   // like_mode: add / remove

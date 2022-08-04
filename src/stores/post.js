@@ -82,6 +82,11 @@ export const usePostStore = defineStore('postStore', {
       const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
       const replyIndex = this.posts[postIndex].comments[commentIndex].commentReplies.findIndex(reply => reply._id === reply_id)
       this.posts[postIndex].comments[commentIndex].commentReplies.splice(replyIndex, 1)
+    },
+    // 新增／移除 收藏
+    async patchPostLikesData (post_id, data) {
+      const postIndex = this.posts.findIndex(post => post._id === post_id)
+      this.posts[postIndex].likes = data.likes
     }
   }
 })
