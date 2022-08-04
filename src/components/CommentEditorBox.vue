@@ -62,6 +62,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
@@ -69,15 +71,13 @@ import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
 import { useUserStore } from '@/stores/user'
 import { patchOneComment, postOneReply, patchOneReply } from '@/fetch/fetch'
-import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const userStore = useUserStore()
+const { showCommentEditorType, showCommentEditorTemp } = storeToRefs(modalStore)
 const { openLoading, closeLoading, openAlert, openCommentEditorBox } = modalStore
 const { patchCommentData, addReplyData, patchReplyData } = postStore
-const { showCommentEditorType, showCommentEditorTemp } = storeToRefs(modalStore)
 const { user_id, name, avatar } = userStore
 
 const tempData = ref({})
@@ -108,7 +108,6 @@ const patchCommentHandler = async (comment) => {
   const { data } = await patchOneComment(comment._id, {
     content: comment.content
   })
-  console.log(data.data)
   await patchCommentData(comment._id, comment.post, data.data)
   closeLoading()
   openCommentEditorBox(false)

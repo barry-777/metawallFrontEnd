@@ -14,8 +14,7 @@ export const usePostStore = defineStore('postStore', {
       q: '',
       s: 'new',
       p: 1
-    },
-    tempPostData: {}
+    }
   }),
   // methods
   actions: {
@@ -38,14 +37,6 @@ export const usePostStore = defineStore('postStore', {
     async resetPosts () {
       this.posts.length = 0
     },
-    // 更新編輯貼文資料
-    async patchTempPostData (data) {
-      Object.assign(this.tempPostData, data)
-    },
-    // 重設編輯貼文資料
-    async resetTempPostData () {
-      this.tempPostData = {}
-    },
     // 新增留言
     async addCommentData (post_id, data) {
       const index = this.posts.findIndex(post => post._id === post_id)
@@ -67,6 +58,7 @@ export const usePostStore = defineStore('postStore', {
     async addReplyData (comment_id, post_id, data) {
       const postIndex = this.posts.findIndex(post => post._id === post_id)
       const commentIndex = this.posts[postIndex].comments.findIndex(comment => comment._id === comment_id)
+      console.log(postIndex, commentIndex)
       this.posts[postIndex].comments[commentIndex].commentReplies.unshift(data)
     },
     // 編輯回覆留言

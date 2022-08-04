@@ -23,7 +23,7 @@
             />
             <div v-if="showPostControl">
               <ul>
-                <li @click="patchPostHandler(props.post)">
+                <li @click="openPostUploadBox(true, props.post)">
                   編輯貼文
                 </li>
                 <li @click="deletePostHandler(props.post)">
@@ -64,7 +64,7 @@
             <div
               v-if="props.post.images?.length >= 2"
               class="img-more"
-              @click="$emit('images-value', props.post.images)"
+              @click="openImagesBox(true, props.post.images)"
             >
               <i class="fa-regular fa-square-plus" />
               <p>MORE</p>
@@ -96,11 +96,11 @@
 import UserPhoto from '@/components/UserPhoto.vue'
 import CommentWall from '@/components/CommentWall.vue'
 import PostTool from '@/components/PostTool.vue'
-import { dateFormat } from '@/services/helper'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { getPostsByRoute, deleteOnePost, deleteUploadImage } from '@/fetch/fetch'
 import { storeToRefs } from 'pinia'
+import { dateFormat } from '@/services/helper'
+import { getPostsByRoute, deleteOnePost, deleteUploadImage } from '@/fetch/fetch'
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/post'
 import { useModalStore } from '@/stores/modal'
@@ -109,14 +109,13 @@ const route = useRoute()
 const modalStore = useModalStore()
 const userStore = useUserStore()
 const postStore = usePostStore()
-const { openLoading, closeLoading, openAlert, openPostUploadBox } = modalStore
-const { patchPosts, patchQuery, patchTempPostData } = postStore
 const { postQuery } = storeToRefs(postStore)
+const { openLoading, closeLoading, openAlert, openPostUploadBox, openImagesBox } = modalStore
+const { patchPosts, patchQuery } = postStore
 
 const props = defineProps({
   post: Object
 })
-defineEmits(['images-value'])
 
 // 確認是否有資料
 const hasData = ref(null)
@@ -124,12 +123,6 @@ hasData.value = Object.keys(props.post).length !== 0
 
 // 控制視窗
 const showPostControl = ref(false)
-
-// 編輯貼文
-const patchPostHandler = async (post) => {
-  await patchTempPostData(post)
-  openPostUploadBox(true)
-}
 
 // 刪除貼文
 const deletePostHandler = async (post) => {

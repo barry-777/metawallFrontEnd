@@ -6,7 +6,6 @@
           v-for="post in posts"
           :key="post._id"
           :post="post"
-          @images-value="imagesBoxHandler"
         />
       </template>
       <template v-else>
@@ -23,7 +22,6 @@
   <Transition name="fade-model">
     <ImagesBox
       v-if="showImagesBox"
-      :images="emitImages"
     />
   </Transition>
   <Transition name="fade-model">
@@ -60,10 +58,10 @@ const route = useRoute()
 // store 資料
 const modalStore = useModalStore()
 const postStore = usePostStore()
-const { openAlert, openLoading, closeLoading, openImagesBox } = modalStore
-const { patchPosts, resetPosts, patchQuery, addPosts, resetTempPostData } = postStore
 const { showImagesBox, showPostUploadBox, showPostLikesBox, showCommentEditorBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
+const { openAlert, openLoading, closeLoading } = modalStore
+const { patchPosts, resetPosts, patchQuery, addPosts } = postStore
 
 const postPage = ref(1)
 const isLoaded = ref(false)
@@ -113,8 +111,6 @@ const scrollLoading = async () => {
 
 onMounted(() => {
   window.addEventListener('scroll', scrollLoading)
-  // 重置編輯暫存
-  resetTempPostData()
 })
 
 onBeforeUnmount(() => {
@@ -124,13 +120,6 @@ onBeforeUnmount(() => {
   isLoaded.value = false
   isStopScroll.value = false
 })
-
-// 開啟更多照片燈箱
-const emitImages = ref(null)
-const imagesBoxHandler = (value) => {
-  emitImages.value = value
-  openImagesBox(true)
-}
 </script>
 
 <style scoped lang="scss">

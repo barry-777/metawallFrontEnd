@@ -18,7 +18,7 @@
           </div>
           <ul>
             <li
-              v-for="(list, index) in likesList"
+              v-for="(list, index) in showPostLikesTemp"
               :key="'list' + index"
             >
               <div class="user-photo-outer">
@@ -42,9 +42,8 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '@/stores/modal'
 
 const modalStore = useModalStore()
-const { openPostLikesBox } = modalStore
 const { showPostLikesTemp } = storeToRefs(modalStore)
-const likesList = showPostLikesTemp.value
+const { openPostLikesBox } = modalStore
 
 onMounted(() => {
   const element = document.querySelector('.main-inner')

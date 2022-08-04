@@ -10,7 +10,9 @@ export const useModalStore = defineStore('modalStore', {
     showAlertText: [],
     showAlertCls: '',
     showImagesBox: false,
+    showImagesTemp: null,
     showPostUploadBox: false,
+    showPostUploadTemp: null,
     showPostLikesBox: false,
     showPostLikesTemp: null,
     showCommentEditorBox: false,
@@ -48,22 +50,26 @@ export const useModalStore = defineStore('modalStore', {
         this.showAlertText = []
       }, 2000)
     },
-    openImagesBox (control) {
+    openImagesBox (control, data) {
       if (control) {
         this.lockScroll()
         this.showImagesBox = true
+        this.showImagesTemp = data
       } else {
         this.unLockScroll()
         this.showImagesBox = false
+        this.showImagesTemp = null
       }
     },
-    openPostUploadBox (control) {
+    openPostUploadBox (control, data) {
       if (control) {
         this.lockScroll()
         this.showPostUploadBox = true
+        this.showPostUploadTemp = data
       } else {
         this.unLockScroll()
         this.showPostUploadBox = false
+        this.showPostUploadTemp = null
       }
     },
     openPostLikesBox (control, data) {

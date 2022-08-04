@@ -112,7 +112,7 @@ const patchLikesHandler = async (post_id) => {
   else openAlert('error', '已取消收藏！')
 }
 
-// 顯示收藏會員
+// 顯示收藏會員燈箱
 const likesListHandler = async (post_id) => {
   openLoading('取得收藏會員中！')
   const { data } = await getPostLikesList(post_id)

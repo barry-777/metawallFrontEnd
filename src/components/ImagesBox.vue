@@ -23,7 +23,7 @@
             :fade-effect="{crossFade: true}"
           >
             <swiper-slide
-              v-for="(image, index) in props.images"
+              v-for="(image, index) in showImagesTemp"
               :key="'image' + index"
             >
               <img
@@ -47,12 +47,11 @@ import { Navigation, Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { useModalStore } from '@/stores/modal'
 import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const modalStore = useModalStore()
+const { showImagesTemp } = storeToRefs(modalStore)
 const { openImagesBox } = modalStore
-const props = defineProps({
-  images: Array
-})
 
 onMounted(() => {
   const element = document.querySelector('.main-inner')

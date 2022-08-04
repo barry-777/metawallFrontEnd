@@ -183,6 +183,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
@@ -201,13 +202,14 @@ const sendData = ref({
 // store 資料
 const modalStore = useModalStore()
 const postStore = usePostStore()
+const { showPostUploadTemp } = storeToRefs(modalStore)
 const { openLoading, closeLoading, openAlert, openPostUploadBox } = modalStore
-const { patchPost, tempPostData, resetTempPostData } = postStore
+const { patchPost } = postStore
 
 // 編輯模式處理
-const isPatchMode = !!tempPostData._id
+const isPatchMode = !!showPostUploadTemp.value?._id
 if (isPatchMode) {
-  Object.assign(sendData.value, tempPostData)
+  Object.assign(sendData.value, showPostUploadTemp.value)
 }
 
 // 編輯器處理
@@ -305,7 +307,6 @@ const patchSubmit = async () => {
   }
   // console.log('編輯的資料：', sendData.value)
   await patchOnePost(sendData.value)
-  await resetTempPostData()
   await patchPost(sendData.value)
   openPostUploadBox(false)
   closeLoading()
