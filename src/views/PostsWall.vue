@@ -66,7 +66,6 @@ const isStopScroll = ref(false)
 
 // 取得所有貼文
 const getPosts = async () => {
-  console.log(posts.value)
   openLoading('取得貼文中')
   isStopScroll.value = true
   if (posts.value?.length) postPage.value += 1

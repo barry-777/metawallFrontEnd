@@ -1,9 +1,42 @@
 <template>
   <div class="post-tool">
     <!-- 讚 -->
-    <div>
-      <i class="fa-regular fa-thumbs-up" />
-      <p>100</p>
+    <div @click.stop="patchLikesHandler(props.post._id)">
+      <div
+        class="heart"
+        :class="{'liked': isLiked}"
+      >
+        <svg
+          class="heart-small red"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
+        </svg>
+        <svg
+          class="heart-small black"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path d="M6.28 3c3.236.001 4.973 3.491 5.72 5.031.75-1.547 2.469-5.021 5.726-5.021 2.058 0 4.274 1.309 4.274 4.182 0 3.442-4.744 7.851-10 13-5.258-5.151-10-9.559-10-13 0-2.676 1.965-4.193 4.28-4.192zm.001-2c-3.183 0-6.281 2.187-6.281 6.192 0 4.661 5.57 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-4.011-3.097-6.182-6.274-6.182-2.204 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248z" />
+        </svg>
+      </div>
+      <p
+        v-if="props.post.likes?.length"
+        class="heart-num"
+      >
+        {{ props.post.likes.length }}
+      </p>
+      <p
+        v-else
+        class="heart-num no"
+      >
+        成為第一位收藏的人！
+      </p>
     </div>
     <!-- 留言 -->
     <div>
@@ -30,23 +63,40 @@ import UserPhoto from '@/components/UserPhoto.vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
-import { postOneComment } from '@/fetch/fetch'
+import { postOneComment, patchPostLikes } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
 import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const userStore = useUserStore()
 const { openLoading, closeLoading, openAlert } = modalStore
 const { addCommentData } = postStore
-const { user_id, name, avatar } = storeToRefs(userStore)
+const { user_id, name, avatar } = userStore
 
 const props = defineProps({
   post: Object
 })
+
+const isLiked = ref(false)
+isLiked.value = props.post.likes.some(item => item === user_id)
+const patchLikesHandler = async (post_id) => {
+  const mode = isLiked.value ? 'remove' : 'add'
+
+  if (isLiked.value) openLoading('取消收藏中！')
+  else openLoading('幫您收藏中！')
+
+  // 更新狀態
+  const { data } = await patchPostLikes(post_id, mode)
+  isLiked.value = data.data.likes.some(item => item === user_id)
+
+  closeLoading()
+
+  if (isLiked.value) openAlert('success', '已收藏！')
+  else openAlert('error', '已取消收藏！')
+}
 
 // 新增一則留言
 const commentData = ref({
@@ -71,6 +121,7 @@ const postCommentHandler = async (post_id) => {
   closeLoading()
   openAlert('success', '新增成功')
 }
+
 // 編輯器處理
 const editor = useEditor({
   content: commentData.value.content,
@@ -109,14 +160,61 @@ const editor = useEditor({
   align-content: center;
   user-select: none;
   cursor: pointer;
-  i {
-    font-size: px(25);
-    color: $c-first;
+  .heart {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all .5s ease;
+    .heart-small {
+      width: 100%;
+      height: 100%;
+      padding: 0.5rem;
+      stroke-width: 5px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      &.red {
+        fill: $c-red;
+        transform: scale(0);
+      }
+      &.black {
+        transform: scale(1);
+      }
+    }
+    &.liked {
+      .heart-small.red {
+        animation: likedHeart 0.5s ease;
+        transform: scale(1);
+      }
+      .heart-small.black {
+        transform: scale(0);
+      }
+    }
   }
   p {
     font-weight: $medium;
-    margin-top: 5px;
-    margin-left: 7px;
+    padding-top: 12px;
+    padding-left: 2px;
+    &.no {
+      font-size: px(14);
+    }
+  }
+  @keyframes likedHeart {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+    75% {
+      transform: scale(0.7);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 }
 .post-tool > div:nth-child(2) {

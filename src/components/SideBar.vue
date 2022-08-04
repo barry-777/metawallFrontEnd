@@ -33,9 +33,9 @@
         <li>
           <router-link to="/auth">
             <div>
-              <i class="fa-regular fa-thumbs-up" />
+              <i class="fa-solid fa-heart" />
             </div>
-            <p>我按讚的文章</p>
+            <p>我收藏的文章</p>
           </router-link>
         </li>
         <li>

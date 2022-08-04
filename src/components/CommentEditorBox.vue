@@ -78,7 +78,7 @@ const userStore = useUserStore()
 const { openLoading, closeLoading, openAlert, openCommentEditorBox } = modalStore
 const { patchCommentData, addReplyData, patchReplyData } = postStore
 const { showCommentEditorType, showCommentEditorTemp } = storeToRefs(modalStore)
-const { user_id, name, avatar } = storeToRefs(userStore)
+const { user_id, name, avatar } = userStore
 
 const tempData = ref({})
 if (showCommentEditorTemp.value.content) {
