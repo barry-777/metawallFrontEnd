@@ -8,7 +8,7 @@
         >
           <i class="fa-solid fa-xmark" />
         </div>
-        <div class="main-inner">
+        <div class="main-inner animate-inner">
           <div class="inner-top">
             <p v-if="isPatchMode">
               編輯動態中 ！
@@ -317,19 +317,9 @@ const patchSubmit = async () => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
-.close-button {
-  margin-bottom: 30px;
-}
 .main-inner {
   width: 100%;
   max-width: 1200px;
-  padding: 50px 40px 60px;
-  border: 4px solid $c-first;
-  border-bottom: 6px solid $c-first;
-  border-radius: 20px 20px 0 0;
-  background-color: $c-white;
-  box-shadow: 0 5px 8px rgba($c-black, .5);
-  overflow: hidden;
 }
 .wrap {
   margin-bottom: 40px;

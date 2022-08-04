@@ -26,14 +26,14 @@ body {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .8s;
+  transition: opacity .6s;
 }
 
 .fade-alert-enter-from,
 .fade-alert-leave-to {
   opacity: 0;
   transition: opacity .6s .2s;
-  .main-inner {
+  .alert-inner {
     opacity: 0;
     transform: translateY(10px);
   }
@@ -43,7 +43,7 @@ body {
 .fade-alert-leave-from {
   opacity: 1;
   transition: opacity .6s;
-  .main-inner {
+  .alert-inner {
     opacity: 1;
     transform: translateZ(0);
     transition: opacity .6s .2s, transform .6s .2s;
@@ -53,16 +53,18 @@ body {
 .fade-model-enter-from,
 .fade-model-leave-to {
   opacity: 0;
-  transition: opacity .8s .2s;
+  transition: opacity .4s .2s;
   .close-button {
     opacity: 0;
     transform: translateY(-10px);
   }
-  .main-inner {
+  .animate-inner {
     opacity: 0;
-    clip-path: inset(0 50% 0 50%);
+    clip-path: inset(0 30% 0 30%);
+    transition: .2s;
     > * {
       opacity: 0;
+      transition: .2s;
     }
   }
 }
@@ -70,19 +72,19 @@ body {
 .fade-model-enter-to,
 .fade-model-leave-from {
   opacity: 1;
-  transition: opacity 1s;
+  transition: opacity 1.2s;
   .close-button {
     opacity: 1;
     transform: translateY(0px);
     transition: .6s .6s;
   }
-  .main-inner {
+  .animate-inner {
     opacity: 1;
     clip-path: inset(0 0 0 0);
-    transition: opacity .6s .4s, clip-path .6s .4s;
+    transition: opacity .6s .6s, clip-path .6s .6s;
     > * {
       opacity: 1;
-      transition: .8s .6s;
+      transition: .4s .8s;
     }
   }
 }
@@ -285,12 +287,20 @@ textarea {
     position: relative;
   }
   .close-button {
+    margin-bottom: 30px;
     position: relative;
     z-index: 2;
   }
   .main-inner {
+    padding: 50px 40px 60px;
+    border: 4px solid $c-first;
+    border-bottom: 6px solid $c-first;
+    border-radius: 20px 20px 0 0;
+    background-color: $c-white;
+    box-shadow: 0 5px 8px rgba($c-black, .5);
     position: relative;
     z-index: 2;
+    overflow: hidden;
   }
   .full-title {
     width: 100%;

@@ -12,7 +12,7 @@
         >
           <i class="fa-solid fa-xmark" />
         </div>
-        <div class="main-inner">
+        <div class="images-inner">
           <swiper
             :modules="[Navigation, Pagination, EffectFade]"
             :speed="1000"
@@ -46,7 +46,7 @@ import 'swiper/css/effect-fade'
 import { Navigation, Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { useModalStore } from '@/stores/modal'
-import { onMounted } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const modalStore = useModalStore()
@@ -54,10 +54,15 @@ const { showImagesTemp } = storeToRefs(modalStore)
 const { openImagesBox } = modalStore
 
 onMounted(() => {
-  const element = document.querySelector('.main-inner')
+  const element = document.querySelector('.images-inner')
   element.addEventListener('click', function (e) {
     e.stopPropagation()
   })
+})
+
+onBeforeUnmount(() => {
+  const element = document.querySelector('.swiper-pagination')
+  element.style.display = 'none'
 })
 </script>
 
@@ -66,7 +71,7 @@ onMounted(() => {
 .swiper-slide {
   padding: 35px;
 }
-.main-inner {
+.images-inner {
   width: 100%;
   max-width: 800px;
   img {

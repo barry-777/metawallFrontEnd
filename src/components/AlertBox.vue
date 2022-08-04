@@ -5,7 +5,7 @@
     :class="showAlertCls"
   >
     <div class="alert-container">
-      <div class="main-inner">
+      <div class="alert-inner">
         <p
           v-for="t in showAlertText"
           :key="t"
@@ -33,12 +33,12 @@ const { showAlertText, showAlertCls } = modalStore
   transform: translateX(-50%);
   z-index: 9999;
   &.success {
-    .main-inner {
+    .alert-inner {
       background-color: $c-success;
     }
   }
   &.error {
-    .main-inner {
+    .alert-inner {
       background-color: $c-error;
     }
   }
@@ -46,7 +46,7 @@ const { showAlertText, showAlertCls } = modalStore
 .alert-container {
   width: auto;
   height: auto;
-  .main-inner {
+  .alert-inner {
     width: auto;
     height: auto;
     display: flex;

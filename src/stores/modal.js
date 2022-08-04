@@ -1,4 +1,3 @@
-import { setTimeout } from 'core-js'
 import { defineStore } from 'pinia'
 
 export const useModalStore = defineStore('modalStore', {

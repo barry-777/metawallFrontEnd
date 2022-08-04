@@ -19,7 +19,7 @@
       class="loading-detector"
     />
   </div>
-  <Transition name="fade-model">
+  <Transition name="fade">
     <ImagesBox
       v-if="showImagesBox"
     />
