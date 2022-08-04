@@ -4,18 +4,23 @@ import { useUserStore } from '@/stores/user.js'
 const routes = [
   {
     path: '/',
-    redirect: '/posts-wall'
+    redirect: '/posts'
   },
   {
     path: '/auth',
     component: () => import('@/views/AuthBase.vue')
   },
   {
-    path: '/posts-wall',
+    path: '/posts',
     component: () => import('@/views/AuthCenter.vue'),
     children: [
       {
-        path: '/posts-wall',
+        path: '/posts',
+        component: () => import('@/views/PostsWall.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/posts-likes',
         component: () => import('@/views/PostsWall.vue'),
         meta: { requiresAuth: true }
       }
@@ -43,7 +48,7 @@ router.beforeEach((to, from) => {
   const userStore = useUserStore()
   const { tryLogin } = userStore
 
-  if (tryLogin() && to.path === '/auth') return '/posts-wall'
+  if (tryLogin() && to.path === '/auth') return '/posts'
 
   if (!tryLogin() && to.meta.requiresAuth) return '/auth'
   else return true

@@ -9,7 +9,7 @@
           <i class="fa-solid fa-xmark" />
         </div>
         <div class="main-inner animate-inner">
-          <div class="info-wrap">
+          <div class="full-title">
             <div
               v-if="showCommentEditorType === 'patchComment'"
             >
@@ -152,14 +152,8 @@ const patchReplyHandler = async (reply) => {
   width: 100%;
   max-width: 800px;
 }
-.info-wrap {
-  width: 90%;
+.full-title {
   margin: 0 auto 40px;
-  text-align: center;
-  div {
-    font-size: px(18);
-    font-weight: $medium;
-  }
 }
 .button-wrap {
   width: 90%;

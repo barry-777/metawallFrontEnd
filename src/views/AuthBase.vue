@@ -197,7 +197,7 @@ const loginEvent = async () => {
         name: userData.data.name,
         avatar: userData.data.avatar
       })
-      router.push('/posts-wall')
+      router.push('/posts')
       // 清空錯誤
       errorMessage.all.length = 0
     }

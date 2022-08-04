@@ -136,16 +136,6 @@ const deleteReplyHandler = async (reply) => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
-.user-photo-outer {
-  width: 45px;
-  height: 45px;
-  margin-right: 12px;
-  flex-shrink: 0;
-  position: relative;
-  border: 2px solid $c-black;
-  border-radius: 50%;
-  overflow: hidden;
-}
 .comments {
   width: 100%;
   padding-left: 40px;

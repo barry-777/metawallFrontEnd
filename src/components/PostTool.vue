@@ -162,16 +162,6 @@ const editor = useEditor({
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
-.user-photo-outer {
-  width: 45px;
-  height: 45px;
-  margin-right: 12px;
-  flex-shrink: 0;
-  position: relative;
-  border: 2px solid $c-black;
-  border-radius: 50%;
-  overflow: hidden;
-}
 .post-tool {
   width: 100%;
   margin-top: 25px;

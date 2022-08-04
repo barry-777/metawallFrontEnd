@@ -277,10 +277,10 @@ const postSubmit = async () => {
   openPostUploadBox(false)
   closeLoading()
   openAlert('success', '上傳成功！')
-  if (router.currentRoute.value.path === '/posts-wall') {
+  if (router.currentRoute.value.path === '/posts') {
     window.location.reload()
   } else {
-    router.push('/posts-wall')
+    router.push('/posts')
   }
 }
 
