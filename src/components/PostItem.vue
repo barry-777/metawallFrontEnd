@@ -100,9 +100,8 @@ import CommentWall from '@/components/CommentWall.vue'
 import PostTool from '@/components/PostTool.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { storeToRefs } from 'pinia'
 import { dateFormat } from '@/services/helper'
-import { getPostsByRoute, deleteOnePost, deleteUploadImage } from '@/fetch/fetch'
+import { deleteOnePost, deleteUploadImage } from '@/fetch/fetch'
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/post'
 import { useModalStore } from '@/stores/modal'
@@ -111,9 +110,8 @@ const route = useRoute()
 const modalStore = useModalStore()
 const userStore = useUserStore()
 const postStore = usePostStore()
-const { postQuery } = storeToRefs(postStore)
 const { openLoading, closeLoading, openAlert, openPostUploadBox, openImagesBox } = modalStore
-const { patchPosts, patchQuery } = postStore
+const { patchQuery, deletePost } = postStore
 
 const props = defineProps({
   post: Object
@@ -134,8 +132,7 @@ const deletePostHandler = async (post) => {
   }
   await deleteOnePost(post._id)
   await patchQuery([route.query])
-  const results = await getPostsByRoute(postQuery.value)
-  await patchPosts(results.data.data)
+  await deletePost(post._id)
   closeLoading()
   openAlert('success', '刪除貼文成功！')
 }

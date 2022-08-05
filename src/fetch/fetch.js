@@ -73,6 +73,14 @@ export function getLikePosts (user_id) {
   })
 }
 
+// 取得單一貼文
+export function getPostOnly (post_id) {
+  return useReq({
+    url: `${apiPath}/api/post/1/${post_id}`,
+    method: 'get'
+  })
+}
+
 // 取得使用者貼文 -> user_id
 export function getPostsById (user_id) {
   return useReq({

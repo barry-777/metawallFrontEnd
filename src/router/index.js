@@ -3,20 +3,22 @@ import { useUserStore } from '@/stores/user.js'
 
 const routes = [
   {
-    path: '/',
-    redirect: '/posts'
-  },
-  {
     path: '/auth',
     component: () => import('@/views/AuthBase.vue')
   },
   {
-    path: '/posts',
+    path: '/',
+    redirect: '/posts',
     component: () => import('@/views/AuthCenter.vue'),
     children: [
       {
         path: '/posts',
         component: () => import('@/components/PostsWall.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/post/:post_id',
+        component: () => import('@/components/PostOnly.vue'),
         meta: { requiresAuth: true }
       }
     ]

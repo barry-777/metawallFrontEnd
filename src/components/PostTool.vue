@@ -180,60 +180,12 @@ const editor = useEditor({
     margin-left: 15px;
     margin-top: 12px;
   }
-  .heart {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    transition: all .5s ease;
-    .heart-small {
-      width: 100%;
-      height: 100%;
-      padding: 0.5rem;
-      stroke-width: 5px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      &.red {
-        fill: $c-red;
-        transform: scale(0);
-      }
-      &.black {
-        transform: scale(1);
-      }
-    }
-    &.liked {
-      .heart-small.red {
-        animation: likedHeart 0.5s ease;
-        transform: scale(1);
-      }
-      .heart-small.black {
-        transform: scale(0);
-      }
-    }
-  }
   p {
     font-weight: $medium;
     padding-top: 12px;
     padding-left: 2px;
     &.no {
       font-size: px(14);
-    }
-  }
-  @keyframes likedHeart {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(1);
-    }
-    75% {
-      transform: scale(0.7);
-    }
-    100% {
-      transform: scale(1);
     }
   }
 }
