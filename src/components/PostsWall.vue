@@ -25,11 +25,6 @@
     />
   </Transition>
   <Transition name="fade-model">
-    <PostUploadBox
-      v-if="showPostUploadBox"
-    />
-  </Transition>
-  <Transition name="fade-model">
     <PostLikesBox
       v-if="showPostLikesBox"
     />
@@ -44,7 +39,6 @@
 <script setup>
 import PostItem from '@/components/PostItem.vue'
 import ImagesBox from '@/components/ImagesBox.vue'
-import PostUploadBox from '@/components/PostUploadBox.vue'
 import PostLikesBox from '@/components/PostLikesBox.vue'
 import CommentEditorBox from '@/components/CommentEditorBox.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
@@ -58,7 +52,7 @@ const route = useRoute()
 // store 資料
 const modalStore = useModalStore()
 const postStore = usePostStore()
-const { showImagesBox, showPostUploadBox, showPostLikesBox, showCommentEditorBox } = storeToRefs(modalStore)
+const { showImagesBox, showPostLikesBox, showCommentEditorBox } = storeToRefs(modalStore)
 const { posts, postQuery } = storeToRefs(postStore)
 const { openAlert, openLoading, closeLoading } = modalStore
 const { patchPosts, resetPosts, patchQuery, addPosts } = postStore

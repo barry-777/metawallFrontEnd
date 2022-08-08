@@ -13,7 +13,7 @@
 import { onMounted } from 'vue'
 import SideBar from '@/components/SideBar.vue'
 import { useUserStore } from '@/stores/user'
-import { getCurrentUser } from '@/fetch/fetch'
+import { checkToken, getUserInfo } from '@/fetch/fetch'
 
 // store 資料
 const userStore = useUserStore()
@@ -21,7 +21,8 @@ const { patchUser } = userStore
 
 // 取得個人資料
 const getProfile = async () => {
-  const { data } = await getCurrentUser()
+  const { data: now_user } = await checkToken()
+  const { data } = await getUserInfo(now_user.data._id)
   if (data.status) {
     patchUser({
       user_id: data.data._id,

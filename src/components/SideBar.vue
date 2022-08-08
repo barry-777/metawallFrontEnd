@@ -23,11 +23,19 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/auth">
+          <router-link :to="`/user/followings/${userStore.user_id}`">
             <div>
               <i class="fa-regular fa-bell" />
             </div>
-            <p>追蹤名單</p>
+            <p>我的追蹤清單</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="`/user/followers/${userStore.user_id}`">
+            <div>
+              <i class="fa-regular fa-bell" />
+            </div>
+            <p>我的粉絲清單</p>
           </router-link>
         </li>
         <li>
@@ -35,7 +43,7 @@
             <div>
               <i class="fa-solid fa-heart" />
             </div>
-            <p>我收藏的文章</p>
+            <p>我收藏的貼文</p>
           </router-link>
         </li>
         <li>
@@ -49,15 +57,23 @@
       </ul>
     </div>
   </section>
+  <Transition name="fade-model">
+    <PostUploadBox
+      v-if="showPostUploadBox"
+    />
+  </transition>
 </template>
 
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
+import PostUploadBox from '@/components/PostUploadBox.vue'
+import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
 
 const userStore = useUserStore()
 const modalStore = useModalStore()
+const { showPostUploadBox } = storeToRefs(modalStore)
 const { openPostUploadBox } = modalStore
 </script>
 

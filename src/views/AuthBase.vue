@@ -133,7 +133,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { reactive, ref, watch } from 'vue'
 import router from '@/router/index'
-import { postLogin, postSignUp, getCurrentUser } from '@/fetch/fetch'
+import { postLogin, postSignUp, getUserInfo } from '@/fetch/fetch'
 import { isNotEmpty, isValidEmail, isValidPassword, isSamePassword } from '@/services/validate'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
@@ -190,7 +190,7 @@ const loginEvent = async () => {
     setAuth({
       token: data.data.token
     })
-    const { data: userData } = await getCurrentUser()
+    const { data: userData } = await getUserInfo(data.user._id)
     if (userData.status === true) {
       patchUser({
         user_id: userData.data._id,

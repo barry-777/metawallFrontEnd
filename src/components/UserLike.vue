@@ -1,11 +1,11 @@
 <template>
   <div class="user-like">
     <div class="common-title">
-      <p v-if="user_id === route.params.user_id">
+      <p v-if="user_id === nowUser._id">
         我收藏的貼文
       </p>
       <p v-else>
-        {{ name }} 收藏的貼文
+        {{ nowUser.name }} 收藏的貼文
       </p>
     </div>
     <div class="show-lists">
@@ -80,7 +80,7 @@ import { ref, onBeforeUnmount, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router/index'
 import { dateFormat } from '@/services/helper'
-import { getLikePosts, patchPostLikes } from '@/fetch/fetch'
+import { getUserInfo, getLikePosts, patchPostLikes } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { useUserStore } from '@/stores/user'
 
@@ -88,14 +88,17 @@ const route = useRoute()
 // store 資料
 const modalStore = useModalStore()
 const userStore = useUserStore()
-const { user_id, name } = storeToRefs(userStore)
+const { user_id } = storeToRefs(userStore)
 const { openAlert, openLoading, closeLoading } = modalStore
 
 const postsData = ref([])
+const nowUser = ref([])
 
-const getLikePostsHandler = async (user_id) => {
+const getLikePostsHandler = async (params_id) => {
   openLoading()
-  const { data } = await getLikePosts(user_id)
+  const { data: userData } = await getUserInfo(params_id)
+  nowUser.value = userData.data
+  const { data } = await getLikePosts(params_id)
   if (!data.data) router.push('/notfound')
   postsData.value = data.data
   postsData.value.forEach((post) => {

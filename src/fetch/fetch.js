@@ -40,11 +40,44 @@ export function postSignUp (data) {
   })
 }
 
-// 取得個人資料
-export function getCurrentUser () {
+// 驗證 token
+export function checkToken () {
   return useReq({
-    url: `${apiPath}/api/users/current_user`,
+    url: `${apiPath}/api/auth/check`,
     method: 'get'
+  })
+}
+
+// 取得個人資料
+export function getUserInfo (user_id) {
+  return useReq({
+    url: `${apiPath}/api/users/${user_id}`,
+    method: 'get'
+  })
+}
+
+// 編輯個人資料
+export function patchUserInfo (user_id) {
+  return useReq({
+    url: `${apiPath}/api/users/${user_id}`,
+    method: 'patch'
+  })
+}
+
+// 取得追蹤列表
+export function getFollowsList (user_id) {
+  return useReq({
+    url: `${apiPath}/api/follows_list?user_id=${user_id}`,
+    method: 'get'
+  })
+}
+
+// 追蹤 與 取消追蹤
+export function patchFollows (user_id, mode) {
+  // follow_mode: follow / unfollow
+  return useReq({
+    url: `${apiPath}/api/follows?user_id=${user_id}&follow_mode=${mode}`,
+    method: 'patch'
   })
 }
 

@@ -31,6 +31,16 @@ const routes = [
         path: '/user/likes/:user_id',
         component: () => import('@/components/UserLike.vue'),
         meta: { requiresAuth: true }
+      },
+      {
+        path: '/user/followings/:user_id',
+        component: () => import('@/components/UserFollowing.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/user/followers/:user_id',
+        component: () => import('@/components/UserFollower.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   },
