@@ -31,6 +31,7 @@
             <div class="tool">
               <!-- 收藏 -->
               <div
+                v-if="user_id === nowUser._id"
                 class="heart"
                 :class="{'liked': data.isLiked}"
                 @click.stop="patchLikesHandler(data)"
