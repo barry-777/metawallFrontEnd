@@ -190,7 +190,7 @@ const loginEvent = async () => {
     setAuth({
       token: data.data.token
     })
-    const { data: userData } = await getUserInfo(data.user._id)
+    const { data: userData } = await getUserInfo(data.data.user._id)
     if (userData.status === true) {
       patchUser({
         user_id: userData.data._id,
