@@ -20,13 +20,12 @@ const routes = [
         path: '/post/:post_id',
         component: () => import('@/components/PostOnly.vue'),
         meta: { requiresAuth: true }
-      }
-    ]
-  },
-  {
-    path: '/user',
-    component: () => import('@/views/AuthCenter.vue'),
-    children: [
+      },
+      {
+        path: '/user/info/:user_id',
+        component: () => import('@/components/UserInfo.vue'),
+        meta: { requiresAuth: true }
+      },
       {
         path: '/user/likes/:user_id',
         component: () => import('@/components/UserLike.vue'),

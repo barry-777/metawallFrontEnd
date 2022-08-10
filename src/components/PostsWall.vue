@@ -19,28 +19,12 @@
       class="loading-detector"
     />
   </div>
-  <Transition name="fade">
-    <ImagesBox
-      v-if="showImagesBox"
-    />
-  </Transition>
-  <Transition name="fade-model">
-    <PostLikesBox
-      v-if="showPostLikesBox"
-    />
-  </Transition>
-  <Transition name="fade-model">
-    <CommentEditorBox
-      v-if="showCommentEditorBox"
-    />
-  </Transition>
+  <PostBox />
 </template>
 
 <script setup>
 import PostItem from '@/components/PostItem.vue'
-import ImagesBox from '@/components/ImagesBox.vue'
-import PostLikesBox from '@/components/PostLikesBox.vue'
-import CommentEditorBox from '@/components/CommentEditorBox.vue'
+import PostBox from '@/components/PostBox.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
@@ -52,11 +36,10 @@ const route = useRoute()
 // store 資料
 const modalStore = useModalStore()
 const postStore = usePostStore()
-const { showImagesBox, showPostLikesBox, showCommentEditorBox } = storeToRefs(modalStore)
+
 const { posts, postQuery } = storeToRefs(postStore)
 const { openAlert, openLoading, closeLoading } = modalStore
 const { patchPosts, resetPosts, patchQuery, addPosts } = postStore
-
 const postPage = ref(1)
 const isLoaded = ref(false)
 const loadDetector = ref(null)

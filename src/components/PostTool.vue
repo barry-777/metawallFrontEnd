@@ -75,26 +75,28 @@ import UserPhoto from '@/components/UserPhoto.vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
+import { storeToRefs } from 'pinia'
 import { postOneComment, getPostLikesList, patchPostLikes } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
 import { useUserStore } from '@/stores/user'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const modalStore = useModalStore()
 const postStore = usePostStore()
 const userStore = useUserStore()
 const { openLoading, closeLoading, openAlert, openPostLikesBox } = modalStore
 const { addCommentData, patchPostLikesData } = postStore
-const { user_id, name, avatar } = userStore
+const { user_id, name, avatar } = storeToRefs(userStore)
 
 const props = defineProps({
   post: Object
 })
 
 // 收藏功能
-const isLiked = ref(false)
-isLiked.value = props.post.likes.some(item => item === user_id)
+const isLiked = computed(() => {
+  return props.post.likes.some(item => item === user_id.value)
+})
 const patchLikesHandler = async (post_id) => {
   const mode = isLiked.value ? 'remove' : 'add'
 
@@ -103,7 +105,6 @@ const patchLikesHandler = async (post_id) => {
 
   // 更新狀態
   const { data } = await patchPostLikes(post_id, mode)
-  isLiked.value = data.data.likes.some(item => item === user_id)
   patchPostLikesData(post_id, data.data)
 
   closeLoading()
@@ -135,9 +136,9 @@ const postCommentHandler = async (post_id) => {
   editor.value.commands.clearContent()
   // 暫存當前使用者
   data.data.user = {
-    _id: user_id,
-    avatar,
-    name
+    _id: user_id.value,
+    avatar: avatar.value,
+    name: name.value
   }
   await addCommentData(data.data.post, data.data)
   closeLoading()

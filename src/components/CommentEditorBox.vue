@@ -78,7 +78,7 @@ const userStore = useUserStore()
 const { showCommentEditorType, showCommentEditorTemp } = storeToRefs(modalStore)
 const { openLoading, closeLoading, openAlert, openCommentEditorBox } = modalStore
 const { patchCommentData, addReplyData, patchReplyData } = postStore
-const { user_id, name, avatar } = userStore
+const { user_id, name, avatar } = storeToRefs(userStore)
 
 const tempData = ref({})
 if (showCommentEditorTemp.value.content) {
@@ -122,9 +122,9 @@ const postReplyHandler = async (comment) => {
   })
   // 暫存當前使用者
   data.data.user = {
-    _id: user_id,
-    avatar,
-    name
+    _id: user_id.value,
+    avatar: avatar.value,
+    name: name.value
   }
   await addReplyData(comment._id, comment.post, data.data)
   closeLoading()

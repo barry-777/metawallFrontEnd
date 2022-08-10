@@ -115,9 +115,18 @@ export function getPostOnly (post_id) {
 }
 
 // 取得使用者貼文 -> user_id
-export function getPostsById (user_id) {
+export function getPostsById (user_id, query) {
+  // q => 搜尋項目
+  // s => 資料排序
+  // p => 限制則數
+  let sendUrl = `${apiPath}/api/posts/user/${user_id}`
+  const keys = Object.keys(query)
+  keys.forEach((key, i) => {
+    if (i === 0) sendUrl += `?${key}=${query[key]}`
+    else sendUrl += `&${key}=${query[key]}`
+  })
   return useReq({
-    url: `${apiPath}/api/posts/user/${user_id}`,
+    url: sendUrl,
     method: 'get'
   })
 }
@@ -126,6 +135,7 @@ export function getPostsById (user_id) {
 export function getPostsByRoute (query) {
   // q => 搜尋項目
   // s => 資料排序
+  // p => 限制則數
   let sendUrl = `${apiPath}/api/posts`
   const keys = Object.keys(query)
   keys.forEach((key, i) => {

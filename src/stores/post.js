@@ -12,8 +12,7 @@ export const usePostStore = defineStore('postStore', {
     // s => 資料排序
     postQuery: {
       q: '',
-      s: 'new',
-      p: 1
+      s: 'new'
     }
   }),
   // methods

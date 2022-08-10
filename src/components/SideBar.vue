@@ -10,7 +10,7 @@
       </button>
       <ul>
         <li>
-          <router-link to="/auth">
+          <router-link :to="`/user/info/${userStore.user_id}`">
             <div>
               <user-photo :photo="userStore.avatar" />
             </div>
