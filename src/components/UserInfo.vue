@@ -98,9 +98,11 @@ const nowUser = ref([])
 const getInfoHandler = async (params_id) => {
   openLoading()
   const { data: userData } = await getUserInfo(params_id)
+  if (!userData.data) router.push('/notfound')
   nowUser.value = userData.data
   await patchQuery([route.query])
   const { data } = await getPostsById(params_id, postQuery.value)
+  if (!data.data) router.push('/notfound')
   await patchPosts(data.data)
   closeLoading()
 }
@@ -114,7 +116,6 @@ watch(() => route.params.user_id, () => {
 })
 
 onBeforeUnmount(() => {
-  nowUser.value.length = 0
   resetPosts()
 })
 </script>
