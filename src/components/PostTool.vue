@@ -217,7 +217,7 @@ const editor = useEditor({
     transition: background-color 0.6s, color 0.2s, transform 0.4s;
     cursor: pointer;
     &:hover {
-      background-color: darken($c-first, 8%);
+      background-color: darken($c-first, 5%);
     }
   }
 }

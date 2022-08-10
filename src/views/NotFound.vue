@@ -24,7 +24,7 @@
       <div class="go-back">
         <router-link
           to="/posts"
-          class="base-button simple"
+          class="base-button"
         >
           返回首頁
         </router-link>

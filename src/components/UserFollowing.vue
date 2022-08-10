@@ -35,12 +35,13 @@
               v-if="user_id === nowUser._id"
               class="tool"
             >
-              <div
-                class="btn"
+              <button
+                class="base-button red"
+                type="button"
                 @click.stop="patchFollowsHandler(data.user)"
               >
                 取消追蹤
-              </div>
+              </button>
             </div>
           </li>
         </template>
@@ -113,19 +114,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/scss/base/mixins';
-@import '../assets/scss/base/variables';
-.btn {
-  font-size: px(18);
-  padding: 10px 14px;
-  border-radius: 8px;
-  color: $c-white;
-  background-color: $c-error;
-  user-select: none;
-  cursor: pointer;
-  &:hover {
-    background-color: darken($c-error, 5%);
-    transition: .4s;
-  }
+.base-button {
+  min-width: 150px;
 }
 </style>

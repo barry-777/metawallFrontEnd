@@ -43,14 +43,14 @@
                 </template>
                 <div class="button-group">
                   <button
-                    class="base-button"
+                    class="base-button blue"
                     type="button"
                     @click="loginEvent"
                   >
                     登入
                   </button>
                   <button
-                    class="base-button simple"
+                    class="base-button"
                     type="button"
                     @click="slideToTarget(1)"
                   >
@@ -105,14 +105,14 @@
                 </template>
                 <div class="button-group">
                   <button
-                    class="base-button"
+                    class="base-button blue"
                     type="button"
                     @click="signUpEvent"
                   >
                     註冊
                   </button>
                   <button
-                    class="base-button simple"
+                    class="base-button"
                     type="button"
                     @click="slideToTarget(0)"
                   >

@@ -167,7 +167,7 @@
               </button>
               <button
                 v-if="isPatchMode"
-                class="base-button simple"
+                class="base-button"
                 type="button"
                 @click="openPostUploadBox(false)"
               >

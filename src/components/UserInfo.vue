@@ -34,19 +34,21 @@
           </div>
         </div>
       </div>
-      <div
+      <button
         v-if="user_id === nowUser._id"
-        class="btn file"
+        class="base-button file"
+        type="button"
       >
         編輯個人檔案
-      </div>
+      </button>
       <div class="tool">
-        <div
+        <button
           v-if="user_id !== nowUser._id"
-          class="btn"
+          class="base-button red"
+          type="button"
         >
           追蹤
-        </div>
+        </button>
       </div>
     </div>
     <div class="bottom-posts">
@@ -138,7 +140,7 @@ onBeforeUnmount(() => {
     top: 0;
     z-index: 0;
   }
-  > div {
+  > * {
     position: relative;
     z-index: 1;
   }
@@ -206,24 +208,12 @@ onBeforeUnmount(() => {
   display: flex;
   margin-top: 15px;
 }
-.btn {
-  width: 100%;
-  padding: 15px;
-  border-radius: 8px;
-  color: $c-black;
-  border: 2px solid $c-black;
-  text-align: center;
-  user-select: none;
-  cursor: pointer;
+.base-button {
   &:not(:first-child) {
     margin-left: 10px;
   }
-  &:hover {
-    color: $c-first;
-    transition: .4s;
-  }
 }
-.btn.file {
+.base-button.file {
   margin: 0;
   margin-top: 25px;
 }

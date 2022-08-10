@@ -200,39 +200,49 @@ textarea {
 }
 
 .base-button {
+  background-color: $c-white;
+  font-weight: $medium;
+  width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 50px;
-  font-weight: $medium;
   letter-spacing: 1px;
   line-height: 1.4;
-  padding: 8px 20px;
-  background-color: $c-first;
-  color: $c-white;
-  box-shadow: -2px 2px 0 0 $c-black;
-  border-radius: 8px;
-  border: 2px solid $c-black;
-  cursor: pointer;
+  padding: 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: $c-black;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  box-shadow: rgba($c-black, .2) 5px 10px 15px -10px;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
   user-select: none;
-  position: relative;
-  transition: background-color .6s, color .2s, transform .4s;
-  &:hover:not(.disable) {
-    background-color: darken($c-first, 8%);
-    color: $c-white;
-    transform: translateY(-2px);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all .25s ease-in-out;
+  &:hover {
+    background-color: darken($c-white, 5%);
+    box-shadow: rgba($c-black, .3) 2px 5px 8px -5px;
+    transform: translateY(-1px);
   }
-  &.simple {
-    background-color: $c-white;
-    color: $c-black;
-    &:hover:not(.disable) {
-      background-color: darken($c-white, 8%);
-      color: $c-black;
+  &.blue {
+    background-color: $c-first;
+    color: $c-white;
+    &:hover {
+      background-color: darken($c-first, 5%);
     }
   }
-  &.disable {
-    cursor: not-allowed;
+  &.red {
+    background-color: $c-error;
+    color: $c-white;
+    &:hover {
+      background-color: darken($c-error, 5%);
+    }
   }
 }
 
