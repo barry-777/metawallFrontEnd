@@ -14,7 +14,7 @@
           </div>
           <div class="comment-outer">
             <div>
-              <router-link :to="`/user/likes/${comment.user._id}`">
+              <router-link :to="`/user/info/${comment.user._id}`">
                 <div class="name">
                   {{ comment.user.name }}
                 </div>

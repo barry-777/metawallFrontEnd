@@ -1,7 +1,6 @@
 <template>
   <div class="user-following">
     <div
-      v-if="usersData?.length"
       class="common-title"
     >
       <p v-if="user_id === nowUser._id">
@@ -19,17 +18,19 @@
             :key="data.user._id"
           >
             <div class="info">
-              <div class="user-photo-outer">
-                <UserPhoto :photo="data.user.avatar" />
-              </div>
-              <div class="user">
-                <div class="name">
-                  {{ data.user.name }}
+              <router-link :to="`/user/info/${data.user._id}`">
+                <div class="user-photo-outer">
+                  <UserPhoto :photo="data.user.avatar" />
                 </div>
-                <div class="time">
-                  追蹤時間： {{ dateFormat(data.createdAt) }}
+                <div class="user">
+                  <div class="name">
+                    {{ data.user.name }}
+                  </div>
+                  <div class="time">
+                    追蹤時間： {{ dateFormat(data.createdAt) }}
+                  </div>
                 </div>
-              </div>
+              </router-link>
             </div>
             <div
               v-if="user_id === nowUser._id"

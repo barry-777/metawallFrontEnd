@@ -237,6 +237,13 @@ textarea {
       background-color: darken($c-first, 5%);
     }
   }
+  &.yellow {
+    background-color: $c-yellow;
+    color: $c-white;
+    &:hover {
+      background-color: darken($c-yellow, 5%);
+    }
+  }
   &.red {
     background-color: $c-error;
     color: $c-white;
@@ -439,6 +446,16 @@ textarea {
   .tool, .info {
     display: flex;
     align-items: center;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    &:hover {
+      .name {
+        color: $c-first;
+        transition: .4s;
+      }
+    }
   }
   .name {
     font-weight: $medium;

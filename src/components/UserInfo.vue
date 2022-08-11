@@ -23,13 +23,13 @@
           <div class="followers">
             <router-link :to="`/user/followings/${route.params.user_id}`">
               <span>追蹤中</span>
-              <p>{{ nowUser.followers?.length }}</p>
+              <p>{{ nowUser.followings?.length }}</p>
             </router-link>
           </div>
           <div class="followings">
             <router-link :to="`/user/followers/${route.params.user_id}`">
               <span>粉絲</span>
-              <p>{{ nowUser.followings?.length }}</p>
+              <p>{{ nowUser.followers?.length }}</p>
             </router-link>
           </div>
         </div>
@@ -42,13 +42,24 @@
         編輯個人檔案
       </button>
       <div class="tool">
-        <button
-          v-if="user_id !== nowUser._id"
-          class="base-button red"
-          type="button"
-        >
-          追蹤
-        </button>
+        <template v-if="user_id !== nowUser._id">
+          <button
+            v-if="followMode"
+            class="base-button"
+            type="button"
+            @click="patchFollowsHandler(nowUser._id)"
+          >
+            取消追蹤
+          </button>
+          <button
+            v-else
+            class="base-button"
+            type="button"
+            @click="patchFollowsHandler(nowUser._id)"
+          >
+            追蹤
+          </button>
+        </template>
       </div>
     </div>
     <div class="bottom-posts">
@@ -78,7 +89,7 @@ import { ref, onBeforeUnmount, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router/index'
 import { dateFormat } from '@/services/helper'
-import { getPostsById, getUserInfo } from '@/fetch/fetch'
+import { getPostsById, getUserInfo, patchFollows } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/post'
@@ -90,16 +101,18 @@ const userStore = useUserStore()
 const postStore = usePostStore()
 const { user_id } = storeToRefs(userStore)
 const { posts, postQuery } = storeToRefs(postStore)
-const { openLoading, closeLoading } = modalStore
+const { openAlert, openLoading, closeLoading } = modalStore
 const { patchPosts, resetPosts, patchQuery } = postStore
 
 const nowUser = ref([])
+const followMode = ref(false)
 
 const getInfoHandler = async (params_id) => {
   openLoading()
   const { data: userData } = await getUserInfo(params_id)
   if (!userData.data) router.push('/notfound')
   nowUser.value = userData.data
+  followMode.value = nowUser.value.followers.some(item => item.user === user_id.value)
   await patchQuery([route.query])
   const { data } = await getPostsById(params_id, postQuery.value)
   if (!data.data) router.push('/notfound')
@@ -116,8 +129,35 @@ watch(() => route.params.user_id, () => {
 })
 
 onBeforeUnmount(() => {
+  nowUser.value = []
   resetPosts()
 })
+
+// 追蹤功能
+const patchFollowsHandler = async (params_id) => {
+  openLoading()
+  const mode = followMode.value ? 'unfollow' : 'follow'
+
+  // 更新狀態
+  await patchFollows(params_id, mode)
+
+  if (mode === 'unfollow') {
+    const aryIndex = nowUser.value.followers.findIndex(s => s.user === user_id)
+    nowUser.value.followers.splice(aryIndex, 1)
+  } else {
+    nowUser.value.followers.push(user_id)
+  }
+
+  followMode.value = !followMode.value
+
+  closeLoading()
+
+  if (mode === 'unfollow') {
+    openAlert('success', '已取消追蹤！')
+  } else {
+    openAlert('success', '已追蹤！')
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -207,7 +247,7 @@ onBeforeUnmount(() => {
 .tool {
   width: 100%;
   display: flex;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 .base-button {
   &:not(:first-child) {

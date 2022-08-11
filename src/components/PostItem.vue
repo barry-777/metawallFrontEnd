@@ -6,7 +6,7 @@
     <template v-if="hasData">
       <div class="content">
         <div class="top">
-          <router-link :to="`/user/likes/${props.post.user._id}`">
+          <router-link :to="`/user/info/${props.post.user._id}`">
             <div class="user-photo-outer">
               <UserPhoto :photo="props.post.user.avatar" />
             </div>
