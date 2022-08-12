@@ -56,6 +56,14 @@ export function getUserInfo (user_id) {
   })
 }
 
+// 刪除個人資料
+export function deleteUserInfo (user_id) {
+  return useReq({
+    url: `${apiPath}/api/users/${user_id}`,
+    method: 'delete'
+  })
+}
+
 // 編輯個人資料
 export function patchUserInfo (user_id, data) {
   return useReq({

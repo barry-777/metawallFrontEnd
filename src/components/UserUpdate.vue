@@ -70,6 +70,13 @@
           >
             更新個人資料
           </button>
+          <button
+            class="base-button red"
+            type="button"
+            @click="deleteUserInfoHandler"
+          >
+            刪除帳號
+          </button>
         </div>
         <div
           v-show="tabSwitch === 2"
@@ -107,7 +114,8 @@
 import UserPhoto from '@/components/UserPhoto.vue'
 import { storeToRefs } from 'pinia'
 import { ref, reactive, onMounted } from 'vue'
-import { checkToken, postUploadImage, deleteUploadImage, getUserInfo, patchUserInfo } from '@/fetch/fetch'
+import router from '@/router'
+import { checkToken, postUploadImage, deleteUploadImage, getUserInfo, patchUserInfo, deleteUserInfo } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { useUserStore } from '@/stores/user'
 
@@ -116,7 +124,7 @@ const modalStore = useModalStore()
 const userStore = useUserStore()
 const { user_id, name, avatar } = storeToRefs(userStore)
 const { openAlert, openLoading, closeLoading } = modalStore
-const { patchUser } = userStore
+const { patchUser, logoutAuth } = userStore
 
 const tabSwitch = ref(1)
 const tempUser = reactive({
@@ -153,17 +161,19 @@ const patchUserInfoHandler = async () => {
   }
   openLoading('更新個人資料中！')
 
-  // 刪除圖片
-  if (tempUser.avatar.hash !== '') {
-    await deleteUploadImage(tempUser.avatar.hash)
-  }
-
   // 上傳圖片
   if (tempFile.value) {
+    console.log('upload')
     const form = new FormData()
     form.append('files-upload', tempFile.value)
     const { data: imageData } = await postUploadImage(form)
     tempUser.avatar = imageData.data.images[0]
+  }
+
+  // 刪除圖片
+  if (tempUser.avatar.hash && tempFile.value && avatar.value.hash !== null) {
+    console.log('delete', avatar.value)
+    await deleteUploadImage(avatar.value.hash)
   }
 
   // 更新
@@ -176,6 +186,19 @@ const patchUserInfoHandler = async () => {
   closeLoading()
   openAlert('success', '更新成功！')
   tempFile.value = null
+}
+
+const deleteUserInfoHandler = async () => {
+  openLoading('刪除個人資料中！')
+  // 刪除圖片
+  if (avatar.value.hash) {
+    await deleteUploadImage(tempUser.avatar.hash)
+  }
+  await deleteUserInfo(user_id.value)
+  closeLoading()
+  openAlert('success', '刪除成功！')
+  logoutAuth()
+  router.push('/auth')
 }
 
 onMounted(async () => {
