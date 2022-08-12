@@ -33,7 +33,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/auth">
+          <router-link :to="`/user/comments/${userStore.user_id}`">
             <div>
               <i class="fa-regular fa-comment" />
             </div>

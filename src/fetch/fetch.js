@@ -115,6 +115,14 @@ export function getLikePosts (user_id) {
   })
 }
 
+// 取得使用者留言的貼文
+export function getCommentPosts (user_id) {
+  return useReq({
+    url: `${apiPath}/api/posts/comments/${user_id}`,
+    method: 'get'
+  })
+}
+
 // 取得單一貼文
 export function getPostOnly (post_id) {
   return useReq({

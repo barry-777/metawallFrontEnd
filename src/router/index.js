@@ -37,6 +37,11 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
+        path: '/user/comments/:user_id',
+        component: () => import('@/components/UserComment.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: '/user/followings/:user_id',
         component: () => import('@/components/UserFollowing.vue'),
         meta: { requiresAuth: true }
