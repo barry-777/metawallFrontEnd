@@ -71,7 +71,7 @@
             更新個人資料
           </button>
           <button
-            class="base-button red"
+            class="base-button red delete"
             type="button"
             @click="deleteUserInfoHandler"
           >
@@ -320,5 +320,8 @@ onMounted(async () => {
   width: 100%;
   max-width: 300px;
   margin-top: 40px;
+  &.delete {
+    margin-top: 30px;
+  }
 }
 </style>

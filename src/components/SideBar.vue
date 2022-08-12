@@ -25,22 +25,6 @@
           </router-link>
         </li>
         <li>
-          <router-link :to="`/user/followings/${userStore.user_id}`">
-            <div>
-              <i class="fa-regular fa-bell" />
-            </div>
-            <p>我的追蹤清單</p>
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="`/user/followers/${userStore.user_id}`">
-            <div>
-              <i class="fa-regular fa-bell" />
-            </div>
-            <p>我的粉絲清單</p>
-          </router-link>
-        </li>
-        <li>
           <router-link :to="`/user/likes/${userStore.user_id}`">
             <div>
               <i class="fa-solid fa-heart" />
