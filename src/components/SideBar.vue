@@ -12,7 +12,9 @@
         <li>
           <router-link :to="`/user/info/${userStore.user_id}`">
             <div>
-              <user-photo :photo="userStore.avatar" />
+              <div class="user-photo-outer">
+                <UserPhoto :photo="userStore.avatar" />
+              </div>
             </div>
             <p v-if="userStore.name">
               {{ userStore.name }}
@@ -124,5 +126,8 @@ const { openPostUploadBox } = modalStore
       font-size: px(20);
     }
   }
+}
+.user-photo-outer {
+  margin: 0 !important;
 }
 </style>

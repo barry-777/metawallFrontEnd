@@ -7,7 +7,10 @@ export const useUserStore = defineStore('userStore', {
     isLogin: false,
     user_id: '',
     name: '',
-    avatar: ''
+    avatar: {
+      link: '',
+      hash: ''
+    }
   }),
   // methods
   actions: {

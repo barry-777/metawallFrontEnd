@@ -90,7 +90,7 @@
                   <input
                     v-model="registerValue.confirmPassword"
                     type="password"
-                    placeholder="confirmPassword"
+                    placeholder="ConfirmPassword"
                   >
                 </div>
                 <template v-if="errorMessage.all.length">

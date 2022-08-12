@@ -1,0 +1,301 @@
+<template>
+  <div class="user-update">
+    <div
+      class="common-title"
+    >
+      <p>修改個人資料</p>
+    </div>
+    <div class="update-inner">
+      <div class="tabs">
+        <div
+          class="tab"
+          :class="{'active': tabSwitch === 1}"
+          @click="tabSwitch = 1"
+        >
+          資料修改
+        </div>
+        <div
+          class="tab"
+          :class="{'active': tabSwitch === 2}"
+          @click="tabSwitch = 2"
+        >
+          重設密碼
+        </div>
+      </div>
+      <div class="contents">
+        <div
+          v-show="tabSwitch === 1"
+          class="content"
+        >
+          <div class="user-iamge">
+            <div class="user-photo-outer">
+              <UserPhoto
+                v-if="!tempFile"
+                :photo="tempUser.avatar"
+              />
+              <img
+                v-else
+                :src="tempUser.avatar?.link"
+                alt=""
+              >
+            </div>
+            <button
+              class="image-add"
+              type="button"
+            >
+              <label for="upload">
+                上傳大頭貼
+                <input
+                  id="upload"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  @change="preloadImageHandler"
+                >
+              </label>
+            </button>
+          </div>
+          <div class="inp name">
+            <p>名稱</p>
+            <input
+              v-model="tempUser.name"
+              type="text"
+              placeholder="Name"
+            >
+          </div>
+          <button
+            class="base-button"
+            type="button"
+            @click="patchUserInfoHandler"
+          >
+            更新個人資料
+          </button>
+        </div>
+        <div
+          v-show="tabSwitch === 2"
+          class="content"
+        >
+          <div class="inp password">
+            <p>輸入密碼</p>
+            <input
+              v-model="nowPassword"
+              type="text"
+              placeholder="Password"
+            >
+          </div>
+          <div class="inp confirmPassword">
+            <p>再次輸入密碼</p>
+            <input
+              v-model="nowConfirmPassword"
+              type="text"
+              placeholder="ConfirmPassword"
+            >
+          </div>
+          <button
+            class="base-button"
+            type="button"
+          >
+            重設密碼
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import UserPhoto from '@/components/UserPhoto.vue'
+import { storeToRefs } from 'pinia'
+import { ref, reactive, onMounted } from 'vue'
+import { checkToken, postUploadImage, deleteUploadImage, getUserInfo, patchUserInfo } from '@/fetch/fetch'
+import { useModalStore } from '@/stores/modal'
+import { useUserStore } from '@/stores/user'
+
+// store 資料
+const modalStore = useModalStore()
+const userStore = useUserStore()
+const { user_id, name, avatar } = storeToRefs(userStore)
+const { openAlert, openLoading, closeLoading } = modalStore
+const { patchUser } = userStore
+
+const tabSwitch = ref(1)
+const tempUser = reactive({
+  user_id: null,
+  name: null,
+  avatar: null
+})
+const tempFile = ref(null)
+const nowPassword = ref('')
+const nowConfirmPassword = ref('')
+
+Object.assign(tempUser, {
+  user_id: user_id.value,
+  name: name.value,
+  avatar: avatar.value
+})
+
+const preloadImageHandler = (e) => {
+  if (!e.target.files.length) return
+  const file = e.target.files[0]
+  const fileSize = Math.ceil(file.size / 1024)
+  if (fileSize > 200) {
+    openAlert('error', '圖片檔案過大，僅限 2mb 以下檔案')
+  } else {
+    tempUser.avatar.link = URL.createObjectURL(file)
+    tempFile.value = file
+  }
+}
+
+const patchUserInfoHandler = async () => {
+  if (tempUser.avatar.link === '' || tempUser.name === '') {
+    openAlert('error', '填入資料不得為空！')
+    return false
+  }
+  openLoading('更新個人資料中！')
+
+  // 刪除圖片
+  if (tempUser.avatar.hash !== '') {
+    await deleteUploadImage(tempUser.avatar.hash)
+  }
+
+  // 上傳圖片
+  if (tempFile.value) {
+    const form = new FormData()
+    form.append('files-upload', tempFile.value)
+    const { data: imageData } = await postUploadImage(form)
+    tempUser.avatar = imageData.data.images[0]
+  }
+
+  // 更新
+  const { data } = await patchUserInfo(tempUser.user_id, tempUser)
+  await patchUser({
+    user_id: data.data._id,
+    name: data.data.name,
+    avatar: data.data.avatar
+  })
+  closeLoading()
+  openAlert('success', '更新成功！')
+  tempFile.value = null
+}
+
+onMounted(async () => {
+  if (!user_id.value) {
+    openLoading('取得個人資料中！')
+    const { data: now_user } = await checkToken()
+    const { data } = await getUserInfo(now_user.data._id)
+    if (data.status) {
+      patchUser({
+        user_id: data.data._id,
+        name: data.data.name,
+        avatar: data.data.avatar
+      })
+      Object.assign(tempUser, {
+        user_id: data.data._id,
+        name: data.data.name,
+        avatar: data.data.avatar
+      })
+    }
+    closeLoading()
+    openAlert('success', '取得成功！')
+  }
+})
+</script>
+
+<style scoped lang="scss">
+@import '../assets/scss/base/mixins';
+@import '../assets/scss/base/variables';
+.update-inner {
+  width: 100%;
+}
+.tabs {
+  width: 95%;
+  display: flex;
+  align-items: stretch;
+  margin: 0 auto;
+  .tab {
+    background-color: $c-white;
+    border-radius: 8px 8px 0 0;
+    border: 2px solid $c-black;
+    border-bottom: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    transition: .5s;
+    cursor: pointer;
+    user-select: none;
+    &.active {
+      color: $c-white;
+      background-color: $c-black;
+    }
+  }
+}
+.contents {
+  width: 100%;
+  padding: 50px 25px 60px;
+  background-color: $c-white;
+  border-radius: 8px 8px 15px 15px;
+  border: 2px solid $c-black;
+  position: relative;
+  z-index: 1;
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.image-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 40px;
+  line-height: 1.4;
+  letter-spacing: 1.5px;
+  background-color: $c-black;
+  color: $c-white;
+  border-radius: 4px;
+  border: 2px solid $c-black;
+  position: relative;
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    user-select: none;
+  }
+  input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+  }
+}
+.user-photo-outer {
+  width: 120px;
+  height: 120px;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.inp {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 30px;
+  &:first-child {
+    margin-top: 0;
+  }
+  > p {
+    font-weight: $medium;
+    margin-bottom: 12px;
+  }
+}
+.base-button {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 40px;
+}
+</style>

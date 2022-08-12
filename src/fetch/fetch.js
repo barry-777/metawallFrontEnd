@@ -57,10 +57,11 @@ export function getUserInfo (user_id) {
 }
 
 // 編輯個人資料
-export function patchUserInfo (user_id) {
+export function patchUserInfo (user_id, data) {
   return useReq({
     url: `${apiPath}/api/users/${user_id}`,
-    method: 'patch'
+    method: 'patch',
+    data
   })
 }
 

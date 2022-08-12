@@ -34,13 +34,13 @@
           </div>
         </div>
       </div>
-      <button
+      <router-link
         v-if="user_id === nowUser._id"
         class="base-button file"
-        type="button"
+        to="/user/update"
       >
         編輯個人檔案
-      </button>
+      </router-link>
       <div class="tool">
         <template v-if="user_id !== nowUser._id">
           <button
