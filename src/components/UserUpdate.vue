@@ -10,14 +10,14 @@
         <div
           class="tab"
           :class="{'active': tabSwitch === 1}"
-          @click="tabSwitch = 1"
+          @click="switchPage(1)"
         >
           資料修改
         </div>
         <div
           class="tab"
           :class="{'active': tabSwitch === 2}"
-          @click="tabSwitch = 2"
+          @click="switchPage(2)"
         >
           重設密碼
         </div>
@@ -85,22 +85,33 @@
           <div class="inp password">
             <p>輸入密碼</p>
             <input
-              v-model="nowPassword"
-              type="text"
+              v-model="updateValue.password"
+              type="password"
               placeholder="Password"
             >
           </div>
           <div class="inp confirmPassword">
             <p>再次輸入密碼</p>
             <input
-              v-model="nowConfirmPassword"
-              type="text"
+              v-model="updateValue.confirmPassword"
+              type="password"
               placeholder="ConfirmPassword"
             >
           </div>
+          <template v-if="errorMessage.all.length">
+            <div class="err-t">
+              <p
+                v-for="item in errorMessage.all"
+                :key="item"
+              >
+                {{ item }}
+              </p>
+            </div>
+          </template>
           <button
             class="base-button"
             type="button"
+            @click="updatePassword"
           >
             重設密碼
           </button>
@@ -115,7 +126,8 @@ import UserPhoto from '@/components/UserPhoto.vue'
 import { storeToRefs } from 'pinia'
 import { ref, reactive, onMounted } from 'vue'
 import router from '@/router'
-import { checkToken, postUploadImage, deleteUploadImage, getUserInfo, patchUserInfo, deleteUserInfo } from '@/fetch/fetch'
+import { checkToken, patchPassword, postUploadImage, deleteUploadImage, getUserInfo, patchUserInfo, deleteUserInfo } from '@/fetch/fetch'
+import { isNotEmpty, isValidPassword, isSamePassword } from '@/services/validate'
 import { useModalStore } from '@/stores/modal'
 import { useUserStore } from '@/stores/user'
 
@@ -133,8 +145,11 @@ const tempUser = reactive({
   avatar: null
 })
 const tempFile = ref(null)
-const nowPassword = ref('')
-const nowConfirmPassword = ref('')
+const errorMessage = reactive({ all: [] })
+const updateValue = reactive({
+  password: '',
+  confirmPassword: ''
+})
 
 Object.assign(tempUser, {
   user_id: user_id.value,
@@ -199,6 +214,52 @@ const deleteUserInfoHandler = async () => {
   openAlert('success', '刪除成功！')
   logoutAuth()
   router.push('/auth')
+}
+
+const updatePassword = async () => {
+  // 清空錯誤
+  errorMessage.all.length = 0
+  if (isNotEmpty(updateValue.password)) {
+    errorMessage.all.push(`密碼 ${isNotEmpty(updateValue.password)}`)
+  }
+  if (isValidPassword(updateValue.password)) {
+    errorMessage.all.push(isValidPassword(updateValue.password))
+  }
+  if (isSamePassword(updateValue.password, updateValue.confirmPassword)) {
+    errorMessage.all.push(isSamePassword(updateValue.password, updateValue.confirmPassword))
+  }
+  if (errorMessage.all.length) {
+    openAlert('error', ...errorMessage.all)
+    return
+  }
+  openLoading('更新中')
+  await patchPassword({
+    password: updateValue.password,
+    confirm_password: updateValue.confirmPassword
+  })
+  Object.assign(updateValue, {
+    password: '',
+    confirmPassword: ''
+  })
+  closeLoading()
+  openAlert('success', '更新成功')
+}
+
+const switchPage = (n) => {
+  tabSwitch.value = n
+  // 1
+  Object.assign(tempUser, {
+    user_id: user_id.value,
+    name: name.value,
+    avatar: avatar.value
+  })
+  tempFile.value = null
+  // 2
+  errorMessage.all.length = 0
+  Object.assign(updateValue, {
+    password: '',
+    confirmPassword: ''
+  })
 }
 
 onMounted(async () => {
@@ -315,6 +376,9 @@ onMounted(async () => {
     font-weight: $medium;
     margin-bottom: 12px;
   }
+}
+.err-t {
+  margin-top: 15px;
 }
 .base-button {
   width: 100%;

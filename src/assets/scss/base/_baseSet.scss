@@ -567,3 +567,19 @@ textarea {
     }
   }
 }
+
+.err-t {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 15px;
+  margin-bottom: -20px;
+
+  p {
+    margin: 3px;
+    color: $c-error;
+    &:not(:first-child)::before {
+      content: ', ';
+    }
+  }
+}

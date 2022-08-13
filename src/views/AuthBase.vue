@@ -333,21 +333,6 @@ watch(errorMessage, () => {
     color: $c-black;
     margin: 8px 0 20px;
   }
-  .err-t {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin-top: 15px;
-    margin-bottom: -20px;
-
-    p {
-      margin: 3px;
-      color: $c-error;
-      &:not(:first-child)::before {
-        content: ', ';
-      }
-    }
-  }
   .input-group input:not(:first-child),
   button:not(:first-child) {
     margin-top: 12px;

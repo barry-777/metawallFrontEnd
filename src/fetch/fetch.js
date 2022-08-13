@@ -40,6 +40,15 @@ export function postSignUp (data) {
   })
 }
 
+// 更新密碼
+export function patchPassword (data) {
+  return useReq({
+    url: `${apiPath}/api/auth/reset_password`,
+    method: 'patch',
+    data
+  })
+}
+
 // 驗證 token
 export function checkToken () {
   return useReq({
