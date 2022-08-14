@@ -24,7 +24,7 @@ const { showLoadingText } = storeToRefs(modalStore)
 </script>
 
 <style scoped lang="scss">
-@import '../assets/scss/base/variables';
+@import '../../assets/scss/base/variables';
 .lds-ellipsis {
   display: inline-block;
   position: relative;

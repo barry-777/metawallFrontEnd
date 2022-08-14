@@ -24,8 +24,8 @@ const { showAlertText, showAlertCls } = modalStore
 </script>
 
 <style scoped lang="scss">
-@import '../assets/scss/base/variables';
-@import '../assets/scss/base/mixins';
+@import '../../assets/scss/base/variables';
+@import '../../assets/scss/base/mixins';
 .alert-box {
   position: fixed;
   top: 20%;

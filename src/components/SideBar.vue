@@ -52,7 +52,7 @@
 
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
-import PostUploadBox from '@/components/PostUploadBox.vue'
+import PostUploadBox from '@/components/box/PostUploadBox.vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'

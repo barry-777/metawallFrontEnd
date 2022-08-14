@@ -17,9 +17,9 @@
 </template>
 
 <script setup>
-import ImagesBox from '@/components/ImagesBox.vue'
-import PostLikesBox from '@/components/PostLikesBox.vue'
-import CommentEditorBox from '@/components/CommentEditorBox.vue'
+import ImagesBox from '@/components/box/ImagesBox.vue'
+import PostLikesBox from '@/components/box/PostLikesBox.vue'
+import CommentEditorBox from '@/components/box/CommentEditorBox.vue'
 import { storeToRefs } from 'pinia'
 import { useModalStore } from '@/stores/modal'
 

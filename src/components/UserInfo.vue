@@ -83,7 +83,7 @@
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
 import PostItem from '@/components/PostItem.vue'
-import PostBox from '@/components/PostBox.vue'
+import PostBox from '@/components/box/PostBox.vue'
 import { storeToRefs } from 'pinia'
 import { ref, onBeforeUnmount, watch } from 'vue'
 import { useRoute } from 'vue-router'

@@ -54,7 +54,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/scss/base/variables';
+@import '../../assets/scss/base/variables';
 .main-inner {
   width: 100%;
   max-width: 600px;

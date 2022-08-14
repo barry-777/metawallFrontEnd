@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/scss/base/variables';
+@import '../../assets/scss/base/variables';
 .swiper-slide {
   padding: 35px;
 }

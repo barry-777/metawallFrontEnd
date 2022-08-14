@@ -24,7 +24,7 @@
 
 <script setup>
 import PostItem from '@/components/PostItem.vue'
-import PostBox from '@/components/PostBox.vue'
+import PostBox from '@/components/box/PostBox.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'

@@ -9,8 +9,8 @@
 </template>
 
 <script setup>
-import LoadingBox from '@/components/LoadingBox.vue'
-import AlertBox from '@/components/AlertBox.vue'
+import LoadingBox from '@/components/box/LoadingBox.vue'
+import AlertBox from '@/components/box/AlertBox.vue'
 import { useModalStore } from '@/stores/modal'
 import { storeToRefs } from 'pinia'
 
