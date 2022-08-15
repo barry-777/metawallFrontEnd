@@ -46,11 +46,19 @@
             </div>
           </li>
         </template>
-        <template v-else>
-          <li class="no-data">
+        <div
+          v-else
+          class="no-data"
+        >
+          <div class="top-bar">
+            <div />
+            <div />
+            <div />
+          </div>
+          <div class="no-t">
             目前尚無粉絲！
-          </li>
-        </template>
+          </div>
+        </div>
       </ul>
     </div>
   </div>

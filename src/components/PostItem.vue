@@ -1,96 +1,95 @@
 <template>
   <div
+    v-if="hasData"
     class="post"
-    :class="{ 'only': !hasData }"
   >
-    <template v-if="hasData">
-      <div class="content">
-        <div class="top">
-          <router-link :to="`/user/info/${props.post.user._id}`">
-            <div class="user-photo-outer">
-              <UserPhoto :photo="props.post.user.avatar" />
-            </div>
-            <div class="user-name">
-              <p>{{ props.post.user.name }}</p>
-              <p>{{ dateFormat(props.post.createdAt) }}</p>
-            </div>
-          </router-link>
+    <div class="content">
+      <div class="top">
+        <router-link :to="`/user/info/${props.post.user._id}`">
+          <div class="user-photo-outer">
+            <UserPhoto :photo="props.post.user.avatar" />
+          </div>
+          <div class="user-name">
+            <p>{{ props.post.user.name }}</p>
+            <p>{{ dateFormat(props.post.createdAt) }}</p>
+          </div>
+        </router-link>
+        <div
+          v-if="props.post.user._id === userStore.user_id"
+          class="post-control"
+        >
+          <i
+            class="fa-solid fa-ellipsis"
+            @click.stop="showPostControl = !showPostControl"
+          />
+          <div v-if="showPostControl">
+            <ul>
+              <li @click="openPostUploadBox(true, props.post)">
+                編輯貼文
+              </li>
+              <li @click="deletePostHandler(props.post)">
+                刪除貼文
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="middle">
+        <div class="inner-t serEditorCss">
+          <!-- eslint-disable vue/no-v-html -->
+          <div v-html="props.post.content" />
+          <!--eslint-enable-->
+        </div>
+        <div
+          v-if="props.post.images?.length"
+          class="inner-photo"
+        >
           <div
-            v-if="props.post.user._id === userStore.user_id"
-            class="post-control"
+            v-if="props.post.images[0]?.link"
+            class="img-control"
           >
-            <i
-              class="fa-solid fa-ellipsis"
-              @click.stop="showPostControl = !showPostControl"
-            />
-            <div v-if="showPostControl">
-              <ul>
-                <li @click="openPostUploadBox(true, props.post)">
-                  編輯貼文
-                </li>
-                <li @click="deletePostHandler(props.post)">
-                  刪除貼文
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="middle">
-          <div class="inner-t serEditorCss">
-            <!-- eslint-disable vue/no-v-html -->
-            <div v-html="props.post.content" />
-            <!--eslint-enable-->
+            <img
+              :src="props.post.images[0].link"
+              alt=""
+            >
           </div>
           <div
-            v-if="props.post.images?.length"
-            class="inner-photo"
+            v-if="props.post.images[1]?.link"
+            class="img-control"
           >
-            <div
-              v-if="props.post.images[0]?.link"
-              class="img-control"
+            <img
+              :src="props.post.images[1].link"
+              alt=""
             >
-              <img
-                :src="props.post.images[0].link"
-                alt=""
-              >
-            </div>
-            <div
-              v-if="props.post.images[1]?.link"
-              class="img-control"
-            >
-              <img
-                :src="props.post.images[1].link"
-                alt=""
-              >
-            </div>
-            <div
-              v-if="props.post.images?.length >= 2"
-              class="img-more"
-              @click="openImagesBox(true, props.post.images)"
-            >
-              <i class="fa-regular fa-square-plus" />
-              <p>MORE</p>
-            </div>
+          </div>
+          <div
+            v-if="props.post.images?.length >= 2"
+            class="img-more"
+            @click="openImagesBox(true, props.post.images)"
+          >
+            <i class="fa-regular fa-square-plus" />
+            <p>MORE</p>
           </div>
         </div>
-        <div class="bottom">
-          <PostTool :post="props.post" />
-          <CommentWall :comments="props.post.comments" />
-        </div>
       </div>
-    </template>
-    <template v-else>
-      <div class="top-bar">
-        <div />
-        <div />
-        <div />
+      <div class="bottom">
+        <PostTool :post="props.post" />
+        <CommentWall :comments="props.post.comments" />
       </div>
-      <div class="content">
-        <div class="no-t">
-          目前尚無貼文！
-        </div>
-      </div>
-    </template>
+    </div>
+  </div>
+  <div
+    v-else
+    class="no-data"
+  >
+    <div class="top-bar">
+      <div />
+      <div />
+      <div />
+    </div>
+    <div class="no-t">
+      目前尚無貼文！
+    </div>
   </div>
 </template>
 
@@ -282,52 +281,5 @@ onMounted(() => {
 }
 .bottom {
   width: 100%;
-}
-// 無貼文樣式
-.post.only {
-  padding: 0;
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .top-bar {
-    display: flex;
-    align-content: center;
-  }
-  .no-t {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-  }
-}
-.top-bar {
-  display: none;
-  width: 100%;
-  padding: 15px;
-  border-bottom: 2px solid $c-black;
-  padding: 12px 15px;
-  > div {
-    width: 8px;
-    height: 8px;
-    margin: 3px;
-    border-radius: 50%;
-    border: 1px solid $c-gray-4;
-  }
-  > div:nth-child(1) {
-    background-color: $c-red;
-  }
-  > div:nth-child(2) {
-    background-color: $c-yellow;
-  }
-  > div:nth-child(3) {
-    background-color: $c-green;
-  }
-}
-.no-t {
-  display: none;
-  width: 100%;
-  height: 100%;
-  color: $c-gray-4;
 }
 </style>
