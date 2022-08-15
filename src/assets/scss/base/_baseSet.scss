@@ -583,3 +583,41 @@ textarea {
     }
   }
 }
+
+.no-data {
+  width: 100%;
+  background-color: $c-white;
+  border: 2px solid $c-black;
+  border-bottom: 4px solid $c-black;
+  border-radius: 8px 8px 15px 15px;
+  .top-bar {
+    width: 100%;
+    padding: 15px;
+    border-bottom: 2px solid $c-black;
+    padding: 12px 15px;
+    > div {
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      margin: 3px;
+      border-radius: 50%;
+      border: 1px solid $c-gray-4;
+    }
+    > div:nth-child(1) {
+      background-color: $c-red;
+    }
+    > div:nth-child(2) {
+      background-color: $c-yellow;
+    }
+    > div:nth-child(3) {
+      background-color: $c-green;
+    }
+  }
+  .no-t {
+    padding: 50px 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    color: $c-gray-4;
+  }
+}

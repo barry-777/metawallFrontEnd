@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
 import SideBar from '@/components/SideBar.vue'
+import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { checkToken, getUserInfo } from '@/fetch/fetch'
 

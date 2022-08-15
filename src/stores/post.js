@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
-// import { useUserStore } from './userStore'
 
-// const userStore = useUserStore()
-
+// 利用 store 的資料 製作貼文相關暫存的功能
 export const usePostStore = defineStore('postStore', {
   // data
   state: () => ({
@@ -10,7 +8,7 @@ export const usePostStore = defineStore('postStore', {
     posts: [],
     // q => 搜尋項目
     // s => 資料排序
-    postQuery: {
+    routeQuery: {
       q: '',
       s: 'new'
     }
@@ -20,7 +18,7 @@ export const usePostStore = defineStore('postStore', {
     // 更新參數
     async patchQuery (data) {
       // 傳入陣列
-      Object.assign(this.postQuery, ...data)
+      Object.assign(this.routeQuery, ...data)
     },
     // 新增貼文資料
     async addPosts (data) {

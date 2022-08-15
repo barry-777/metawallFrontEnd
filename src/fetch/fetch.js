@@ -57,28 +57,43 @@ export function checkToken () {
   })
 }
 
-// 取得個人資料
-export function getUserInfo (user_id) {
+// 搜尋個人資料
+export function getUsersByRoute (query) {
+  // q 搜尋使用者名稱
+  let sendUrl = `${apiPath}/api/users`
+  const keys = Object.keys(query)
+  keys.forEach((key, i) => {
+    if (i === 0) sendUrl += `?${key}=${query[key]}`
+    else sendUrl += `&${key}=${query[key]}`
+  })
   return useReq({
-    url: `${apiPath}/api/users/${user_id}`,
+    url: sendUrl,
     method: 'get'
   })
 }
 
-// 刪除個人資料
-export function deleteUserInfo (user_id) {
+// 取得個人資料
+export function getUserInfo (user_id) {
   return useReq({
-    url: `${apiPath}/api/users/${user_id}`,
-    method: 'delete'
+    url: `${apiPath}/api/user/${user_id}`,
+    method: 'get'
   })
 }
 
 // 編輯個人資料
 export function patchUserInfo (user_id, data) {
   return useReq({
-    url: `${apiPath}/api/users/${user_id}`,
+    url: `${apiPath}/api/user/${user_id}`,
     method: 'patch',
     data
+  })
+}
+
+// 刪除個人資料
+export function deleteUserInfo (user_id) {
+  return useReq({
+    url: `${apiPath}/api/user/${user_id}`,
+    method: 'delete'
   })
 }
 

@@ -99,19 +99,17 @@ import UserPhoto from '@/components/UserPhoto.vue'
 import CommentWall from '@/components/CommentWall.vue'
 import PostTool from '@/components/PostTool.vue'
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 import { dateFormat } from '@/services/helper'
 import { deleteOnePost, deleteUploadImage } from '@/fetch/fetch'
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/post'
 import { useModalStore } from '@/stores/modal'
 
-const route = useRoute()
 const modalStore = useModalStore()
 const userStore = useUserStore()
 const postStore = usePostStore()
 const { openLoading, closeLoading, openAlert, openPostUploadBox, openImagesBox } = modalStore
-const { patchQuery, deletePost } = postStore
+const { deletePost } = postStore
 
 const props = defineProps({
   post: Object
@@ -131,7 +129,6 @@ const deletePostHandler = async (post) => {
     await deleteUploadImage(image.hash)
   }
   await deleteOnePost(post._id)
-  await patchQuery([route.query])
   await deletePost(post._id)
   closeLoading()
   openAlert('success', '刪除貼文成功！')

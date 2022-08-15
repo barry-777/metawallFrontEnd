@@ -100,7 +100,7 @@ const modalStore = useModalStore()
 const userStore = useUserStore()
 const postStore = usePostStore()
 const { user_id } = storeToRefs(userStore)
-const { posts, postQuery } = storeToRefs(postStore)
+const { posts, routeQuery } = storeToRefs(postStore)
 const { openAlert, openLoading, closeLoading } = modalStore
 const { patchPosts, resetPosts, patchQuery } = postStore
 
@@ -114,7 +114,7 @@ const getInfoHandler = async (params_id) => {
   nowUser.value = userData.data
   followMode.value = nowUser.value.followers.some(item => item.user === user_id.value)
   await patchQuery([route.query])
-  const { data } = await getPostsById(params_id, postQuery.value)
+  const { data } = await getPostsById(params_id, routeQuery.value)
   if (!data.data) router.push('/notfound')
   await patchPosts(data.data)
   closeLoading()

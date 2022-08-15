@@ -1,5 +1,6 @@
 <template>
   <div class="posts-outer">
+    <SearchBar />
     <div class="posts">
       <template v-if="posts.length">
         <PostItem
@@ -25,6 +26,7 @@
 <script setup>
 import PostItem from '@/components/PostItem.vue'
 import PostBox from '@/components/box/PostBox.vue'
+import SearchBar from '@/components/SearchBar.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
@@ -37,7 +39,7 @@ const route = useRoute()
 const modalStore = useModalStore()
 const postStore = usePostStore()
 
-const { posts, postQuery } = storeToRefs(postStore)
+const { posts, routeQuery } = storeToRefs(postStore)
 const { openAlert, openLoading, closeLoading } = modalStore
 const { patchPosts, resetPosts, patchQuery, addPosts } = postStore
 const postPage = ref(1)
@@ -51,7 +53,7 @@ const getPosts = async () => {
   isStopScroll.value = true
   if (posts.value?.length) postPage.value += 1
   await patchQuery([route.query, { p: postPage.value }])
-  const { data } = await getPostsByRoute(postQuery.value)
+  const { data } = await getPostsByRoute(routeQuery.value)
 
   // 判斷是否已經載入完全部貼文
   if (data.data?.length === 0) {

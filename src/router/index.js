@@ -50,6 +50,11 @@ const routes = [
         path: '/user/followers/:user_id',
         component: () => import('@/components/UserFollower.vue'),
         meta: { requiresAuth: true }
+      },
+      {
+        path: '/search',
+        component: () => import('@/components/SearchResult.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   },
