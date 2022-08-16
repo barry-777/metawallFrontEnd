@@ -35,9 +35,17 @@
         <li>
           <router-link :to="`/user/comments/${userStore.user_id}`">
             <div>
-              <i class="fa-regular fa-comment" />
+              <i class="fa-solid fa-comment" />
             </div>
             <p>我留言的貼文</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="`/user/more`">
+            <div>
+              <i class="fa-solid fa-user" />
+            </div>
+            <p>尋找更多使用者</p>
           </router-link>
         </li>
       </ul>

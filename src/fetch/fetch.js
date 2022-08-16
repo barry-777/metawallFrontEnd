@@ -57,6 +57,14 @@ export function checkToken () {
   })
 }
 
+// 隨機取得使用者
+export function getRandomUsers () {
+  return useReq({
+    url: `${apiPath}/api/random_users`,
+    method: 'get'
+  })
+}
+
 // 搜尋個人資料
 export function getUsersByRoute (query) {
   // q 搜尋使用者名稱
