@@ -51,7 +51,6 @@ const searchHandler = async () => {
   width: 100%;
   display: flex;
   align-items: stretch;
-  margin-bottom: 20px;
 }
 input {
   border: 2px solid $c-black;
@@ -62,7 +61,7 @@ input {
   align-items: center;
   justify-content: center;
   width: 45px;
-  height: 45px;
+  height: 100%;
   font-size: px(20);
   background-color: $c-first;
   color: $c-white;

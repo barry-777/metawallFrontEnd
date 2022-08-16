@@ -1,6 +1,9 @@
 <template>
   <div class="posts-outer">
-    <SearchBar />
+    <div class="base-tools">
+      <FilterSort />
+      <SearchBar />
+    </div>
     <div class="posts">
       <template v-if="posts.length">
         <PostItem
@@ -27,6 +30,7 @@
 import PostItem from '@/components/PostItem.vue'
 import PostBox from '@/components/box/PostBox.vue'
 import SearchBar from '@/components/SearchBar.vue'
+import FilterSort from '@/components/FilterSort.vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'

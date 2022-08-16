@@ -448,6 +448,18 @@ textarea {
   }
 }
 
+.base-tools {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 40px;
+  .filter-select {
+    max-width: 180px;
+    flex-shrink: 0;
+    margin-right: 20px;
+  }
+}
+
 .user-photo-outer {
   width: 45px;
   height: 45px;

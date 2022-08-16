@@ -8,11 +8,10 @@ const routes = [
   },
   {
     path: '/',
-    redirect: '/posts',
     component: () => import('@/views/AuthCenter.vue'),
     children: [
       {
-        path: '/posts',
+        path: '/',
         component: () => import('@/components/PostsWall.vue'),
         meta: { requiresAuth: true }
       },
@@ -85,7 +84,7 @@ router.beforeEach((to, from) => {
   const userStore = useUserStore()
   const { tryLogin } = userStore
 
-  if (tryLogin() && to.path === '/auth') return '/posts'
+  if (tryLogin() && to.path === '/auth') return '/'
 
   if (!tryLogin() && to.meta.requiresAuth) return '/auth'
   else return true

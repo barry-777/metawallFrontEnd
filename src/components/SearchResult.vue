@@ -3,14 +3,17 @@
     <div class="common-title">
       搜尋結果
     </div>
-    <SearchBar />
+    <div class="base-tools">
+      <FilterSort v-if="nowSwitch===1" />
+      <SearchBar />
+    </div>
     <div class="tool">
-      <a
+      <router-link
         class="back"
-        @click.prevent="router.back()"
+        to="/"
       >
         <i class="fa-solid fa-circle-arrow-left" />
-      </a>
+      </router-link>
       <div class="tabs">
         <div
           class="tab"
@@ -77,10 +80,10 @@ import UserItem from '@/components/UserItem.vue'
 import PostItem from '@/components/PostItem.vue'
 import PostBox from '@/components/box/PostBox.vue'
 import SearchBar from '@/components/SearchBar.vue'
+import FilterSort from '@/components/FilterSort.vue'
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
-import router from '@/router'
 import { getPostsByRoute, getUsersByRoute } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { usePostStore } from '@/stores/post'
