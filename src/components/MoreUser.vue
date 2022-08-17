@@ -3,7 +3,7 @@
     <div
       class="common-title"
     >
-      <p>尋找更多使用者</p>
+      <p>尋找使用者</p>
     </div>
     <div class="users">
       <template v-if="users.length">
@@ -33,7 +33,7 @@
 
 <script setup>
 import UserItem from '@/components/UserItem.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { getRandomUsers } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
@@ -47,13 +47,17 @@ const { openLoading, closeLoading } = modalStore
 const users = ref([])
 const getData = async () => {
   openLoading('尋找中')
+  users.value.length = 0
   const { data: usersData } = await getRandomUsers()
   const checkSelf = usersData.data.findIndex(user => user._id === user_id.value)
   if (checkSelf > -1) usersData.data.splice(checkSelf, 1)
   users.value = usersData.data
   closeLoading()
 }
-getData()
+watch(() => user_id.value, () => {
+  if (users.value?.length) return
+  getData()
+})
 </script>
 
 <style scoped lang="scss">

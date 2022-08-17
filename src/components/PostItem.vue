@@ -63,12 +63,20 @@
             >
           </div>
           <div
+            v-if="props.post.images[2]?.link"
+            class="img-control"
+          >
+            <img
+              :src="props.post.images[2].link"
+              alt=""
+            >
+          </div>
+          <div
             v-if="props.post.images?.length >= 2"
             class="img-more"
             @click="openImagesBox(true, props.post.images)"
           >
-            <i class="fa-regular fa-square-plus" />
-            <p>MORE</p>
+            <p>查看更多 ...</p>
           </div>
         </div>
       </div>
@@ -156,6 +164,9 @@ onMounted(() => {
   &:not(:first-child) {
     margin-top: 25px;
   }
+  @include mobile {
+    padding: 25px 15px;
+  }
 }
 .content {
   width: 100%;
@@ -217,6 +228,12 @@ onMounted(() => {
       background-color: darken($c-white, 15%);
     }
   }
+  @include mobile {
+    li {
+      font-size: px(14);
+      padding: 8px 10px;
+    }
+  }
 }
 .middle {
   width: 100%;
@@ -239,7 +256,7 @@ onMounted(() => {
     border: 2px solid $c-black;
     position: relative;
     overflow: hidden;
-    margin-right: 5px;
+    margin: 5px;
     > img {
       width: 100%;
       height: 100%;
@@ -255,27 +272,24 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    align-self: flex-end;
     flex-shrink: 0;
-    width: 150px;
-    padding: 15px;
+    padding: 10px;
+    margin: 5px;
     border-radius: 10px;
-    color: $c-white;
-    background-color: rgba($c-black, 0.5);
-    backdrop-filter: blur(3px);
+    color: $c-black;
     user-select: none;
     cursor: pointer;
-    transition: 0.6s;
-    &:hover {
-      background-color: rgba($c-black, 0.6);
-    }
-    i {
-      font-size: px(20);
-    }
     p {
-      font-size: px(14);
+      font-size: px(12);
       font-weight: $medium;
       letter-spacing: 1.2px;
-      margin-top: 5px;
+    }
+  }
+  @include mobile {
+    flex-wrap: wrap;
+    .img-control {
+      width: calc(50% - 10px);
     }
   }
 }

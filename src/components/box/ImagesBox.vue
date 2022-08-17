@@ -71,6 +71,12 @@ onBeforeUnmount(() => {
 .swiper-slide {
   padding: 35px;
 }
+.close-button {
+  margin-bottom: 5px;
+  color: $c-white;
+  position: relative;
+  z-index: 2;
+}
 .images-inner {
   width: 100%;
   max-width: 800px;

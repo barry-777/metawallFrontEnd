@@ -90,7 +90,7 @@ const selected = async (sort) => {
   width: 100%;
   min-height: 40px;
   display: flex;
-  padding: 12px 15px 10px;
+  padding: 10px 15px 8px;
   background-color: $c-white;
   border: 2px solid $c-black;
   border-radius: 8px 8px 15px 15px;

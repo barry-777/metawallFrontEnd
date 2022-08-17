@@ -2,23 +2,24 @@
   <div class="full-box">
     <div class="full-container">
       <div class="full-inner">
-        <div
-          class="close-button"
-          @click="openPostUploadBox(false)"
-        >
-          <i class="fa-solid fa-xmark" />
-        </div>
         <div class="main-inner animate-inner">
-          <div class="inner-top">
+          <div class="top-control">
+            <div
+              class="close-button"
+              @click="openPostUploadBox(false)"
+            >
+              <i class="fa-solid fa-xmark" />
+            </div>
+          </div>
+          <div class="full-title">
             <p v-if="isPatchMode">
               編輯動態中 ！
             </p>
             <p v-else>
               新增動態吧 ！
             </p>
-            <div class="bg" />
           </div>
-          <div class="inner-bottom">
+          <div class="inner-content">
             <div class="wrap editor-section">
               <p v-if="isPatchMode">
                 編輯貼文內容
@@ -54,30 +55,6 @@
                     @click="editor.chain().focus().toggleItalic().run()"
                   >
                     <i class="fa-solid fa-italic" />
-                  </li>
-                  <li
-                    :class="{ 'is-active': editor.isActive({ textAlign: 'left' }) }"
-                    @click="editor.chain().focus().setTextAlign('left').run()"
-                  >
-                    <i class="fa-solid fa-align-left" />
-                  </li>
-                  <li
-                    :class="{ 'is-active': editor.isActive({ textAlign: 'center' }) }"
-                    @click="editor.chain().focus().setTextAlign('center').run()"
-                  >
-                    <i class="fa-solid fa-align-center" />
-                  </li>
-                  <li
-                    :class="{ 'is-active': editor.isActive({ textAlign: 'right' }) }"
-                    @click="editor.chain().focus().setTextAlign('right').run()"
-                  >
-                    <i class="fa-solid fa-align-right" />
-                  </li>
-                  <li
-                    :class="{ 'is-active': editor.isActive({ textAlign: 'justify' }) }"
-                    @click="editor.chain().focus().setTextAlign('justify').run()"
-                  >
-                    <i class="fa-solid fa-align-justify" />
                   </li>
                   <li
                     :class="{ 'is-active': editor.isActive('strike') }"
@@ -133,7 +110,7 @@
                   type="button"
                   @click="clearImageHandler"
                 >
-                  清除所有圖片
+                  清除圖片
                 </button>
               </div>
               <div
@@ -151,7 +128,7 @@
             <div class="wrap control-section">
               <button
                 v-if="isPatchMode"
-                class="base-button"
+                class="base-button blue"
                 type="button"
                 @click="patchSubmit"
               >
@@ -159,7 +136,7 @@
               </button>
               <button
                 v-else
-                class="base-button"
+                class="base-button blue"
                 type="button"
                 @click="postSubmit"
               >
@@ -167,7 +144,7 @@
               </button>
               <button
                 v-if="isPatchMode"
-                class="base-button"
+                class="base-button red"
                 type="button"
                 @click="openPostUploadBox(false)"
               >
@@ -321,6 +298,22 @@ const patchSubmit = async () => {
   width: 100%;
   max-width: 1200px;
 }
+.full-title {
+  margin: 0 auto 25px;
+}
+.inner-content {
+  width: 100%;
+  padding: 30px 25px;
+  margin: 0 auto;
+  border-radius: 0 0 8px 8px;
+  border: 2px solid $c-black;
+  border-bottom: 6px solid $c-black;
+  background-color: $c-white;
+  box-shadow: 0 2px 10px rgba($c-black, .25);
+  @include mobile {
+    padding: 30px 15px;
+  }
+}
 .wrap {
   margin-bottom: 40px;
   &:last-child {
@@ -332,6 +325,11 @@ const patchSubmit = async () => {
     font-size: px(18);
     font-weight: $medium;
     margin-bottom: 20px;
+  }
+  @include mobile {
+    p {
+      font-size: px(16);
+    }
   }
 }
 .image-section {
@@ -360,6 +358,11 @@ const patchSubmit = async () => {
     height: auto;
     margin: 5px;
   }
+  @include mobileS {
+    img {
+      width: 100px;
+    }
+  }
 }
 .image-add {
   display: flex;
@@ -369,10 +372,9 @@ const patchSubmit = async () => {
   height: 40px;
   line-height: 1.4;
   letter-spacing: 1.5px;
-  background-color: $c-success;
+  background-color: $c-black;
   color: $c-white;
   border-radius: 4px;
-  border: 2px solid $c-black;
   position: relative;
   label {
     display: flex;
@@ -404,7 +406,6 @@ const patchSubmit = async () => {
   background-color: $c-error;
   color: $c-white;
   border-radius: 4px;
-  border: 2px solid $c-black;
   cursor: pointer;
   user-select: none;
 }

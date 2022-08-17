@@ -132,12 +132,19 @@ body {
 }
 .ProseMirror {
   width: 100%;
+  height: 100%;
   min-height: 120px;
   padding: 12px 15px;
   background-color: $c-white;
   border: 2px solid $c-black;
   outline: none;
-  @include setEditor()
+  > div {
+    height: 100%;
+  }
+  @include setEditor();
+  @include mobile {
+    padding: 8px 10px;
+  }
 }
 .serEditorCss {
   @include setEditor()
@@ -150,11 +157,26 @@ body {
   pointer-events: none;
   height: 0;
 }
-.comment-editor .ProseMirror {
-  min-height: 50px;
+.comment-editor {
+  > div {
+    height: 100%;
+  }
+  .ProseMirror {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    @include mobile {
+      min-height: 30px;
+    }
+  }
 }
-.comment-box-editor .ProseMirror {
-  min-height: 200px;
+.comment-box-editor {
+  > div {
+    height: 100%;
+  }
+  .ProseMirror {
+    min-height: 200px;
+  }
 }
 
 #app {
@@ -169,6 +191,9 @@ body {
   color: $c-first;
   &.small {
     font-size: px(40);
+    @include pad {
+      font-size: px(30);
+    }
   }
 }
 
@@ -178,11 +203,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 130px 5vw 5vw;
+  padding: 130px 5vw;
   @include pad {
-    .container {
-      padding: 50px 5vw;
-    }
+    padding: 90px 5vw 130px;
   }
 }
 
@@ -204,46 +227,9 @@ input, textarea {
       opacity: 0;
     }
   }
-}
-
-.radio-input {
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-right: 8px;
-  input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    padding: 0;
-    margin: 0;
-    pointer-events: none;
-    &:checked ~ label .circle {
-      &::before {
-        content: '';
-        width: 7px;
-        height: 7px;
-        background-color: $c-first;
-        border-radius: 50%;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
-  }
-  label {
-    display: inline-flex;
-    align-items: center;
-    .circle {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 2px solid $c-black;
-      margin-right: 3px;
-      position: relative;
-    }
+  @include mobile {
+    font-size: px(16);
+    padding: 8px 10px;
   }
 }
 
@@ -303,11 +289,14 @@ textarea {
       background-color: darken($c-error, 5%);
     }
   }
+  @include mobile {
+    padding: 8px 10px;
+  }
 }
 
 .close-button {
   font-size: px(30);
-  color: $c-gray-4;
+  color: $c-black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -349,16 +338,20 @@ textarea {
     justify-content: center;
     position: relative;
   }
-  .close-button {
+  .top-control {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 2px solid $c-black;
+    padding: 0 10px 15px;
     margin-bottom: 30px;
     position: relative;
     z-index: 2;
   }
   .main-inner {
     padding: 50px 40px 60px;
-    border: 4px solid $c-first;
-    border-bottom: 6px solid $c-first;
-    border-radius: 20px 20px 0 0;
+    border: 6px solid $c-black;
+    border-radius: 8px;
     background-color: $c-white;
     box-shadow: 0 5px 8px rgba($c-black, .5);
     position: relative;
@@ -369,69 +362,19 @@ textarea {
     width: 100%;
     font-size: px(20);
     font-weight: $bold;
+    line-height: 1.2;
     text-align: center;
   }
-}
-
-.inner-top {
-  width: 100%;
-  min-height: 40px;
-  margin-bottom: 20px;
-  border-radius: 8px 8px 0 0;
-  border: 2px solid $c-black;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba($c-black, .25);
-  p {
-    width: 100%;
-    font-size: px(18);
-    font-weight: $medium;
-    line-height: 1.4;
-    letter-spacing: 1.5px;
-    padding: 20px 25px;
-    text-align: center;
-    color: $c-white;
-    position: relative;
-    z-index: 1;
+  @include mobile {
+    .full-container {
+      padding: 10px;
+    }
+    .main-inner {
+      padding: 30px 10px 40px;
+      border: 2px solid $c-black;
+      border-top: 4px solid $c-black;
+    }
   }
-  .bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: 300% 300%;
-    background-image: linear-gradient(
-      -45deg, 
-      #DE4B63 0%, 
-      #FAA722 25%, 
-      #83C51D 51%, 
-      #03438D 100%
-    );  
-    animation: animate 15s ease infinite;
-  }
-  @keyframes animate { 
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-} 
-
-.inner-bottom {
-  width: 98%;
-  padding: 30px 25px;
-  margin: 0 auto;
-  border-radius: 0 0 8px 8px;
-  border: 2px solid $c-black;
-  border-bottom: 6px solid $c-black;
-  background-color: $c-white;
-  box-shadow: 0 2px 10px rgba($c-black, .25);
 }
 
 .common-title {
@@ -462,6 +405,14 @@ textarea {
     max-width: 180px;
     flex-shrink: 0;
     margin-right: 20px;
+  }
+  @include mobile {
+    flex-direction: column-reverse;
+    .filter-select {
+      max-width: 100%;
+      margin: 0;
+      margin-top: 20px;
+    }
   }
 }
 
@@ -497,9 +448,9 @@ textarea {
     display: flex;
     justify-content: space-between;
     background-color: #fff;
-    padding: 15px 20px;
+    padding: 18px 20px;
     border: 2px solid $c-black;
-    border-bottom: 6px solid $c-black;
+    border-bottom: 4px solid $c-black;
     border-radius: 8px 8px 15px 15px;
     box-shadow: 0 2px 10px rgba($c-black, .2);
     &:not(:first-child) {
@@ -510,6 +461,12 @@ textarea {
       align-items: center;
       padding: 25px 20px;
       color: $c-gray-4;
+    }
+    @include mobile {
+      flex-direction: column;
+      .tool {
+        margin-top: 30px;
+      }
     }
   }
   .tool, .info {
@@ -527,10 +484,11 @@ textarea {
     }
   }
   .name {
+    font-size: px(18);
     font-weight: $medium;
   }
   .time {
-    font-size: px(14);
+    font-size: px(12);
     margin-top: 8px;
     color: $c-gray-4;
   }
@@ -542,6 +500,7 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   position: relative;
   transition: all .5s ease;
   .heart-small {

@@ -185,6 +185,9 @@ const patchFollowsHandler = async (params_id) => {
     position: relative;
     z-index: 1;
   }
+  @include mobile {
+    padding: 20px 15px 15px;
+  }
 }
 .status {
   width: 100%;
@@ -209,9 +212,14 @@ const patchFollowsHandler = async (params_id) => {
     font-weight: $medium;
   }
   .create {
-    font-size: px(14);
+    font-size: px(12);
     margin-top: 8px;
     color: $c-gray-4;
+  }
+  @include mobile {
+    .create {
+      display: none;
+    }
   }
 }
 .detail {
@@ -242,6 +250,9 @@ const patchFollowsHandler = async (params_id) => {
       font-weight: $medium;
       margin-top: 8px;
     }
+  }
+  @include mobile {
+    padding-left: 10px;
   }
 }
 .tool {

@@ -35,11 +35,13 @@ const { showAlertText, showAlertCls } = modalStore
   &.success {
     .alert-inner {
       background-color: $c-success;
+      color: $c-white;
     }
   }
   &.error {
     .alert-inner {
       background-color: $c-error;
+      color: $c-white;
     }
   }
 }
@@ -51,7 +53,7 @@ const { showAlertText, showAlertCls } = modalStore
     height: auto;
     display: flex;
     align-content: center;
-    padding: 12px 20px;
+    padding: 12px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba($c-black, 0.5);
   }
@@ -63,6 +65,11 @@ const { showAlertText, showAlertCls } = modalStore
     line-height: 1.4;
     &:not(:first-child)::before {
       content: ', ';
+    }
+  }
+  @include mobile {
+    p {
+      font-size: px(12);
     }
   }
 }

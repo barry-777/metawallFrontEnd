@@ -61,7 +61,7 @@ input {
   align-items: center;
   justify-content: center;
   width: 45px;
-  height: 100%;
+  min-height: 100%;
   font-size: px(20);
   background-color: $c-first;
   color: $c-white;

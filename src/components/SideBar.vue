@@ -1,8 +1,8 @@
 <template>
-  <section class="side-bar">
+  <aside class="side-bar">
     <div class="container">
       <button
-        class="base-button"
+        class="base-button blue"
         type="button"
         @click="openPostUploadBox(true)"
       >
@@ -41,16 +41,54 @@
           </router-link>
         </li>
         <li>
-          <router-link :to="`/user/more`">
+          <router-link to="/user/more">
             <div>
               <i class="fa-solid fa-user" />
             </div>
-            <p>尋找更多使用者</p>
+            <p>尋找使用者</p>
           </router-link>
         </li>
       </ul>
     </div>
-  </section>
+  </aside>
+
+  <aside class="mobile-bar">
+    <ul>
+      <li>
+        <router-link to="/">
+          <i class="fa-solid fa-house" />
+          <p>首頁</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/search">
+          <i class="fa-solid fa-magnifying-glass" />
+          <p>搜尋</p>
+        </router-link>
+      </li>
+      <li class="add">
+        <a
+          href="javascript:;"
+          @click.prevent="openPostUploadBox(true)"
+        >
+          <i class="fa-solid fa-circle-plus" />
+        </a>
+      </li>
+      <li>
+        <router-link :to="`/user/likes/${userStore.user_id}`">
+          <i class="fa-solid fa-heart" />
+          <p>收藏</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="`/user/info/${userStore.user_id}`">
+          <i class="fa-solid fa-user" />
+          <p>個人</p>
+        </router-link>
+      </li>
+    </ul>
+  </aside>
+
   <Transition name="fade-model">
     <PostUploadBox
       v-if="showPostUploadBox"
@@ -79,14 +117,14 @@ const { openPostUploadBox } = modalStore
   max-width: 300px;
   padding: 30px 20px 20px 20px;
   border: 2px solid $c-black;
+  border-bottom: 4px solid $c-black;
+  border-radius: 8px 8px 15px 15px;
   background-color: $c-white;
   position: sticky;
-  top: 130px;
+  top: 40px;
+  margin-right: 30px;
   > .container {
     width: 100%;
-  }
-  a {
-    display: block;
   }
   li {
     width: 100%;
@@ -100,6 +138,11 @@ const { openPostUploadBox } = modalStore
       width: 100%;
       display: flex;
       align-items: center;
+      &:hover {
+        p {
+          color: $c-first;
+        }
+      }
     }
     div {
       width: 50px;
@@ -116,6 +159,82 @@ const { openPostUploadBox } = modalStore
     }
     i {
       font-size: px(20);
+    }
+  }
+  @include pad {
+    display: none;
+  }
+}
+.mobile-bar {
+  display: none;
+  width: 100vw;
+  border: 2px solid $c-black;
+  border-radius: 15px 15px 0 0;
+  background-color: $c-white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  overflow: hidden;
+  ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  li {
+    width: 100%;
+    a {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &.router-link-exact-active {
+        background-color: $c-first;
+        color: $c-white;
+      }
+    }
+    i {
+      font-size: px(20);
+    }
+    p {
+      font-size: px(12);
+      margin-top: 10px;
+    }
+    &.add {
+      a {
+        animation: move 1.5s infinite alternate-reverse ease;
+      }
+      i {
+        font-size: px(30);
+      }
+    }
+  }
+  @keyframes move {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-5px);
+    }
+  }
+  @include pad {
+    display: block;
+  }
+  @include mobile {
+    li{
+      i {
+        font-size: px(18);
+      }
+    }
+  }
+  @include mobileS {
+    li{
+      p {
+        display: none;
+      }
     }
   }
 }

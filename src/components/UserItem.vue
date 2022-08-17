@@ -47,7 +47,7 @@
 
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { patchFollows } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
@@ -64,14 +64,19 @@ const props = defineProps({
 
 // 確認是否有資料
 const hasData = ref(null)
-hasData.value = Object.keys(props.user).length !== 0
-
+// 追蹤狀態
 const followMode = ref(false)
-if (props.user?.followers?.some(item => item.user === user_id.value)) {
-  followMode.value = true
-} else {
-  followMode.value = false
-}
+// 確認資料進來
+onMounted(() => {
+  hasData.value = Object.keys(props.user).length !== 0
+
+  if (props.user?.followers?.some(item => item.user === user_id.value)) {
+    followMode.value = true
+  } else {
+    followMode.value = false
+  }
+})
+
 // 追蹤功能
 const patchFollowsHandler = async (params_id) => {
   const mode = followMode.value ? 'unfollow' : 'follow'

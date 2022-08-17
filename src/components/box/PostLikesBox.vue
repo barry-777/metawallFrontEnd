@@ -6,13 +6,15 @@
     />
     <div class="full-container">
       <div class="full-inner">
-        <div
-          class="close-button"
-          @click="openPostLikesBox(false)"
-        >
-          <i class="fa-solid fa-xmark" />
-        </div>
         <div class="main-inner animate-inner">
+          <div class="top-control">
+            <div
+              class="close-button"
+              @click="openPostLikesBox(false)"
+            >
+              <i class="fa-solid fa-xmark" />
+            </div>
+          </div>
           <div class="full-title">
             目前收藏的會員
           </div>
@@ -21,12 +23,17 @@
               v-for="(list, index) in showPostLikesTemp"
               :key="'list' + index"
             >
-              <div class="user-photo-outer">
-                <UserPhoto :photo="list.avatar" />
-              </div>
-              <div class="name">
-                {{ list.name }}
-              </div>
+              <router-link
+                :to="`/user/info/${list._id}`"
+                @click="openPostLikesBox(false)"
+              >
+                <div class="user-photo-outer">
+                  <UserPhoto :photo="list.avatar" />
+                </div>
+                <div class="name">
+                  {{ list.name }}
+                </div>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -60,7 +67,7 @@ onMounted(() => {
   max-width: 600px;
 }
 ul {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 li {
   display: flex;
@@ -69,6 +76,15 @@ li {
   margin-bottom: 20px;
   &:last-child {
     margin-bottom: 0;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    &:hover {
+      .name {
+        color: $c-first;
+      }
+    }
   }
   .name {
     font-size: px(18);

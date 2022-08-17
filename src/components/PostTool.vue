@@ -151,7 +151,7 @@ const editor = useEditor({
   extensions: [
     StarterKit,
     Placeholder.configure({
-      placeholder: '輸入留言內容 ...'
+      placeholder: '留言 ...'
     })
   ],
   onUpdate: ({ editor }) => {
@@ -167,6 +167,9 @@ const editor = useEditor({
   width: 100%;
   margin-top: 25px;
   padding-left: 15px;
+  @include mobile {
+    padding-left: 0;
+  }
 }
 .post-tool > div:nth-child(1) {
   display: inline-flex;
@@ -195,10 +198,17 @@ const editor = useEditor({
   display: flex;
   align-items: stretch;
   margin-top: 20px;
+  @include mobileS {
+    margin-top: 10px;
+    .user-photo-outer {
+      display: none;
+    }
+  }
 }
 .input-outer {
   width: 100%;
   display: flex;
+  align-items: stretch;
   > div {
     width: calc(100% - 130px);
   }
@@ -209,7 +219,7 @@ const editor = useEditor({
     font-weight: $medium;
     background-color: $c-first;
     color: $c-white;
-    padding: 8px;
+    padding: 6px;
     border: 2px solid $c-black;
     border-left: none;
     user-select: none;
@@ -218,6 +228,15 @@ const editor = useEditor({
     cursor: pointer;
     &:hover {
       background-color: darken($c-first, 5%);
+    }
+  }
+  @include mobile {
+    > div {
+      width: calc(100% - 80px);
+    }
+    button {
+      width: 80px;
+      font-size: px(16);
     }
   }
 }

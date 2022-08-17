@@ -149,6 +149,13 @@ const deleteReplyHandler = async (reply) => {
   padding-left: 40px;
   margin-top: 25px;
   position: relative;
+  @include mobile {
+    padding-left: 0;
+    .user-photo-outer {
+      width: 35px;
+      height: 35px;
+    }
+  }
 }
 ul {
   width: 100%;
@@ -173,6 +180,9 @@ li {
   align-items: flex-start;
   padding-top: 20px;
   padding-left: 50px;
+  @include mobile {
+    padding-left: 15px;
+  }
 }
 .comment-outer {
   width: 100%;

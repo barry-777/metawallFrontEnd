@@ -2,13 +2,15 @@
   <div class="full-box">
     <div class="full-container">
       <div class="full-inner">
-        <div
-          class="close-button"
-          @click="openCommentEditorBox(false)"
-        >
-          <i class="fa-solid fa-xmark" />
-        </div>
         <div class="main-inner animate-inner">
+          <div class="top-control">
+            <div
+              class="close-button"
+              @click="openCommentEditorBox(false)"
+            >
+              <i class="fa-solid fa-xmark" />
+            </div>
+          </div>
           <div class="full-title">
             <div
               v-if="showCommentEditorType === 'patchComment'"
@@ -18,7 +20,7 @@
             <div
               v-else-if="showCommentEditorType === 'postReply'"
             >
-              正在回覆這則留言
+              正在回覆留言
             </div>
             <div
               v-else-if="showCommentEditorType === 'patchReply'"
@@ -32,7 +34,7 @@
           <div class="button-wrap">
             <button
               v-if="showCommentEditorType === 'patchComment'"
-              class="base-button"
+              class="base-button blue"
               type="button"
               @click="patchCommentHandler(tempData)"
             >
@@ -40,7 +42,7 @@
             </button>
             <button
               v-else-if="showCommentEditorType === 'postReply'"
-              class="base-button"
+              class="base-button blue"
               type="button"
               @click="postReplyHandler(tempData)"
             >
@@ -48,7 +50,7 @@
             </button>
             <button
               v-else-if="showCommentEditorType === 'patchReply'"
-              class="base-button"
+              class="base-button blue"
               type="button"
               @click="patchReplyHandler(tempData)"
             >

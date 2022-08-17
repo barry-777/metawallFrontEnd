@@ -2,10 +2,10 @@
   <MainHeader />
   <section class="auth-center">
     <div class="container-box">
+      <SideBar />
       <div class="max">
         <router-view />
       </div>
-      <SideBar />
     </div>
   </section>
 </template>
@@ -53,7 +53,6 @@ onMounted(async () => {
   .max {
     width: 100%;
     max-width: 950px;
-    margin-right: 30px;
   }
 }
 </style>

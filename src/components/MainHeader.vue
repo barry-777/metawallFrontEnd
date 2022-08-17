@@ -57,6 +57,21 @@
             </router-link>
           </li>
           <li>
+            <router-link :to="`/user/likes/${userStore.user_id}`">
+              我收藏的貼文
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="`/user/comments/${userStore.user_id}`">
+              我留言的貼文
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/user/more">
+              尋找使用者
+            </router-link>
+          </li>
+          <li>
             <router-link
               to="/"
               @click="logoutAuth"
@@ -72,7 +87,7 @@
 
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
@@ -93,6 +108,34 @@ const barSwitch = (type) => {
     unLockScroll()
   }
 }
+
+onMounted(() => {
+  const target = document.querySelector('.main-header')
+  const scrollUp = 'scroll-up'
+  const scrollDown = 'scroll-down'
+  let lastScroll = 0
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset
+    if (currentScroll <= 0) {
+      target.classList.remove(scrollUp)
+      return
+    }
+    if (currentScroll > lastScroll && !target.classList.contains(scrollDown)) {
+      // down
+      target.classList.remove(scrollUp)
+      target.classList.add(scrollDown)
+    } else if (
+      currentScroll < lastScroll &&
+      target.classList.contains(scrollDown)
+    ) {
+      // up
+      target.classList.remove(scrollDown)
+      target.classList.add(scrollUp)
+    }
+    lastScroll = currentScroll
+  })
+})
 </script>
 
 <style scoped lang="scss">
@@ -104,6 +147,7 @@ const barSwitch = (type) => {
   left: 0;
   top: 0;
   z-index: 20;
+  transition: transform .4s;
   &::after {
     content: '';
     width: 100%;
@@ -116,6 +160,12 @@ const barSwitch = (type) => {
     top: 0;
     z-index: 0;
   }
+  &.scroll-up {
+    transform: translateY(0);
+  }
+  &.scroll-down {
+    transform: translateY(-100%);
+  }
 }
 .container {
   display: flex;
@@ -123,6 +173,9 @@ const barSwitch = (type) => {
   padding: 12px 50px;
   position: relative;
   z-index: 1;
+  @include pad {
+    padding: 12px 25px;
+  }
 }
 .other {
   display: flex;
@@ -144,6 +197,9 @@ const barSwitch = (type) => {
     &:last-child {
       margin: 0;
     }
+  }
+  @include mobile {
+    display: none;
   }
 }
 .bars {
@@ -191,7 +247,8 @@ const barSwitch = (type) => {
     background-color: rgba(0, 0, 0, .4);
   }
   .bars-inner {
-    width: 15vw;
+    width: 90%;
+    max-width: 300px;
     padding: 10vh 20px;
     background-color: rgba(255, 255, 255, .9);
     position: relative;
@@ -208,7 +265,7 @@ const barSwitch = (type) => {
     }
   }
   .close-button {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
   .user-photo-outer {
     width: 60px;
