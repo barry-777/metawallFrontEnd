@@ -1,4 +1,5 @@
 <template>
+  <MainHeader />
   <section class="auth-center">
     <div class="container-box">
       <div class="max">
@@ -10,6 +11,7 @@
 </template>
 
 <script setup>
+import MainHeader from '@/components/MainHeader.vue'
 import SideBar from '@/components/SideBar.vue'
 import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/user'

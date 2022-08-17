@@ -17,7 +17,9 @@
                 >
               </div>
               <div class="right-box">
-                <h1>MetaWall</h1>
+                <h1 class="main-title">
+                  MetaWall
+                </h1>
                 <h2>從元宇宙展開全新社交圈</h2>
                 <div class="input-group">
                   <input
@@ -69,7 +71,9 @@
                 >
               </div>
               <div class="right-box">
-                <h1>MetaWall</h1>
+                <h1 class="main-title">
+                  MetaWall
+                </h1>
                 <h2>註冊會員！</h2>
                 <div class="input-group">
                   <input
@@ -317,13 +321,6 @@ watch(errorMessage, () => {
     width: 55%;
     max-width: 370px;
     position: relative;
-  }
-  h1 {
-    font-size: 50px;
-    font-weight: $regular;
-    font-family: 'Paytone One', sans-serif;
-    letter-spacing: 0.8px;
-    color: $c-first;
   }
   h2 {
     font-size: px(20);

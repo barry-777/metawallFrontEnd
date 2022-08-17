@@ -81,7 +81,7 @@ const { openPostUploadBox } = modalStore
   border: 2px solid $c-black;
   background-color: $c-white;
   position: sticky;
-  top: 30px;
+  top: 130px;
   > .container {
     width: 100%;
   }

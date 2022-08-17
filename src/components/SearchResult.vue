@@ -1,7 +1,7 @@
 <template>
   <div class="search-bar">
     <div class="common-title">
-      搜尋結果
+      搜尋
     </div>
     <div class="base-tools">
       <FilterSort v-if="nowSwitch===1" />
@@ -97,15 +97,18 @@ const userStore = useUserStore()
 const { posts } = storeToRefs(postStore)
 const { user_id } = storeToRefs(userStore)
 const { openLoading, closeLoading } = modalStore
-const { patchPosts } = postStore
+const { patchPosts, resetPosts } = postStore
 
 const nowSwitch = ref(1)
 const users = ref([])
+
 // 取得所有貼文
 const getData = async () => {
+  resetPosts()
+  users.value.length = 0
   switch (nowSwitch.value) {
     case 1: {
-      if (posts.value?.length) return
+      if (posts.value?.length || !route.query.q) return
       openLoading()
       const { data: postsData } = await getPostsByRoute(route.query)
       await patchPosts(postsData.data)
@@ -113,7 +116,7 @@ const getData = async () => {
       break
     }
     case 2: {
-      if (users.value?.length) return
+      if (users.value?.length || !route.query.q) return
       openLoading()
       const { data: usersData } = await getUsersByRoute(route.query)
       const checkSelf = usersData.data.findIndex(user => user._id === user_id.value)
