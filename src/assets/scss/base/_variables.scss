@@ -1,34 +1,31 @@
-$c-first: #065fc5;
-$c-second: #dfeaf6;
+$c-first: #065FC5;
+$c-second: #DFEAF6;
 $c-red: #DE4B63;
 $c-yellow: #FAA722;
 $c-green: #83C51D;
 $c-gray-1: #EFECE7;
 $c-gray-2: #E4E6EB;
 $c-gray-3: #9B9893;
-$c-gray-4: #5a5a5a;
+$c-gray-4: #5A5A5A;
+$c-white: #FFF;
+$c-black: #2F2F2F;
 
-$c-white: #FFFFFF;
-$c-black: #2f2f2f;
-// var(--light)
-// var(--dark)
-// var(--gray)
-// var(--gray2)
 body {
   &.light-theme {
-    --light: #FFFFFF;
-    --light2: #edecec;
-    --dark: #2f2f2f;
-    --dark2: #4e4d4d;
-    --gray: #9b9893;
-    --gray2: #7f7c77;
+    --light: #FFF;
+    --light2: #EDECEC;
+    --dark: #2F2F2F;
+    --dark2: #4E4D4D;
+    --gray: #9B9893;
+    --gray2: #7F7C77;
   }
+
   &.dark-theme {
-    --light: #2f2f2f;
+    --light: #2F2F2F;
     --light2: #505050;
-    --dark: #d4cec4;
-    --dark2: #e0d9cc;
-    --gray: #aeaeae;
+    --dark: #D4CEC4;
+    --dark2: #E0D9CC;
+    --gray: #AEAEAE;
     --gray2: #989797;
   }
 }

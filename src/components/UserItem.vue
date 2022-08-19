@@ -105,38 +105,43 @@ const patchFollowsHandler = async (params_id) => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .user {
-  padding: 15px 40px;
   margin: 0 10px 15px;
+  padding: 15px 40px;
   background: $c-white;
   border: 2px solid $c-black;
   border-radius: 8px;
+
   .user-inner {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+
     a {
       display: block;
+
       &:hover {
-        .name {
-          color: $c-first;
-        }
+        color: $c-first;
       }
     }
-    .user-photo-outer{
+
+    .user-photo-outer {
+      margin: 0;
       width: 60px;
       height: 60px;
-      margin: 0;
     }
+
     .name {
+      margin-top: 8px;
       width: 100%;
       font-size: px(18);
       font-weight: $medium;
-      line-height: 1.4;
       text-align: center;
-      margin-top: 8px;
+      line-height: 1.4;
     }
+
     .base-button {
       margin-top: 15px;
       padding: 8px;

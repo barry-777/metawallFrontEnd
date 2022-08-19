@@ -163,114 +163,135 @@ const patchFollowsHandler = async (params_id) => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .top-info {
-  width: 100%;
-  padding: 25px 25px 30px;
-  border-radius: 8px 8px 15px 15px;
-  color: var(--dark);
-  box-shadow: 0 2px 10px var(--dark);
   position: relative;
   overflow: hidden;
+  padding: 25px 25px 30px;
+  width: 100%;
+  color: var(--dark);
+  border-radius: 8px 8px 15px 15px;
+  box-shadow: 0 2px 10px var(--dark);
+
+  @include mobile {
+    padding: 20px 15px 15px;
+  }
+
   &::after {
-    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    opacity: .7;
     background-color: var(--light2);
-    backdrop-filter: blur(3px);
-    position: absolute;
-    left: 0;
-    top: 0;
+    opacity: 0.7;
     z-index: 0;
+    backdrop-filter: blur(3px);
+    content: '';
   }
+
   > * {
     position: relative;
     z-index: 1;
   }
-  @include mobile {
-    padding: 20px 15px 15px;
-  }
 }
+
 .status {
-  width: 100%;
   display: flex;
+  width: 100%;
 }
+
 .base {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   flex-shrink: 0;
-  .user-photo-outer {
-    width: 55px;
-    height: 55px;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-  .now-user {
-    padding-left: 5px;
-  }
-  .name {
-    font-size: px(18);
-    font-weight: $medium;
-  }
-  .create {
-    font-size: px(12);
-    margin-top: 8px;
-    color: var(--gray);
-  }
+  justify-content: center;
+
   @include mobile {
     .create {
       display: none;
     }
   }
+
+  .user-photo-outer {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 55px;
+    height: 55px;
+  }
+
+  .now-user {
+    padding-left: 5px;
+  }
+
+  .name {
+    font-size: px(18);
+    font-weight: $medium;
+  }
+
+  .create {
+    margin-top: 8px;
+    font-size: px(12);
+    color: var(--gray);
+  }
 }
+
 .detail {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-left: 15px;
+  width: 100%;
+
+  @include mobile {
+    padding-left: 10px;
+  }
+
   > div {
-    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+
     a {
-      width: 100%;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
     }
+
     span {
       font-size: px(14);
       font-weight: $medium;
     }
+
     p {
+      margin-top: 8px;
       font-size: px(18);
       font-weight: $medium;
-      margin-top: 8px;
     }
   }
-  @include mobile {
-    padding-left: 10px;
-  }
 }
+
 .tool {
-  width: 100%;
   display: flex;
   margin-top: 20px;
+  width: 100%;
 }
+
 .base-button {
   &:not(:first-child) {
     margin-left: 10px;
   }
 }
+
 .base-button.file {
   margin: 0;
   margin-top: 25px;
 }
+
 .bottom-posts {
   margin-top: 50px;
 }

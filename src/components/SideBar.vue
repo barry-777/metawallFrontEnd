@@ -112,134 +112,157 @@ const { openPostUploadBox } = modalStore
 <style scoped lang="scss">
 @import '../assets/scss/base/variables';
 @import '../assets/scss/base/mixins';
+
 .side-bar {
-  width: 100%;
-  max-width: 300px;
-  padding: 30px 20px 20px 20px;
-  border: 2px solid var(--dark);
-  border-bottom: 4px solid var(--dark);
-  border-radius: 8px 8px 15px 15px;
-  background-color: var(--light);
-  color: var(--dark);
   position: sticky;
   top: 40px;
   margin-right: 30px;
-  > .container {
-    width: 100%;
-  }
-  li {
-    width: 100%;
-    &:first-child {
-      margin: 25px 0 15px;
-    }
-    &:not(:first-child) {
-      margin: 15px 0;
-    }
-    a {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      &:hover {
-        p {
-          color: $c-first;
-        }
-      }
-    }
-    div {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      color: $c-black;
-      border-radius: 50%;
-      border: 2px solid var(--dark);
-      overflow: hidden;
-      margin-right: 15px;
-      background-color: $c-second;
-    }
-    i {
-      font-size: px(20);
-    }
-  }
+  padding: 30px 20px 20px;
+  width: 100%;
+  max-width: 300px;
+  color: var(--dark);
+  background-color: var(--light);
+  border: 2px solid var(--dark);
+  border-radius: 8px 8px 15px 15px;
+  border-bottom: 4px solid var(--dark);
+
   @include pad {
     display: none;
   }
-}
-.mobile-bar {
-  display: none;
-  width: 100vw;
-  border: 2px solid $c-black;
-  border-radius: 15px 15px 0 0;
-  background-color: $c-white;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 20;
-  overflow: hidden;
-  ul {
+
+  > .container {
     width: 100%;
-    display: flex;
-    justify-content: center;
   }
+
   li {
     width: 100%;
+
+    &:first-child {
+      margin: 25px 0 15px;
+    }
+
+    &:not(:first-child) {
+      margin: 15px 0;
+    }
+
     a {
-      width: 100%;
-      height: 100%;
-      padding: 10px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      &.router-link-exact-active {
-        background-color: $c-first;
-        color: $c-white;
+      width: 100%;
+
+      &:hover {
+        color: $c-first;
       }
     }
+
+    div {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-right: 15px;
+      width: 50px;
+      height: 50px;
+      color: $c-black;
+      background-color: $c-second;
+      border: 2px solid var(--dark);
+      border-radius: 50%;
+    }
+
     i {
       font-size: px(20);
     }
-    p {
-      font-size: px(12);
-      margin-top: 10px;
-    }
-    &.add {
-      a {
-        animation: move 1.5s infinite alternate-reverse ease;
-      }
-      i {
-        font-size: px(30);
-      }
-    }
   }
+}
+
+.mobile-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: none;
+  overflow: hidden;
+  width: 100vw;
+  background-color: $c-white;
+  border: 2px solid $c-black;
+  border-radius: 15px 15px 0 0;
+  z-index: 20;
+
   @keyframes move {
     0% {
       transform: translateY(0);
     }
+
     100% {
       transform: translateY(-5px);
     }
   }
+
   @include pad {
     display: block;
   }
+
   @include mobile {
-    li{
+    li {
       i {
         font-size: px(18);
       }
     }
   }
-  @include mobileS {
-    li{
+
+  @include mobile-s {
+    li {
       p {
         display: none;
       }
     }
   }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  li {
+    width: 100%;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+
+      &.router-link-exact-active {
+        color: $c-white;
+        background-color: $c-first;
+      }
+    }
+
+    i {
+      font-size: px(20);
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: px(12);
+    }
+
+    &.add {
+      a {
+        animation: move 1.5s infinite alternate-reverse ease;
+      }
+
+      i {
+        font-size: px(30);
+      }
+    }
+  }
 }
+
 .user-photo-outer {
   margin: 0 !important;
 }

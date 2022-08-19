@@ -163,80 +163,96 @@ const editor = useEditor({
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .post-tool {
-  width: 100%;
   margin-top: 25px;
   padding-left: 15px;
+  width: 100%;
+
   @include mobile {
     padding-left: 0;
   }
 }
+
 .post-tool > div:nth-child(1) {
-  display: inline-flex;
   align-content: center;
+  display: inline-flex;
+
   > div {
-    display: inline-flex;
     align-content: center;
-    user-select: none;
     cursor: pointer;
+    display: inline-flex;
+    user-select: none;
   }
+
   .look {
-    margin-left: 15px;
     margin-top: 12px;
+    margin-left: 15px;
   }
+
   p {
-    font-weight: $medium;
     padding-top: 12px;
     padding-left: 2px;
+    font-weight: $medium;
+
     &.no {
       font-size: px(14);
     }
   }
 }
+
 .post-tool > div:nth-child(2) {
-  width: 100%;
   display: flex;
   align-items: stretch;
   margin-top: 20px;
-  @include mobileS {
+  width: 100%;
+
+  @include mobile-s {
     margin-top: 10px;
+
     .user-photo-outer {
       display: none;
     }
   }
 }
+
 .input-outer {
-  width: 100%;
   display: flex;
   align-items: stretch;
-  > div {
-    width: calc(100% - 130px);
-  }
-  button {
-    width: 120px;
-    height: 100%;
-    font-size: px(18);
-    font-weight: $medium;
-    background-color: $c-first;
-    color: $c-white;
-    padding: 6px;
-    border: 2px solid var(--dark);
-    border-left: none;
-    user-select: none;
-    flex-shrink: 0;
-    transition: background-color 0.6s, color 0.2s, transform 0.4s;
-    cursor: pointer;
-    &:hover {
-      background-color: darken($c-first, 5%);
-    }
-  }
+  width: 100%;
+
   @include mobile {
     > div {
       width: calc(100% - 80px);
     }
+
     button {
       width: 80px;
       font-size: px(16);
+    }
+  }
+
+  > div {
+    width: calc(100% - 130px);
+  }
+
+  button {
+    padding: 6px;
+    width: 120px;
+    height: 100%;
+    font-size: px(18);
+    font-weight: $medium;
+    color: $c-white;
+    background-color: $c-first;
+    border: 2px solid var(--dark);
+    transition: background-color 0.6s, color 0.2s, transform 0.4s;
+    border-left: unset;
+    cursor: pointer;
+    flex-shrink: 0;
+    user-select: none;
+
+    &:hover {
+      background-color: rgba($c-first, 0.95);
     }
   }
 }

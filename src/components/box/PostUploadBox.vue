@@ -359,7 +359,7 @@ const patchSubmit = async () => {
     height: auto;
     margin: 5px;
   }
-  @include mobileS {
+  @include mobile-s {
     img {
       width: 100px;
     }

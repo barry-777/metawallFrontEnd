@@ -142,170 +142,197 @@ onMounted(() => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   color: var(--dark);
-  position: fixed;
-  left: 0;
-  top: 0;
   z-index: 20;
-  transition: transform .4s;
+  transition: transform 0.4s;
+
   &::after {
-    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: var(--light);
     opacity: 0.5;
-    backdrop-filter: blur(3px);
-    box-shadow: 0 2px 10px var(--dark2);
-    position: absolute;
-    left: 0;
-    top: 0;
     z-index: 0;
+    box-shadow: 0 2px 10px var(--dark2);
+    backdrop-filter: blur(3px);
+    content: '';
   }
+
   &.scroll-up {
     transform: translateY(0);
   }
+
   &.scroll-down {
     transform: translateY(-100%);
   }
 }
+
 .container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 12px 50px;
-  position: relative;
   z-index: 1;
+
   @include pad {
     padding: 12px 25px;
   }
 }
+
 .other {
   display: flex;
   align-items: center;
 }
+
 .quick {
   display: inline-flex;
   align-items: center;
   margin-right: 25px;
+
+  @include mobile {
+    display: none;
+  }
+
   a {
     display: inline-block;
+    margin-right: 12px;
     font-size: px(14);
     font-weight: $medium;
-    margin-right: 12px;
-    transition: .4s;
+    transition: 0.4s;
+
     &:hover {
       color: $c-first;
     }
+
     &:last-child {
       margin: 0;
     }
   }
-  @include mobile {
-    display: none;
-  }
 }
+
 .bars {
   i {
+    position: relative;
     font-size: px(25);
+    transition: 0.4s;
+    cursor: pointer;
     flex-shrink: 0;
     user-select: none;
-    position: relative;
-    cursor: pointer;
-    transition: .4s;
+
     &:hover {
       color: $c-first;
     }
   }
 }
+
 .bars-content {
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
   display: flex;
   justify-content: flex-end;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 21;
+  width: 100vw;
+  height: 100vh;
   opacity: 0;
+  z-index: 21;
+  transition: opacity 0.2s;
   pointer-events: none;
-  transition: opacity .2s;
+
   &.active {
     opacity: 1;
     pointer-events: all;
-    transition: opacity .4s;
+    transition: opacity 0.4s;
+
     .bars-inner {
       opacity: 1;
       transform: translateX(0);
-      transition: opacity .4s .2s, transform .4s .2s;
+      transition: opacity 0.4s 0.2s, transform 0.4s 0.2s;
     }
   }
+
   &::after {
-    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: rgba($c-black, .4);
+    background-color: rgba($c-black, 0.4);
+    content: '';
   }
+
   .bars-inner {
+    position: relative;
+    overflow-y: auto;
+    padding: 10vh 20px;
     width: 90%;
     max-width: 300px;
-    padding: 10vh 20px;
-    background-color: var(--light2);
     color: var(--dark);
-    position: relative;
-    z-index: 1;
-    overflow-y: auto;
+    background-color: var(--light2);
     opacity: 0;
+    z-index: 1;
+    transition: opacity 0.2s, transform 0.2s;
     transform: translateX(100%);
-    transition: opacity .2s, transform .2s;
+
     > div {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
   }
+
   .close-button {
     margin-bottom: 30px;
   }
+
   .user-photo-outer {
+    margin: 0;
     width: 60px;
     height: 60px;
-    margin: 0;
   }
+
   .name {
-    font-size: px(20);
-    font-weight: $medium;
+    position: relative;
     margin-top: 15px;
     margin-bottom: 50px;
-    position: relative;
+    font-size: px(20);
+    font-weight: $medium;
+
     &::after {
-      content: '';
-      width: 40px;
-      height: 4px;
-      background-color: $c-first;
       position: absolute;
       bottom: -30px;
       left: 50%;
+      width: 40px;
+      height: 4px;
+      background-color: $c-first;
+      content: '';
       transform: translateX(-50%);
     }
   }
+
   ul {
     width: 100%;
     height: 100%;
   }
+
   a {
     display: block;
+    margin: 0 auto;
+    padding: 10px 15px;
     font-size: px(16);
     text-align: center;
-    padding: 10px 15px;
-    margin: 0 auto;
+    transition: 0.4s;
     cursor: pointer;
     user-select: none;
-    transition: .4s;
+
     &:hover {
       color: $c-first;
     }

@@ -1,6 +1,6 @@
-@use "sass:math";
+@use 'sass:math';
 
-@mixin mobileS {
+@mixin mobile-s {
   @media (max-width: 350px) {
     @content;
   }
@@ -18,23 +18,23 @@
   }
 }
 
-@mixin ipadPro {
+@mixin ipad-pro {
   @media (min-height: 1194px) {
     @content;
   }
 }
 
-@mixin rwdSet($max-width) {
-	@media (max-width: '#{$max-width}px') {
-		@content;
+@mixin rwd-set($max-width) {
+  @media (max-width: '#{$max-width}px') {
+    @content;
   }
 }
 
 @function px($px) {
-	@return math.div($px, 16) * 1rem
+  @return math.div($px, 16) * 1rem;
 }
 
-@mixin setEditor() {
+@mixin set-editor() {
   > * + * {
     margin-top: 0.75em;
   }
@@ -68,15 +68,16 @@
   }
 
   pre {
-    background: $c-black;
-    color: $c-white;
     padding: 0.75rem 1rem;
+    color: $c-white;
+    background: $c-black;
     border-radius: 0.5rem;
+
     code {
-      color: inherit;
       padding: 0;
-      background: none;
       font-size: 0.8rem;
+      color: inherit;
+      background: none;
     }
   }
 
@@ -85,13 +86,13 @@
   }
 
   blockquote {
-    padding-left: 1rem;
     border-left: 2px solid rgba($c-black, 0.1);
+    padding-left: 1rem;
   }
 
   hr {
-    border: none;
-    border-top: 2px solid rgba($c-black, 0.1);
     margin: 2rem 0;
+    border: unset;
+    border-top: 2px solid rgba($c-black, 0.1);
   }
 }

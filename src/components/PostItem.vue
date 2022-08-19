@@ -153,147 +153,174 @@ onMounted(() => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .post {
-  width: 100%;
-  background-color: var(--light);
-  color: var(--dark);
-  border-radius: 8px;
-  border: 2px solid var(--dark);
-  border-bottom: 4px solid var(--dark);
-  box-shadow: 0 3px 5px rgba(var(--dark), 0.3);
   padding: 25px 22px;
-  &:not(:first-child) {
-    margin-top: 25px;
-  }
+  width: 100%;
+  color: var(--dark);
+  background-color: var(--light);
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgb(var(--dark) 0.3);
+  border-bottom: 4px solid var(--dark);
+
   @include mobile {
     padding: 25px 15px;
   }
+
+  &:not(:first-child) {
+    margin-top: 25px;
+  }
 }
+
 .content {
   width: 100%;
   min-height: 100px;
 }
+
 .top {
   display: flex;
   align-items: flex-start;
+
   a {
     display: inline-flex;
     align-items: flex-start;
+
     &:hover {
       p:nth-child(1) {
         color: $c-first;
       }
     }
   }
+
   p:nth-child(1) {
+    margin-top: 5px;
     font-size: px(16);
     font-weight: $medium;
-    margin-top: 5px;
   }
+
   p:nth-child(2) {
+    margin-top: 8px;
     font-size: px(12);
     color: var(--gray);
-    margin-top: 8px;
   }
 }
+
 .post-control {
-  margin-left: auto;
   position: relative;
+  margin-left: auto;
   cursor: pointer;
   user-select: none;
+
+  @include mobile {
+    li {
+      padding: 8px 10px;
+      font-size: px(14);
+    }
+  }
+
   > i {
     font-size: px(25);
   }
+
   > div {
+    position: absolute;
+    top: 22px;
+    right: 0;
     width: auto;
     height: auto;
-    position: absolute;
-    right: 0;
-    top: 22px;
     z-index: 5;
   }
+
   ul {
+    overflow: hidden;
     width: 100%;
     border-radius: 8px;
-    overflow: hidden;
     box-shadow: 0 2px 8px var(--dark);
   }
+
   li {
-    width: 100%;
     padding: 10px 15px;
+    width: 100%;
+    white-space: nowrap;
     color: $c-black;
     background-color: var(--gray);
-    white-space: nowrap;
-    transition: background-color .6s;
+    transition: background-color 0.6s;
+
     &:hover {
       background-color: var(--gray2);
     }
   }
-  @include mobile {
-    li {
-      font-size: px(14);
-      padding: 8px 10px;
-    }
-  }
 }
+
 .middle {
+  margin-top: 15px;
+  padding-left: 10px;
   width: 100%;
   min-height: 150px;
-  padding-left: 10px;
-  margin-top: 15px;
 }
+
 .inner-t {
   font-size: px(14);
-  line-height: 1.4;
   letter-spacing: 1.2px;
+  line-height: 1.4;
 }
+
 .inner-photo {
   display: flex;
   align-items: stretch;
   margin-top: 10px;
+
+  @include mobile {
+    flex-wrap: wrap;
+
+    .img-control {
+      width: calc(50% - 10px);
+    }
+  }
+
   .img-control {
-    width: 33.333%;
-    border-radius: 10px;
-    border: 2px solid var(--dark);
     position: relative;
     overflow: hidden;
     margin: 5px;
+    width: 33.333%;
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+
     > img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
     }
+
     &:only-child {
       width: 60%;
     }
   }
+
   .img-more {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    align-self: flex-end;
-    flex-shrink: 0;
-    padding: 10px;
+    justify-content: center;
     margin: 5px;
-    border-radius: 10px;
+    padding: 10px;
     color: var(--dark);
-    user-select: none;
+    border-radius: 10px;
+    align-self: flex-end;
     cursor: pointer;
+    flex-direction: column;
+    flex-shrink: 0;
+    user-select: none;
+
     p {
       font-size: px(12);
       font-weight: $medium;
       letter-spacing: 1.2px;
     }
   }
-  @include mobile {
-    flex-wrap: wrap;
-    .img-control {
-      width: calc(50% - 10px);
-    }
-  }
 }
+
 .bottom {
   width: 100%;
 }

@@ -142,12 +142,15 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
-.look-more, .heart {
-  user-select: none;
+
+.look-more,
+.heart {
   cursor: pointer;
+  user-select: none;
 }
+
 .look-more {
-  font-size: px(24);
   margin-left: 10px;
+  font-size: px(24);
 }
 </style>

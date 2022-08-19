@@ -65,88 +65,99 @@ const selected = async (sort) => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .filter-select {
-  width: 100%;
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
-  color: var(--dark);
-  user-select: none;
-  cursor: pointer;
-  z-index: 5;
-  &.active {
-    .drop-top {
-      border-radius: 8px 8px 0 0;
-      transition: .4s;
-    }
-    .drop-bottom {
-      opacity: 1;
-      pointer-events: all;
-      transform: translate(-50%, 0);
-      transition: .4s;
-    }
-  }
-}
-.drop-top {
   width: 100%;
-  min-height: 40px;
+  color: var(--dark);
+  z-index: 5;
+  cursor: pointer;
+  user-select: none;
+}
+
+.drop-top {
+  position: relative;
   display: flex;
   padding: 10px 15px 8px;
+  width: 100%;
+  min-height: 40px;
   background-color: var(--light);
   border: 2px solid var(--dark);
   border-radius: 8px 8px 15px 15px;
-  position: relative;
   z-index: 1;
-  transition: .2s;
+  transition: 0.2s;
+
   .now-value {
     font-weight: $medium;
   }
+
   .arrow {
-    font-size: px(20);
     margin-left: auto;
+    font-size: px(20);
   }
 }
+
 .drop-bottom {
-  width: 100%;
-  border: 2px solid var(--dark);
-  border-radius: 0 0 15px 15px;
   position: absolute;
   top: calc(100% - 10px);
   left: 50%;
-  transform: translate(-50%, 10px);
-  z-index: 0;
   overflow: hidden;
+  width: 100%;
+  border: 2px solid var(--dark);
+  border-radius: 0 0 15px 15px;
   opacity: 0;
+  z-index: 0;
+  transition: 0.2s;
   pointer-events: none;
-  transition: .2s;
+  transform: translate(-50%, 10px);
+
   &::before {
-    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    opacity: .8;
     background-color: var(--light2);
-    backdrop-filter: blur(3px);
-    position: absolute;
-    left: 0;
-    top: 0;
-    pointer-events: none;
+    opacity: 0.8;
     z-index: -1;
+    backdrop-filter: blur(3px);
+    content: '';
+    pointer-events: none;
   }
+
   ul {
-    padding-top: 8px;
     display: flex;
     flex-direction: column;
+    padding-top: 8px;
   }
+
   li {
-    width: 100%;
-    padding: 12px 12px;
     border-bottom: 1px solid $c-black;
-    user-select: none;
     cursor: pointer;
+    padding: 12px;
+    user-select: none;
+    width: 100%;
+
     &.selected {
-      background-color: $c-first;
       color: $c-white;
+      background-color: $c-first;
     }
+  }
+}
+
+.filter-select.active {
+  .drop-top {
+    border-radius: 8px 8px 0 0;
+    transition: 0.4s;
+  }
+
+  .drop-bottom {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, 0);
+    transition: 0.4s;
   }
 }
 </style>

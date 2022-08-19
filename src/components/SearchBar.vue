@@ -47,15 +47,18 @@ const searchHandler = async () => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .search-bar {
-  width: 100%;
   display: flex;
   align-items: stretch;
+  width: 100%;
 }
+
 input {
   border: 2px solid var(--dark);
   border-radius: 8px 0 0 15px;
 }
+
 .search-btn {
   display: flex;
   align-items: center;
@@ -63,15 +66,16 @@ input {
   width: 45px;
   min-height: 100%;
   font-size: px(20);
-  background-color: $c-first;
   color: $c-white;
+  background-color: $c-first;
   border: 2px solid var(--dark);
-  border-left: none;
   border-radius: 0 8px 15px 0;
+  border-left: unset;
   cursor: pointer;
   user-select: none;
+
   &:hover {
-    background-color: darken($c-first, 5%);
+    background-color: rgba($c-first, 0.95);
   }
 }
 </style>

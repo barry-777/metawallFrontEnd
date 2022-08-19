@@ -67,12 +67,14 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .tool {
-  width: 100%;
   margin-bottom: 20px;
+  width: 100%;
+
   .back {
-    font-size: px(24);
     cursor: pointer;
+    font-size: px(24);
     user-select: none;
   }
 }

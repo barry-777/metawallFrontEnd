@@ -144,82 +144,100 @@ const deleteReplyHandler = async (reply) => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .comments {
-  width: 100%;
-  padding-left: 40px;
-  margin-top: 25px;
   position: relative;
+  margin-top: 25px;
+  padding-left: 40px;
+  width: 100%;
+
   @include mobile {
     padding-left: 0;
+
     .user-photo-outer {
       width: 35px;
       height: 35px;
     }
   }
 }
+
 ul {
   width: 100%;
 }
+
 li {
-  width: 100%;
   padding: 15px;
+  width: 100%;
   background-color: var(--light2);
   border-radius: 10px;
+
   &:not(:first-child) {
     margin-top: 15px;
   }
 }
+
 .div-wrap {
-  width: 100%;
   display: flex;
   align-items: flex-start;
-}
-.div-wrap2 {
   width: 100%;
+}
+
+.div-wrap2 {
   display: flex;
   align-items: flex-start;
   padding-top: 20px;
   padding-left: 50px;
+  width: 100%;
+
   @include mobile {
     padding-left: 15px;
   }
 }
+
+.name {
+  position: relative;
+  font-size: px(14);
+  font-weight: $medium;
+}
+
+.date {
+  margin-top: 8px;
+  font-size: px(12);
+  color: var(--gray);
+}
+
 .comment-outer {
   width: 100%;
+
   a {
     display: inline-block;
+
     &:hover {
       .name {
-        color: $c-first
+        color: $c-first;
       }
     }
   }
 }
-.name {
-  font-size: px(14);
-  font-weight: $medium;
-  position: relative;
-}
-.date {
-  font-size: px(12);
-  color: var(--gray);
-  margin-top: 8px;
-}
+
 .comment {
-  font-size: px(14);
   margin-top: 12px;
-  line-height: 1.4;
+  font-size: px(14);
   letter-spacing: 1.2px;
+  line-height: 1.4;
 }
+
 .control-panel {
-  width: 100%;
   display: flex;
   margin-top: 25px;
+  width: 100%;
+
   button {
     font-weight: $medium;
     color: var(--gray);
-    user-select: none;
     cursor: pointer;
+    user-select: none;
+
     &:not(:first-child) {
       margin-left: 8px;
     }

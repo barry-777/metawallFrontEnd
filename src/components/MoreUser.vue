@@ -64,19 +64,22 @@ watch(() => user_id.value, () => {
 <style scoped lang="scss">
 @import '../assets/scss/base/variables';
 @import '../assets/scss/base/mixins';
+
 .users {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   padding-top: 25px;
 }
+
 .button-wrap {
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
+
 .base-button {
-  max-width: 250px;
   margin-top: 40px;
+  max-width: 250px;
 }
 </style>

@@ -139,45 +139,51 @@ const switchPage = (n) => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .tool {
-  width: 100%;
   display: flex;
   align-items: center;
   margin-top: 40px;
   margin-bottom: 25px;
+  width: 100%;
+
   .back {
-    color: var(--dark);
-    flex-shrink: 0;
-    font-size: px(24);
     margin-right: 30px;
+    font-size: px(24);
+    color: var(--dark);
     cursor: pointer;
+    flex-shrink: 0;
     user-select: none;
   }
+
   .tabs {
-    width: 100%;
     display: flex;
     align-items: stretch;
     margin: 0 auto;
+    width: 100%;
   }
+
   .tab {
+    margin-right: 10px;
+    padding: 10px 15px;
     color: var(--dark);
     background-color: var(--light);
     border: 2px solid var(--dark);
     border-radius: 8px;
-    padding: 10px 15px;
-    margin-right: 10px;
-    transition: .5s;
+    transition: 0.5s;
     cursor: pointer;
     user-select: none;
+
     &.active {
       color: var(--light);
       background-color: var(--dark);
     }
   }
 }
+
 .users {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
 </style>

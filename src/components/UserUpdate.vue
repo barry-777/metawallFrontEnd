@@ -288,61 +288,69 @@ onMounted(async () => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .update-inner {
   width: 100%;
 }
+
 .tabs {
-  width: 95%;
   display: flex;
   align-items: stretch;
   margin: 0 auto;
+  width: 95%;
+
   .tab {
-    background-color: var(--light);
-    color: var(--dark);
-    border-radius: 8px 8px 0 0;
-    border: 2px solid var(--dark);
-    border-bottom: none;
-    padding: 10px 15px;
     margin-right: 10px;
-    transition: .5s;
+    padding: 10px 15px;
+    color: var(--dark);
+    background-color: var(--light);
+    border: 2px solid var(--dark);
+    border-radius: 8px 8px 0 0;
+    transition: 0.5s;
+    border-bottom: unset;
     cursor: pointer;
     user-select: none;
+
     &.active {
       color: var(--light);
-      background-color: var(--dark)
+      background-color: var(--dark);
     }
   }
 }
+
 .contents {
-  width: 100%;
-  padding: 50px 25px 60px;
-  background-color: var(--light);
-  color: var(--dark);
-  border-radius: 8px 8px 15px 15px;
-  border: 2px solid var(--dark);
   position: relative;
+  padding: 50px 25px 60px;
+  width: 100%;
+  color: var(--dark);
+  background-color: var(--light);
+  border: 2px solid var(--dark);
+  border-radius: 8px 8px 15px 15px;
   z-index: 1;
+
   .content {
-    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    flex-direction: column;
   }
 }
+
 .image-add {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 120px;
   height: 40px;
-  line-height: 1.4;
-  letter-spacing: 1.5px;
-  background-color: var(--dark);
   color: var(--light);
-  border-radius: 4px;
+  background-color: var(--dark);
   border: 2px solid var(--dark);
-  position: relative;
+  border-radius: 4px;
+  letter-spacing: 1.5px;
+  line-height: 1.4;
+
   label {
     display: flex;
     align-items: center;
@@ -352,40 +360,48 @@ onMounted(async () => {
     cursor: pointer;
     user-select: none;
   }
+
   input {
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
+    opacity: 0;
     pointer-events: none;
     user-select: none;
-    opacity: 0;
   }
 }
+
 .user-photo-outer {
-  width: 120px;
-  height: 120px;
   margin: 0;
   margin-bottom: 20px;
+  width: 120px;
+  height: 120px;
 }
+
 .inp {
+  margin-top: 30px;
   width: 100%;
   max-width: 400px;
-  margin-top: 30px;
+
   &:first-child {
     margin-top: 0;
   }
+
   > p {
-    font-weight: $medium;
     margin-bottom: 12px;
+    font-weight: $medium;
   }
 }
+
 .err-t {
   margin-top: 15px;
 }
+
 .base-button {
+  margin-top: 40px;
   width: 100%;
   max-width: 300px;
-  margin-top: 40px;
+
   &.delete {
     margin-top: 20px;
   }
