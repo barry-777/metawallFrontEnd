@@ -220,7 +220,7 @@ const editor = useEditor({
     background-color: $c-first;
     color: $c-white;
     padding: 6px;
-    border: 2px solid $c-black;
+    border: 2px solid var(--dark);
     border-left: none;
     user-select: none;
     flex-shrink: 0;

@@ -34,13 +34,13 @@ const { showAlertText, showAlertCls } = modalStore
   z-index: 9999;
   &.success {
     .alert-inner {
-      background-color: $c-success;
+      background-color: $c-green;
       color: $c-white;
     }
   }
   &.error {
     .alert-inner {
-      background-color: $c-error;
+      background-color: $c-red;
       color: $c-white;
     }
   }

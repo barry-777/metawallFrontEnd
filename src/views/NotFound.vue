@@ -40,7 +40,7 @@
 @import '../assets/scss/base/mixins';
 
 .container-box {
-  background: $c-gray-6;
+  background: $c-gray-4;
   flex-direction: column;
 }
 
@@ -107,7 +107,7 @@ h3 {
 .eye,
 .eye-right {
   position: absolute;
-  background: $c-gray-6;
+  background: $c-gray-4;
   width: 13px;
   height: 13px;
   border-radius: 50%;
@@ -130,7 +130,7 @@ h3 {
   height: 10px;
   border: 3px solid;
   border-radius: 50%;
-  border-color: transparent $c-gray-6 $c-gray-6 transparent;
+  border-color: transparent $c-gray-4 $c-gray-4 transparent;
   transform: rotate(45deg);
 }
 

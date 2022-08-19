@@ -1,4 +1,5 @@
 <template>
+  <canvas id="canvas" />
   <section class="auth-base">
     <div class="container-box">
       <div class="container">
@@ -10,17 +11,11 @@
         >
           <swiper-slide>
             <div class="slide-inner">
-              <div class="left-box">
-                <img
-                  src="@img/login_img.svg"
-                  alt=""
-                >
-              </div>
-              <div class="right-box">
+              <div class="content-box">
                 <h1 class="main-title">
-                  MetaWall
+                  {{ appTitle }}
                 </h1>
-                <h2>從元宇宙展開全新社交圈</h2>
+                <h2>展開全新社交圈吧</h2>
                 <div class="input-group">
                   <input
                     v-model="loginValue.email"
@@ -64,15 +59,9 @@
           </swiper-slide>
           <swiper-slide>
             <div class="slide-inner">
-              <div class="left-box">
-                <img
-                  src="@img/register_img.svg"
-                  alt=""
-                >
-              </div>
-              <div class="right-box">
+              <div class="content-box">
                 <h1 class="main-title">
-                  MetaWall
+                  {{ appTitle }}
                 </h1>
                 <h2>註冊會員！</h2>
                 <div class="input-group">
@@ -135,13 +124,15 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, onMounted } from 'vue'
 import router from '@/router/index'
 import { postLogin, postSignUp, getUserInfo } from '@/fetch/fetch'
 import { isNotEmpty, isValidEmail, isValidPassword, isSamePassword } from '@/services/validate'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
+import { drawSpace } from '@/services/space'
 
+const appTitle = ref(import.meta.env.VITE_APP_NAME)
 // 錯誤訊息
 const errorMessage = reactive({ all: [] })
 // store 資料
@@ -254,7 +245,9 @@ const signUpEvent = async () => {
   if (data.status === true) {
     closeLoading()
     openAlert('success', '註冊成功！')
-    slideToTarget(0)
+    loginValue.email = registerValue.email
+    loginValue.password = registerValue.password
+    loginEvent()
   } else {
     closeLoading()
     openAlert('error', '註冊失敗，請洽管理員')
@@ -281,45 +274,69 @@ const slideUpdate = () => {
 watch(errorMessage, () => {
   slideUpdate()
 })
+
+onMounted(() => {
+  const body = document.querySelector('body')
+  body.classList.remove('dark-theme')
+  body.classList.add('light-theme')
+  drawSpace()
+})
 </script>
 
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+canvas {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 0;
+}
 .auth-base {
   width: 100%;
+  position: relative;
+  z-index: 1;
   .container-box {
-    background-color: $c-gray-6;
+    width: 100%;
   }
   > .container-box .container {
     width: 100%;
     max-width: 870px;
     margin: 0 auto;
-    padding: 70px 0;
+    padding: 60px 0;
     border: 2px solid $c-black;
-    background-color: $c-gray-1;
-    box-shadow: 0px 5px 10px 8px $c-white;
+    box-shadow: 0px 0px 20px #fff;
+    position: relative;
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: rgba($c-gray-1, .8);
+      backdrop-filter: blur(3px);
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 0;
+    }
   }
   .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 10px;
+    padding: 25px 50px;
   }
   .slide-inner {
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .left-box {
-    width: 45%;
-    margin-right: 60px;
-  }
-  .right-box {
-    width: 55%;
-    max-width: 370px;
+  .content-box {
+    width: 100%;
     position: relative;
   }
   h2 {
@@ -328,7 +345,7 @@ watch(errorMessage, () => {
     line-height: 1.4;
     letter-spacing: 1px;
     color: $c-black;
-    margin: 8px 0 20px;
+    margin: 12px 0 25px;
   }
   .input-group input:not(:first-child),
   button:not(:first-child) {
@@ -339,8 +356,18 @@ watch(errorMessage, () => {
   }
 
   @include pad {
-    .container {
-      padding: 50px 5vw;
+    .container-box {
+      padding: 60px 20px;
+    }
+    > .container-box .container {
+      max-width: 600px;
+      padding: 20px 0;
+    }
+    h2 {
+      font-size: px(18);
+    }
+    .swiper-slide {
+      padding: 20px;
     }
   }
 }

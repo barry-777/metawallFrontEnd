@@ -3,7 +3,7 @@
     <div class="container">
       <div class="logo main-title small">
         <router-link to="/">
-          MetaWall
+          {{ appTitle }}
         </router-link>
       </div>
       <div class="other">
@@ -68,12 +68,12 @@
           </li>
           <li>
             <router-link to="/user/more">
-              尋找使用者
+              找朋友
             </router-link>
           </li>
           <li>
             <router-link
-              to="/"
+              to="/auth"
               @click="logoutAuth"
             >
               登出 MetaWall
@@ -92,6 +92,7 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
 
+const appTitle = ref(import.meta.env.VITE_APP_NAME)
 const userStore = useUserStore()
 const modalStore = useModalStore()
 const { avatar, name } = storeToRefs(userStore)
@@ -143,6 +144,7 @@ onMounted(() => {
 @import '../assets/scss/base/variables';
 .main-header {
   width: 100vw;
+  color: var(--dark);
   position: fixed;
   left: 0;
   top: 0;
@@ -152,9 +154,10 @@ onMounted(() => {
     content: '';
     width: 100%;
     height: 100%;
-    background-color: rgba($c-white, .5);
+    background-color: var(--light);
+    opacity: 0.5;
     backdrop-filter: blur(3px);
-    box-shadow: 0 2px 10px rgba($c-black, .25);
+    box-shadow: 0 2px 10px var(--dark2);
     position: absolute;
     left: 0;
     top: 0;
@@ -244,13 +247,14 @@ onMounted(() => {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba($c-black, .4);
   }
   .bars-inner {
     width: 90%;
     max-width: 300px;
     padding: 10vh 20px;
-    background-color: rgba(255, 255, 255, .9);
+    background-color: var(--light2);
+    color: var(--dark);
     position: relative;
     z-index: 1;
     overflow-y: auto;

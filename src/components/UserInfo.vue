@@ -167,14 +167,16 @@ const patchFollowsHandler = async (params_id) => {
   width: 100%;
   padding: 25px 25px 30px;
   border-radius: 8px 8px 15px 15px;
-  box-shadow: 0 2px 10px rgba($c-black, .25);
+  color: var(--dark);
+  box-shadow: 0 2px 10px var(--dark);
   position: relative;
   overflow: hidden;
   &::after {
     content: '';
     width: 100%;
     height: 100%;
-    background-color: rgba($c-white, .7);
+    opacity: .7;
+    background-color: var(--light2);
     backdrop-filter: blur(3px);
     position: absolute;
     left: 0;
@@ -214,7 +216,7 @@ const patchFollowsHandler = async (params_id) => {
   .create {
     font-size: px(12);
     margin-top: 8px;
-    color: $c-gray-4;
+    color: var(--gray);
   }
   @include mobile {
     .create {

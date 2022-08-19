@@ -53,7 +53,7 @@ const searchHandler = async () => {
   align-items: stretch;
 }
 input {
-  border: 2px solid $c-black;
+  border: 2px solid var(--dark);
   border-radius: 8px 0 0 15px;
 }
 .search-btn {
@@ -65,7 +65,7 @@ input {
   font-size: px(20);
   background-color: $c-first;
   color: $c-white;
-  border: 2px solid $c-black;
+  border: 2px solid var(--dark);
   border-left: none;
   border-radius: 0 8px 15px 0;
   cursor: pointer;

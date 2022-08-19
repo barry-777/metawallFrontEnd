@@ -3,7 +3,7 @@
     <div
       class="common-title"
     >
-      <p>尋找使用者</p>
+      <p>找朋友</p>
     </div>
     <div class="users">
       <template v-if="users.length">
@@ -25,7 +25,7 @@
         type="button"
         @click.stop="getData()"
       >
-        再次尋找
+        重新尋找
       </button>
     </div>
   </div>
@@ -54,6 +54,7 @@ const getData = async () => {
   users.value = usersData.data
   closeLoading()
 }
+if (user_id.value) getData()
 watch(() => user_id.value, () => {
   if (users.value?.length) return
   getData()

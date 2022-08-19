@@ -163,7 +163,7 @@ ul {
 li {
   width: 100%;
   padding: 15px;
-  background-color: $c-gray-1;
+  background-color: var(--light2);
   border-radius: 10px;
   &:not(:first-child) {
     margin-top: 15px;
@@ -202,7 +202,7 @@ li {
 }
 .date {
   font-size: px(12);
-  color: $c-gray-4;
+  color: var(--gray);
   margin-top: 8px;
 }
 .comment {
@@ -217,7 +217,7 @@ li {
   margin-top: 25px;
   button {
     font-weight: $medium;
-    color: $c-gray-4;
+    color: var(--gray);
     user-select: none;
     cursor: pointer;
     &:not(:first-child) {

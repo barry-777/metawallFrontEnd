@@ -155,11 +155,12 @@ onMounted(() => {
 @import '../assets/scss/base/variables';
 .post {
   width: 100%;
-  background-color: $c-white;
+  background-color: var(--light);
+  color: var(--dark);
   border-radius: 8px;
-  border: 2px solid $c-black;
-  border-bottom: 4px solid $c-black;
-  box-shadow: 0 3px 5px rgba($c-black, 0.3);
+  border: 2px solid var(--dark);
+  border-bottom: 4px solid var(--dark);
+  box-shadow: 0 3px 5px rgba(var(--dark), 0.3);
   padding: 25px 22px;
   &:not(:first-child) {
     margin-top: 25px;
@@ -185,13 +186,13 @@ onMounted(() => {
     }
   }
   p:nth-child(1) {
-    font-size: px(14);
+    font-size: px(16);
     font-weight: $medium;
     margin-top: 5px;
   }
   p:nth-child(2) {
     font-size: px(12);
-    color: $c-gray-4;
+    color: var(--gray);
     margin-top: 8px;
   }
 }
@@ -213,19 +214,19 @@ onMounted(() => {
   }
   ul {
     width: 100%;
-    border: 2px solid $c-black;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba($c-black, .3);
+    box-shadow: 0 2px 8px var(--dark);
   }
   li {
     width: 100%;
     padding: 10px 15px;
-    background-color: $c-white;
+    color: $c-black;
+    background-color: var(--gray);
     white-space: nowrap;
     transition: background-color .6s;
     &:hover {
-      background-color: darken($c-white, 15%);
+      background-color: var(--gray2);
     }
   }
   @include mobile {
@@ -253,7 +254,7 @@ onMounted(() => {
   .img-control {
     width: 33.333%;
     border-radius: 10px;
-    border: 2px solid $c-black;
+    border: 2px solid var(--dark);
     position: relative;
     overflow: hidden;
     margin: 5px;
@@ -277,7 +278,7 @@ onMounted(() => {
     padding: 10px;
     margin: 5px;
     border-radius: 10px;
-    color: $c-black;
+    color: var(--dark);
     user-select: none;
     cursor: pointer;
     p {

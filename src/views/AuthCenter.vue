@@ -48,11 +48,33 @@ onMounted(async () => {
 .auth-center {
   .container-box {
     align-items: flex-start;
-    background-color: $c-gray-1;
+    background-size: 80px 80px;
   }
   .max {
     width: 100%;
     max-width: 950px;
+  }
+}
+body {
+  &.light-theme {
+    .auth-center {
+      .container-box {
+        background-color: var(--light2);
+        background-image:
+          linear-gradient(to right, rgba(0, 0, 0, .25) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 0, 0, .25) 1px, transparent 1px);
+      }
+    }
+  }
+  &.dark-theme {
+    .auth-center {
+      .container-box {
+        background-color: var(--light2);
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, .25) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, .25) 1px, transparent 1px);
+      }
+    }
   }
 }
 </style>

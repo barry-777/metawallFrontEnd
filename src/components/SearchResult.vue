@@ -146,6 +146,7 @@ const switchPage = (n) => {
   margin-top: 40px;
   margin-bottom: 25px;
   .back {
+    color: var(--dark);
     flex-shrink: 0;
     font-size: px(24);
     margin-right: 30px;
@@ -159,17 +160,18 @@ const switchPage = (n) => {
     margin: 0 auto;
   }
   .tab {
-    background-color: $c-white;
+    color: var(--dark);
+    background-color: var(--light);
+    border: 2px solid var(--dark);
     border-radius: 8px;
-    border: 2px solid $c-black;
     padding: 10px 15px;
     margin-right: 10px;
     transition: .5s;
     cursor: pointer;
     user-select: none;
     &.active {
-      color: $c-white;
-      background-color: $c-black;
+      color: var(--light);
+      background-color: var(--dark);
     }
   }
 }

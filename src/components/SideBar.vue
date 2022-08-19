@@ -45,7 +45,7 @@
             <div>
               <i class="fa-solid fa-user" />
             </div>
-            <p>尋找使用者</p>
+            <p>找朋友吧</p>
           </router-link>
         </li>
       </ul>
@@ -116,10 +116,11 @@ const { openPostUploadBox } = modalStore
   width: 100%;
   max-width: 300px;
   padding: 30px 20px 20px 20px;
-  border: 2px solid $c-black;
-  border-bottom: 4px solid $c-black;
+  border: 2px solid var(--dark);
+  border-bottom: 4px solid var(--dark);
   border-radius: 8px 8px 15px 15px;
-  background-color: $c-white;
+  background-color: var(--light);
+  color: var(--dark);
   position: sticky;
   top: 40px;
   margin-right: 30px;
@@ -151,8 +152,9 @@ const { openPostUploadBox } = modalStore
       align-items: center;
       justify-content: center;
       position: relative;
+      color: $c-black;
       border-radius: 50%;
-      border: 2px solid $c-black;
+      border: 2px solid var(--dark);
       overflow: hidden;
       margin-right: 15px;
       background-color: $c-second;

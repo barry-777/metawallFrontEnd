@@ -70,6 +70,7 @@ const selected = async (sort) => {
   display: flex;
   align-items: center;
   position: relative;
+  color: var(--dark);
   user-select: none;
   cursor: pointer;
   z-index: 5;
@@ -91,8 +92,8 @@ const selected = async (sort) => {
   min-height: 40px;
   display: flex;
   padding: 10px 15px 8px;
-  background-color: $c-white;
-  border: 2px solid $c-black;
+  background-color: var(--light);
+  border: 2px solid var(--dark);
   border-radius: 8px 8px 15px 15px;
   position: relative;
   z-index: 1;
@@ -107,7 +108,7 @@ const selected = async (sort) => {
 }
 .drop-bottom {
   width: 100%;
-  border: 2px solid $c-black;
+  border: 2px solid var(--dark);
   border-radius: 0 0 15px 15px;
   position: absolute;
   top: calc(100% - 10px);
@@ -122,7 +123,8 @@ const selected = async (sort) => {
     content: '';
     width: 100%;
     height: 100%;
-    background-color: rgba($c-white, .6);
+    opacity: .8;
+    background-color: var(--light2);
     backdrop-filter: blur(3px);
     position: absolute;
     left: 0;

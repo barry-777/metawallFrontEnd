@@ -1,19 +1,37 @@
 $c-first: #065fc5;
 $c-second: #dfeaf6;
-$c-error: #d72c1d;
-$c-success: #4acf7d;
-$c-gray-1: #EFECE7;
-$c-gray-2: #E4E6EB;
-$c-gray-3: #A8B0B9;
-$c-gray-4: #9B9893;
-$c-gray-5: #808080;
-$c-gray-6: #5a5a5a;
-
-$c-white: #FFFFFF;
-$c-black: #000400;
 $c-red: #DE4B63;
 $c-yellow: #FAA722;
 $c-green: #83C51D;
+$c-gray-1: #EFECE7;
+$c-gray-2: #E4E6EB;
+$c-gray-3: #9B9893;
+$c-gray-4: #5a5a5a;
+
+$c-white: #FFFFFF;
+$c-black: #2f2f2f;
+// var(--light)
+// var(--dark)
+// var(--gray)
+// var(--gray2)
+body {
+  &.light-theme {
+    --light: #FFFFFF;
+    --light2: #edecec;
+    --dark: #2f2f2f;
+    --dark2: #4e4d4d;
+    --gray: #9b9893;
+    --gray2: #7f7c77;
+  }
+  &.dark-theme {
+    --light: #2f2f2f;
+    --light2: #505050;
+    --dark: #d4cec4;
+    --dark2: #e0d9cc;
+    --gray: #aeaeae;
+    --gray2: #989797;
+  }
+}
 
 $light: 300;
 $regular: 400;

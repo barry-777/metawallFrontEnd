@@ -64,7 +64,7 @@
             >
           </div>
           <button
-            class="base-button"
+            class="base-button blue"
             type="button"
             @click="patchUserInfoHandler"
           >
@@ -109,7 +109,7 @@
             </div>
           </template>
           <button
-            class="base-button"
+            class="base-button blue"
             type="button"
             @click="updatePassword"
           >
@@ -297,9 +297,10 @@ onMounted(async () => {
   align-items: stretch;
   margin: 0 auto;
   .tab {
-    background-color: $c-white;
+    background-color: var(--light);
+    color: var(--dark);
     border-radius: 8px 8px 0 0;
-    border: 2px solid $c-black;
+    border: 2px solid var(--dark);
     border-bottom: none;
     padding: 10px 15px;
     margin-right: 10px;
@@ -307,17 +308,18 @@ onMounted(async () => {
     cursor: pointer;
     user-select: none;
     &.active {
-      color: $c-white;
-      background-color: $c-black;
+      color: var(--light);
+      background-color: var(--dark)
     }
   }
 }
 .contents {
   width: 100%;
   padding: 50px 25px 60px;
-  background-color: $c-white;
+  background-color: var(--light);
+  color: var(--dark);
   border-radius: 8px 8px 15px 15px;
-  border: 2px solid $c-black;
+  border: 2px solid var(--dark);
   position: relative;
   z-index: 1;
   .content {
@@ -336,10 +338,10 @@ onMounted(async () => {
   height: 40px;
   line-height: 1.4;
   letter-spacing: 1.5px;
-  background-color: $c-black;
-  color: $c-white;
+  background-color: var(--dark);
+  color: var(--light);
   border-radius: 4px;
-  border: 2px solid $c-black;
+  border: 2px solid var(--dark);
   position: relative;
   label {
     display: flex;
@@ -385,7 +387,7 @@ onMounted(async () => {
   max-width: 300px;
   margin-top: 40px;
   &.delete {
-    margin-top: 30px;
+    margin-top: 20px;
   }
 }
 </style>

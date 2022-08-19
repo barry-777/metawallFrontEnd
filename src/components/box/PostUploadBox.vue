@@ -13,10 +13,10 @@
           </div>
           <div class="full-title">
             <p v-if="isPatchMode">
-              編輯動態中 ！
+              編輯動態中
             </p>
             <p v-else>
-              新增動態吧 ！
+              新增動態吧
             </p>
           </div>
           <div class="inner-content">
@@ -305,11 +305,11 @@ const patchSubmit = async () => {
   width: 100%;
   padding: 30px 25px;
   margin: 0 auto;
-  border-radius: 0 0 8px 8px;
-  border: 2px solid $c-black;
-  border-bottom: 6px solid $c-black;
-  background-color: $c-white;
-  box-shadow: 0 2px 10px rgba($c-black, .25);
+  border-radius: 8px;
+  border: 2px solid var(--dark);
+  border-bottom: 6px solid var(--dark);
+  background-color: var(--light);
+  box-shadow: 0 2px 10px rgba(var(--dark), .25);
   @include mobile {
     padding: 30px 15px;
   }
@@ -325,6 +325,7 @@ const patchSubmit = async () => {
     font-size: px(18);
     font-weight: $medium;
     margin-bottom: 20px;
+    color: var(--dark);
   }
   @include mobile {
     p {
@@ -372,8 +373,8 @@ const patchSubmit = async () => {
   height: 40px;
   line-height: 1.4;
   letter-spacing: 1.5px;
-  background-color: $c-black;
-  color: $c-white;
+  background-color: var(--dark);
+  color: var(--light);
   border-radius: 4px;
   position: relative;
   label {
@@ -403,7 +404,7 @@ const patchSubmit = async () => {
   line-height: 1.4;
   letter-spacing: 1.5px;
   margin-left: 10px;
-  background-color: $c-error;
+  background-color: $c-red;
   color: $c-white;
   border-radius: 4px;
   cursor: pointer;
