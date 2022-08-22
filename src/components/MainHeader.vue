@@ -21,25 +21,32 @@
               class="fa-solid fa-sun"
             />
           </a>
+          <a
+            href="javascript:;"
+            @click.prevent="noticeSwitch(true)"
+          >
+            <i class="fa-solid fa-bell" />
+          </a>
         </div>
         <div
           class="bars"
-          @click="barSwitch(true)"
+          @click="menuSwitch(true)"
         >
           <i class="fa-solid fa-bars" />
         </div>
       </div>
     </div>
   </div>
+  <!-- 主選單 -->
   <div
-    class="bars-content"
-    :class="{'active': barShow}"
+    class="bars-content menu"
+    :class="{'active': menuShow}"
   >
     <div class="bars-inner">
       <div>
         <div
           class="close-button"
-          @click="barSwitch(false)"
+          @click="menuSwitch(false)"
         >
           <i class="fa-solid fa-xmark" />
         </div>
@@ -49,7 +56,7 @@
         <div class="name">
           {{ name }}
         </div>
-        <ul @click="barSwitch(false)">
+        <ul @click="menuSwitch(false)">
           <li>
             <router-link :to="`/user/info/${userStore.user_id}`">
               個人資料
@@ -87,6 +94,91 @@
       </div>
     </div>
   </div>
+  <!-- 通知 -->
+  <div
+    class="bars-content notice"
+    :class="{'active': noticeShow}"
+  >
+    <div class="bars-inner">
+      <div>
+        <div
+          class="close-button"
+          @click="noticeSwitch(false)"
+        >
+          <i class="fa-solid fa-xmark" />
+        </div>
+        <div class="name">
+          通知
+        </div>
+        <ul
+          v-if="noticeNew?.length"
+          @click="noticeSwitch(false)"
+        >
+          <li
+            v-for="(notice, index) in noticeNew"
+            :key="index + 'notice'"
+          >
+            <router-link
+              v-if="notice.type === 'post'"
+              :to="`/post/${notice.post_id}`"
+            >
+              <div class="top">
+                <div class="type">
+                  貼文
+                </div>
+                <div class="time">
+                  {{ dateFormat(notice.time) }}
+                </div>
+              </div>
+              <div class="bottom">
+                {{ notice.name + '發佈了新貼文快去查看吧！' }}
+              </div>
+            </router-link>
+            <router-link
+              v-else-if="notice.type === 'comment'"
+              :to="`/post/${notice.post_id}`"
+            >
+              <div class="top">
+                <div class="type">
+                  留言
+                </div>
+                <div class="time">
+                  {{ dateFormat(notice.time) }}
+                </div>
+              </div>
+              <div class="bottom">
+                {{ notice.name + '新增了留言快去查看吧！' }}
+              </div>
+            </router-link>
+            <router-link
+              v-else-if="notice.type === 'follow'"
+              :to="`/user/followers/${user_id}`"
+            >
+              <div class="top">
+                <div class="type">
+                  追蹤
+                </div>
+                <div class="time">
+                  {{ dateFormat(notice.time) }}
+                </div>
+              </div>
+              <div class="bottom">
+                {{ notice.name + '追蹤了你！' }}
+              </div>
+            </router-link>
+          </li>
+        </ul>
+        <ul v-else>
+          <li>
+            <div class="top" />
+            <div class="bottom">
+              目前無新的通知
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -95,22 +187,106 @@ import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
+import { getPostsByRoute, getPostsById, getFollowsList } from '@/fetch/fetch'
+import { dateFormat } from '@/services/helper'
 
 const appTitle = ref(import.meta.env.VITE_APP_NAME)
 const userStore = useUserStore()
 const modalStore = useModalStore()
-const { avatar, name } = storeToRefs(userStore)
+const { user_id, avatar, name } = storeToRefs(userStore)
 const { logoutAuth } = userStore
 const { lockScroll, unLockScroll } = modalStore
 
 // 主選單切換
-const barShow = ref(false)
-const barSwitch = (type) => {
+const menuShow = ref(false)
+const menuSwitch = (type) => {
   if (type) {
-    barShow.value = type
+    menuShow.value = type
     lockScroll()
   } else {
-    barShow.value = type
+    menuShow.value = type
+    unLockScroll()
+  }
+}
+
+// 通知資料
+const noticeTemp = ref([])
+const noticeNew = ref([])
+const getNotice = async () => {
+  if (localStorage.getItem('notice') !== null) {
+    noticeNew.value = Object.assign([], JSON.parse(localStorage.getItem('notice')))
+  }
+  noticeTemp.value.length = 0
+  const checkTime = (time) => Math.abs(new Date(time) - new Date()) < 1000 * 60 * 60 * 24 * 7
+  const { data: newPosts } = await getPostsByRoute({ l: 10 })
+  const { data: userPosts } = await getPostsById(user_id.value, {})
+  const { data: followsData } = await getFollowsList(user_id.value)
+
+  // 貼文 (取得追蹤中的新貼文通知)
+  newPosts.data.forEach(post => {
+    const hasFollow = followsData.data.followings.some(item => item.user._id === post.user._id)
+    if (hasFollow) {
+      noticeTemp.value.push({
+        post_id: post._id,
+        name: post.user.name,
+        time: post.createdAt,
+        type: 'post'
+      })
+    }
+  })
+  // 留言 (取得使用者貼文新的留言通知)
+  userPosts.data.forEach(post => {
+    post.comments.forEach((comment) => {
+      if (checkTime(comment.createdAt)) {
+        noticeTemp.value.push({
+          post_id: post._id,
+          name: comment.user.name,
+          time: comment.createdAt,
+          type: 'comment'
+        })
+      }
+      comment.commentReplies.forEach((reply) => {
+        if (checkTime(reply.createdAt)) {
+          noticeTemp.value.push({
+            post_id: post._id,
+            name: reply.user.name,
+            time: reply.createdAt,
+            type: 'comment'
+          })
+        }
+      })
+    })
+  })
+  // 追蹤
+  followsData.data.followings.forEach(item => {
+    if (checkTime(item.createdAt)) {
+      noticeTemp.value.push({
+        user_id: item.user._id,
+        name: item.user.name,
+        time: item.createdAt,
+        type: 'follow'
+      })
+    }
+  })
+
+  noticeTemp.value = noticeTemp.value.sort(function (a, b) {
+    return b.time - a.time
+  })
+
+  noticeNew.value.length = 0
+  noticeNew.value = Object.assign([], noticeTemp.value)
+  localStorage.setItem('notice', JSON.stringify(noticeTemp.value))
+}
+
+// 通知選單切換
+const noticeShow = ref(false)
+const noticeSwitch = (type) => {
+  if (type) {
+    getNotice()
+    noticeShow.value = type
+    lockScroll()
+  } else {
+    noticeShow.value = type
     unLockScroll()
   }
 }
@@ -314,16 +490,10 @@ onMounted(() => {
     margin-bottom: 30px;
   }
 
-  .user-photo-outer {
-    margin: 0;
-    width: 60px;
-    height: 60px;
-  }
-
   .name {
     position: relative;
     margin-top: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     font-size: px(20);
     font-weight: $medium;
 
@@ -337,6 +507,14 @@ onMounted(() => {
       content: '';
       transform: translateX(-50%);
     }
+  }
+}
+
+.bars-content.menu {
+  .user-photo-outer {
+    margin: 0;
+    width: 60px;
+    height: 60px;
   }
 
   ul {
@@ -360,6 +538,49 @@ onMounted(() => {
     &:hover {
       color: $c-first;
     }
+  }
+}
+
+.bars-content.notice {
+  ul {
+    width: 100%;
+  }
+
+  li {
+    color: var(--dark);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 5px var(--dark2);
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    width: 100%;
+    font-size: px(12);
+    font-weight: $medium;
+    color: var(--light);
+    background-color: $c-first;
+  }
+
+  .bottom {
+    padding: 8px 12px;
+    width: 100%;
+    font-size: px(14);
+    background-color: var(--light);
   }
 }
 </style>

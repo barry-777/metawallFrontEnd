@@ -168,6 +168,7 @@ export function getPostsById (user_id, query) {
   // q => 搜尋項目
   // s => 資料排序
   // p => 限制則數
+  // l => 取得幾筆
   let sendUrl = `${apiPath}/api/posts/user/${user_id}`
   const keys = Object.keys(query)
   keys.forEach((key, i) => {
@@ -185,6 +186,7 @@ export function getPostsByRoute (query) {
   // q => 搜尋項目
   // s => 資料排序
   // p => 限制則數
+  // l => 取得幾筆
   let sendUrl = `${apiPath}/api/posts`
   const keys = Object.keys(query)
   keys.forEach((key, i) => {
