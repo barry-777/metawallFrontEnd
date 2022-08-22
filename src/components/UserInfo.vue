@@ -173,10 +173,6 @@ const patchFollowsHandler = async (params_id) => {
   overflow: hidden;
   box-shadow: 0 2px 10px var(--dark);
 
-  @include mobile {
-    padding: 20px 15px 15px;
-  }
-
   &::after {
     position: absolute;
     top: 0;
@@ -194,6 +190,10 @@ const patchFollowsHandler = async (params_id) => {
     position: relative;
     z-index: 1;
   }
+
+  @include mobile {
+    padding: 20px 15px 15px;
+  }
 }
 
 .status {
@@ -206,12 +206,6 @@ const patchFollowsHandler = async (params_id) => {
   flex-direction: column;
   flex-shrink: 0;
   justify-content: center;
-
-  @include mobile {
-    .create {
-      display: none;
-    }
-  }
 
   .user-photo-outer {
     margin-right: 0;
@@ -234,6 +228,12 @@ const patchFollowsHandler = async (params_id) => {
     font-size: px(12);
     color: var(--gray);
   }
+
+  @include mobile {
+    .create {
+      display: none;
+    }
+  }
 }
 
 .detail {
@@ -242,10 +242,6 @@ const patchFollowsHandler = async (params_id) => {
   justify-content: center;
   padding-left: 15px;
   width: 100%;
-
-  @include mobile {
-    padding-left: 10px;
-  }
 
   > div {
     display: flex;
@@ -272,6 +268,10 @@ const patchFollowsHandler = async (params_id) => {
       font-size: px(18);
       font-weight: $medium;
     }
+  }
+
+  @include mobile {
+    padding-left: 10px;
   }
 }
 

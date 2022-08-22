@@ -53,14 +53,9 @@ const { showAlertText, showAlertCls } = modalStore
   width: auto;
   height: auto;
 
-  @include mobile {
-    p {
-      font-size: px(12);
-    }
-  }
-
   .alert-inner {
     display: flex;
+    flex-wrap: wrap;
     padding: 12px;
     width: auto;
     height: auto;
@@ -78,6 +73,12 @@ const { showAlertText, showAlertCls } = modalStore
 
     &:not(:first-child)::before {
       content: ', ';
+    }
+  }
+
+  @include mobile {
+    p {
+      font-size: px(12);
     }
   }
 }

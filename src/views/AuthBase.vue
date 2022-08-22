@@ -154,8 +154,8 @@ const resetValue = () => {
 
 // 登入
 const loginValue = reactive({
-  email: 'zion@gmail.com',
-  password: 'q1234567'
+  email: '',
+  password: ''
 })
 
 const loginEvent = async () => {
@@ -286,71 +286,81 @@ onMounted(() => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 canvas {
-  width: 100%;
-  height: 100%;
   position: fixed;
-  left: 0;
   top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   pointer-events: none;
   z-index: 0;
 }
+
 .auth-base {
-  width: 100%;
   position: relative;
+  width: 100%;
   z-index: 1;
+
   .container-box {
     width: 100%;
   }
+
   > .container-box .container {
-    width: 100%;
-    max-width: 870px;
+    position: relative;
     margin: 0 auto;
     padding: 60px 0;
+    width: 100%;
+    max-width: 870px;
     border: 2px solid $c-black;
-    box-shadow: 0px 0px 20px #fff;
-    position: relative;
+    box-shadow: 0 0 15px #FFF;
+
     &::before {
-      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba($c-gray-1, .8);
-      backdrop-filter: blur(3px);
-      position: absolute;
-      left: 0;
-      top: 0;
+      background-color: rgba($c-gray-1, 0.8);
       z-index: 0;
+      content: '';
+      backdrop-filter: blur(3px);
     }
   }
+
   .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 25px 50px;
+    text-align: center;
   }
+
   .slide-inner {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .content-box {
     width: 100%;
-    position: relative;
   }
+
+  .content-box {
+    position: relative;
+    width: 100%;
+  }
+
   h2 {
+    margin: 12px 0 25px;
     font-size: px(20);
-    font-weight: $regular;
+    color: $c-black;
     line-height: 1.4;
     letter-spacing: 1px;
-    color: $c-black;
-    margin: 12px 0 25px;
   }
+
   .input-group input:not(:first-child),
   button:not(:first-child) {
     margin-top: 12px;
   }
+
   .button-group {
     margin-top: 65px;
   }
@@ -359,13 +369,16 @@ canvas {
     .container-box {
       padding: 60px 20px;
     }
+
     > .container-box .container {
-      max-width: 600px;
       padding: 20px 0;
+      max-width: 600px;
     }
+
     h2 {
       font-size: px(18);
     }
+
     .swiper-slide {
       padding: 20px;
     }

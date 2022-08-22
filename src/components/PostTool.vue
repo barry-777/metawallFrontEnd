@@ -207,7 +207,7 @@ const editor = useEditor({
   margin-top: 20px;
   width: 100%;
 
-  @include mobile-s {
+  @include mobile {
     margin-top: 10px;
 
     .user-photo-outer {
@@ -220,17 +220,6 @@ const editor = useEditor({
   display: flex;
   align-items: stretch;
   width: 100%;
-
-  @include mobile {
-    > div {
-      width: calc(100% - 80px);
-    }
-
-    button {
-      width: 80px;
-      font-size: px(16);
-    }
-  }
 
   > div {
     width: calc(100% - 130px);
@@ -255,5 +244,17 @@ const editor = useEditor({
       background-color: rgba($c-first, 0.95);
     }
   }
+
+  @include mobile {
+    > div {
+      width: calc(100% - 70px);
+    }
+
+    button {
+      width: 70px;
+      font-size: px(12);
+    }
+  }
 }
+
 </style>

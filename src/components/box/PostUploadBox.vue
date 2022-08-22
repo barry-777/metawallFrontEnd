@@ -322,12 +322,6 @@ const patchSubmit = async () => {
 .wrap {
   margin-bottom: 40px;
 
-  @include mobile {
-    p {
-      font-size: px(16);
-    }
-  }
-
   &:last-child {
     margin: 0;
     padding-top: 30px;
@@ -339,6 +333,12 @@ const patchSubmit = async () => {
     font-size: px(18);
     font-weight: $medium;
     color: var(--dark);
+  }
+
+  @include mobile {
+    p {
+      font-size: px(16);
+    }
   }
 }
 
@@ -367,16 +367,16 @@ const patchSubmit = async () => {
   flex-wrap: wrap;
   margin-top: 15px;
 
-  @include mobile-s {
-    img {
-      width: 100px;
-    }
-  }
-
   img {
     margin: 5px;
     width: 150px;
     height: auto;
+  }
+
+  @include mobile-s {
+    img {
+      width: 100px;
+    }
   }
 }
 

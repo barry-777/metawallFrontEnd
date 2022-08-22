@@ -13,7 +13,7 @@ html {
     helvetica,
     Arial,
     sans-serif;
-  font-weight: $light;
+  font-weight: $regular;
 }
 
 html,
@@ -75,8 +75,6 @@ body {
 }
 
 .ProseMirror {
-  @include set-editor;
-
   padding: 12px 15px;
   width: 100%;
   height: 100%;
@@ -86,12 +84,14 @@ body {
   border: 2px solid var(--dark);
   outline: none;
 
-  @include mobile {
-    padding: 8px 10px;
-  }
-
   > div {
     height: 100%;
+  }
+
+  @include set-editor;
+
+  @include mobile {
+    padding: 8px 10px;
   }
 }
 
@@ -141,17 +141,9 @@ body {
 .main-title {
   font-size: px(50);
   font-family: 'Paytone One', sans-serif;
-  font-weight: $regular;
+  font-weight: $medium;
   color: $c-first;
   letter-spacing: 0.8px;
-
-  @include pad {
-    font-size: px(40);
-  }
-
-  @include mobile-s {
-    font-size: px(30);
-  }
 
   &.small {
     font-size: px(40);
@@ -159,6 +151,14 @@ body {
     @include pad {
       font-size: px(30);
     }
+  }
+
+  @include pad {
+    font-size: px(40);
+  }
+
+  @include mobile-s {
+    font-size: px(30);
   }
 }
 
@@ -185,18 +185,6 @@ textarea {
   background-color: var(--light);
   border: 2px solid var(--dark);
 
-  @include pad {
-    font-size: px(16);
-
-    &::placeholder {
-      font-size: px(16);
-    }
-  }
-
-  @include mobile {
-    padding: 8px 10px;
-  }
-
   &::placeholder {
     font-size: px(18);
     color: var(--gray);
@@ -206,6 +194,18 @@ textarea {
 
   &:focus::placeholder {
     opacity: 0;
+  }
+
+  @include pad {
+    &::placeholder {
+      font-size: px(16);
+    }
+
+    font-size: px(16);
+  }
+
+  @include mobile {
+    padding: 8px 10px;
   }
 }
 
@@ -236,10 +236,6 @@ textarea {
   letter-spacing: 1px;
   line-height: 1.4;
   touch-action: manipulation;
-
-  @include mobile {
-    padding: 12px 10px;
-  }
 
   &:hover {
     background-color: var(--light2);
@@ -273,6 +269,10 @@ textarea {
       background-color: rgba($c-red, 0.95);
     }
   }
+
+  @include mobile {
+    padding: 12px 10px;
+  }
 }
 
 .close-button {
@@ -294,18 +294,6 @@ textarea {
   left: 0;
   width: 100vw;
   z-index: 999;
-
-  @include mobile {
-    .full-container {
-      padding: 10px;
-    }
-
-    .main-inner {
-      padding: 30px 10px 40px;
-      border: 2px solid $c-black;
-      border-top: 4px solid $c-black;
-    }
-  }
 
   &::before {
     position: absolute;
@@ -375,6 +363,18 @@ textarea {
     color: var(--dark);
     line-height: 1.2;
   }
+
+  @include mobile {
+    .full-container {
+      padding: 10px;
+    }
+
+    .main-inner {
+      padding: 30px 10px 40px;
+      border: 2px solid $c-black;
+      border-top: 4px solid $c-black;
+    }
+  }
 }
 
 .common-title {
@@ -386,10 +386,6 @@ textarea {
   text-align: center;
   color: var(--dark);
 
-  @include mobile {
-    font-size: px(24);
-  }
-
   &::after {
     position: absolute;
     bottom: -30px;
@@ -400,6 +396,10 @@ textarea {
     content: '';
     transform: translateX(-50%);
   }
+
+  @include mobile {
+    font-size: px(24);
+  }
 }
 
 .base-tools {
@@ -407,6 +407,12 @@ textarea {
   align-items: stretch;
   margin-bottom: 40px;
   width: 100%;
+
+  .filter-select {
+    flex-shrink: 0;
+    margin-right: 20px;
+    max-width: 180px;
+  }
 
   @include mobile {
     flex-direction: column-reverse;
@@ -416,12 +422,6 @@ textarea {
       margin-top: 20px;
       max-width: 100%;
     }
-  }
-
-  .filter-select {
-    flex-shrink: 0;
-    margin-right: 20px;
-    max-width: 180px;
   }
 }
 
@@ -467,14 +467,6 @@ textarea {
     box-shadow: 0 2px 10px var(--dark2);
     border-bottom: 4px solid var(--dark);
 
-    @include mobile {
-      flex-direction: column;
-
-      .tool {
-        margin-top: 30px;
-      }
-    }
-
     &:not(:first-child) {
       margin-top: 20px;
     }
@@ -484,6 +476,14 @@ textarea {
       justify-content: center;
       padding: 25px 20px;
       color: $c-gray-4;
+    }
+
+    @include mobile {
+      flex-direction: column;
+
+      .tool {
+        margin-top: 30px;
+      }
     }
   }
 
@@ -527,6 +527,17 @@ textarea {
   transition: all 0.5s ease;
   flex-shrink: 0;
 
+  &.liked {
+    .heart-small.red {
+      animation: liked-heart 0.5s ease;
+      transform: scale(1);
+    }
+
+    .heart-small.black {
+      transform: scale(0);
+    }
+  }
+
   .heart-small {
     position: absolute;
     top: 0;
@@ -544,17 +555,6 @@ textarea {
 
     &.black {
       transform: scale(1);
-    }
-  }
-
-  &.liked {
-    .heart-small.red {
-      animation: liked-heart 0.5s ease;
-      transform: scale(1);
-    }
-
-    .heart-small.black {
-      transform: scale(0);
     }
   }
 
@@ -584,18 +584,18 @@ textarea {
   margin-bottom: -20px;
   flex-wrap: wrap;
 
-  @include pad {
-    p {
-      font-size: px(12);
-    }
-  }
-
   p {
     margin: 3px;
     color: $c-red;
 
     &:not(:first-child)::before {
       content: ', ';
+    }
+  }
+
+  @include pad {
+    p {
+      font-size: px(12);
     }
   }
 }

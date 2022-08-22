@@ -28,8 +28,14 @@ module.exports = {
       {
         "ignore": ["attribute", "class", "id"]
       }
+      
     ],
 		"order/properties-alphabetical-order": null,
+    "order/order": [
+      "rules",
+			"custom-properties",
+			"dollar-variables"
+		],
     "order/properties-order": [
       "position",
       "top",

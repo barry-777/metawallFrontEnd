@@ -164,12 +164,12 @@ onMounted(() => {
   box-shadow: 0 3px 5px rgb(var(--dark) 0.3);
   border-bottom: 4px solid var(--dark);
 
-  @include mobile {
-    padding: 25px 15px;
-  }
-
   &:not(:first-child) {
     margin-top: 25px;
+  }
+
+  @include mobile {
+    padding: 25px 15px;
   }
 }
 
@@ -212,13 +212,6 @@ onMounted(() => {
   user-select: none;
   cursor: pointer;
 
-  @include mobile {
-    li {
-      padding: 8px 10px;
-      font-size: px(14);
-    }
-  }
-
   > i {
     font-size: px(25);
   }
@@ -251,6 +244,13 @@ onMounted(() => {
       background-color: var(--gray2);
     }
   }
+
+  @include mobile {
+    li {
+      padding: 8px 10px;
+      font-size: px(14);
+    }
+  }
 }
 
 .middle {
@@ -270,14 +270,6 @@ onMounted(() => {
   display: flex;
   align-items: stretch;
   margin-top: 10px;
-
-  @include mobile {
-    flex-wrap: wrap;
-
-    .img-control {
-      width: calc(50% - 10px);
-    }
-  }
 
   .img-control {
     position: relative;
@@ -317,6 +309,14 @@ onMounted(() => {
       font-size: px(12);
       font-weight: $medium;
       letter-spacing: 1.2px;
+    }
+  }
+
+  @include mobile {
+    flex-wrap: wrap;
+
+    .img-control {
+      width: calc(50% - 10px);
     }
   }
 }

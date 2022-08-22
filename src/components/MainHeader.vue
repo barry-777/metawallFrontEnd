@@ -195,7 +195,7 @@ const userStore = useUserStore()
 const modalStore = useModalStore()
 const { user_id, avatar, name } = storeToRefs(userStore)
 const { logoutAuth } = userStore
-const { lockScroll, unLockScroll } = modalStore
+const { lockScroll, unLockScroll, openLoading, closeLoading } = modalStore
 
 // 主選單切換
 const menuShow = ref(false)
@@ -215,6 +215,8 @@ const noticeNew = ref([])
 const getNotice = async () => {
   if (localStorage.getItem('notice') !== null) {
     noticeNew.value = Object.assign([], JSON.parse(localStorage.getItem('notice')))
+  } else {
+    openLoading()
   }
   noticeTemp.value.length = 0
   const checkTime = (time) => Math.abs(new Date(time) - new Date()) < 1000 * 60 * 60 * 24 * 7
@@ -276,6 +278,7 @@ const getNotice = async () => {
   noticeNew.value.length = 0
   noticeNew.value = Object.assign([], noticeTemp.value)
   localStorage.setItem('notice', JSON.stringify(noticeTemp.value))
+  closeLoading()
 }
 
 // 通知選單切換
@@ -394,10 +397,6 @@ onMounted(() => {
   align-items: center;
   margin-right: 25px;
 
-  @include mobile {
-    display: none;
-  }
-
   a {
     display: inline-block;
     margin-right: 12px;
@@ -433,11 +432,11 @@ onMounted(() => {
 .bars-content {
   position: fixed;
   top: 0;
+  bottom: 0;
   right: 0;
+  left: 0;
   display: flex;
   justify-content: flex-end;
-  width: 100vw;
-  height: 100vh;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;

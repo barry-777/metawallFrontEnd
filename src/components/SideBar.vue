@@ -126,10 +126,6 @@ const { openPostUploadBox } = modalStore
   border-radius: 8px 8px 15px 15px;
   border-bottom: 4px solid var(--dark);
 
-  @include pad {
-    display: none;
-  }
-
   > .container {
     width: 100%;
   }
@@ -174,6 +170,10 @@ const { openPostUploadBox } = modalStore
       font-size: px(20);
     }
   }
+
+  @include pad {
+    display: none;
+  }
 }
 
 .mobile-bar {
@@ -187,36 +187,6 @@ const { openPostUploadBox } = modalStore
   border-radius: 15px 15px 0 0;
   overflow: hidden;
   z-index: 20;
-
-  @keyframes move {
-    0% {
-      transform: translateY(0);
-    }
-
-    100% {
-      transform: translateY(-5px);
-    }
-  }
-
-  @include pad {
-    display: block;
-  }
-
-  @include mobile {
-    li {
-      i {
-        font-size: px(18);
-      }
-    }
-  }
-
-  @include mobile-s {
-    li {
-      p {
-        display: none;
-      }
-    }
-  }
 
   ul {
     display: flex;
@@ -259,6 +229,36 @@ const { openPostUploadBox } = modalStore
       i {
         font-size: px(30);
       }
+    }
+  }
+
+  @include pad {
+    display: block;
+  }
+
+  @include mobile {
+    li {
+      i {
+        font-size: px(18);
+      }
+    }
+  }
+
+  @include mobile-s {
+    li {
+      p {
+        display: none;
+      }
+    }
+  }
+
+  @keyframes move {
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(-5px);
     }
   }
 }

@@ -6,17 +6,18 @@ import { resolve } from 'path'
 const rootDir = resolve(__dirname)
 
 export default defineConfig({
+  base: '/',
   plugins: [
     vue(),
     alias({
       entries: [
         {
           find: '@',
-          replacement: resolve(rootDir, 'src')
+          replacement: resolve(rootDir, './src')
         },
         {
           find: '@img',
-          replacement: resolve(rootDir, 'src/assets/img')
+          replacement: resolve(rootDir, './src/assets/img')
         }
       ]
     })
