@@ -293,6 +293,8 @@ canvas {
   bottom: 0;
   right: 0;
   left: 0;
+  width: 100vw;
+  min-height: 100vh;
   pointer-events: none;
   z-index: 0;
 }
