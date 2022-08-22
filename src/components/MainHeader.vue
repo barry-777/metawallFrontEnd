@@ -7,16 +7,20 @@
         </router-link>
       </div>
       <div class="other">
-        <div class="quick">
-          <router-link to="/">
-            首頁
-          </router-link>
-          <router-link to="/search">
-            搜尋
-          </router-link>
-          <router-link :to="`/user/info/${userStore.user_id}`">
-            個人資料
-          </router-link>
+        <div class="quick-icon">
+          <a
+            href="javascript:;"
+            class="color-switch"
+          >
+            <i
+              v-if="darkMode"
+              class="fa-solid fa-moon"
+            />
+            <i
+              v-else
+              class="fa-solid fa-sun"
+            />
+          </a>
         </div>
         <div
           class="bars"
@@ -99,6 +103,7 @@ const { avatar, name } = storeToRefs(userStore)
 const { logoutAuth } = userStore
 const { lockScroll, unLockScroll } = modalStore
 
+// 主選單切換
 const barShow = ref(false)
 const barSwitch = (type) => {
   if (type) {
@@ -110,12 +115,13 @@ const barSwitch = (type) => {
   }
 }
 
+const darkMode = ref(false)
 onMounted(() => {
+  // 滾軸事件
   const target = document.querySelector('.main-header')
   const scrollUp = 'scroll-up'
   const scrollDown = 'scroll-down'
   let lastScroll = 0
-
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset
     if (currentScroll <= 0) {
@@ -135,6 +141,21 @@ onMounted(() => {
       target.classList.add(scrollUp)
     }
     lastScroll = currentScroll
+  })
+
+  // 暗黑模式切換
+  const body = document.querySelector('body')
+  const colorSwitch = document.querySelector('.color-switch')
+  darkMode.value = body.classList.contains('dark-theme')
+  colorSwitch.addEventListener('click', () => {
+    if (darkMode.value) {
+      body.classList.remove('dark-theme')
+      body.classList.add('light-theme')
+    } else {
+      body.classList.remove('light-theme')
+      body.classList.add('dark-theme')
+    }
+    darkMode.value = !darkMode.value
   })
 })
 </script>
@@ -192,7 +213,7 @@ onMounted(() => {
   align-items: center;
 }
 
-.quick {
+.quick-icon {
   display: inline-flex;
   align-items: center;
   margin-right: 25px;
@@ -204,7 +225,7 @@ onMounted(() => {
   a {
     display: inline-block;
     margin-right: 12px;
-    font-size: px(14);
+    font-size: px(18);
     font-weight: $medium;
     transition: 0.4s;
 
@@ -319,8 +340,11 @@ onMounted(() => {
   }
 
   ul {
+    padding: 10px 0;
     width: 100%;
     height: 100%;
+    color: var(--dark);
+    background-color: var(--light);
   }
 
   a {
