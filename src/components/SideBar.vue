@@ -160,7 +160,6 @@ const { openPostUploadBox } = modalStore
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       margin-right: 15px;
       width: 50px;
       height: 50px;
@@ -168,6 +167,7 @@ const { openPostUploadBox } = modalStore
       background-color: $c-second;
       border: 2px solid var(--dark);
       border-radius: 50%;
+      overflow: hidden;
     }
 
     i {
@@ -181,11 +181,11 @@ const { openPostUploadBox } = modalStore
   bottom: 0;
   left: 0;
   display: none;
-  overflow: hidden;
   width: 100vw;
   background-color: $c-white;
   border: 2px solid $c-black;
   border-radius: 15px 15px 0 0;
+  overflow: hidden;
   z-index: 20;
 
   @keyframes move {

@@ -150,15 +150,18 @@ const patchReplyHandler = async (reply) => {
 <style scoped lang="scss">
 @import '../../assets/scss/base/mixins';
 @import '../../assets/scss/base/variables';
+
 .main-inner {
   width: 100%;
   max-width: 800px;
 }
+
 .full-title {
   margin: 0 auto 40px;
 }
+
 .button-wrap {
-  width: 90%;
   margin: 60px auto 0;
+  width: 90%;
 }
 </style>

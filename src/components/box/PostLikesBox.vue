@@ -62,31 +62,38 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @import '../../assets/scss/base/variables';
+
 .main-inner {
   width: 100%;
   max-width: 600px;
 }
+
 ul {
   margin-top: 30px;
 }
+
 li {
-  color: var(--dark);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  color: var(--dark);
+
   &:last-child {
     margin-bottom: 0;
   }
+
   a {
     display: inline-flex;
     align-items: center;
+
     &:hover {
       .name {
         color: $c-first;
       }
     }
   }
+
   .name {
     font-size: px(18);
     font-weight: $medium;

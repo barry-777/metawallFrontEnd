@@ -72,9 +72,9 @@ const selected = async (sort) => {
   align-items: center;
   width: 100%;
   color: var(--dark);
-  z-index: 5;
-  cursor: pointer;
   user-select: none;
+  cursor: pointer;
+  z-index: 5;
 }
 
 .drop-top {
@@ -86,8 +86,8 @@ const selected = async (sort) => {
   background-color: var(--light);
   border: 2px solid var(--dark);
   border-radius: 8px 8px 15px 15px;
-  z-index: 1;
   transition: 0.2s;
+  z-index: 1;
 
   .now-value {
     font-weight: $medium;
@@ -103,14 +103,14 @@ const selected = async (sort) => {
   position: absolute;
   top: calc(100% - 10px);
   left: 50%;
-  overflow: hidden;
   width: 100%;
   border: 2px solid var(--dark);
   border-radius: 0 0 15px 15px;
   opacity: 0;
-  z-index: 0;
-  transition: 0.2s;
+  overflow: hidden;
   pointer-events: none;
+  transition: 0.2s;
+  z-index: 0;
   transform: translate(-50%, 10px);
 
   &::before {
@@ -121,10 +121,10 @@ const selected = async (sort) => {
     height: 100%;
     background-color: var(--light2);
     opacity: 0.8;
+    pointer-events: none;
     z-index: -1;
     backdrop-filter: blur(3px);
     content: '';
-    pointer-events: none;
   }
 
   ul {
@@ -134,11 +134,11 @@ const selected = async (sort) => {
   }
 
   li {
-    border-bottom: 1px solid $c-black;
-    cursor: pointer;
     padding: 12px;
-    user-select: none;
     width: 100%;
+    user-select: none;
+    cursor: pointer;
+    border-bottom: 1px solid $c-black;
 
     &.selected {
       color: $c-white;

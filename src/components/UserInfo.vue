@@ -166,11 +166,11 @@ const patchFollowsHandler = async (params_id) => {
 
 .top-info {
   position: relative;
-  overflow: hidden;
   padding: 25px 25px 30px;
   width: 100%;
   color: var(--dark);
   border-radius: 8px 8px 15px 15px;
+  overflow: hidden;
   box-shadow: 0 2px 10px var(--dark);
 
   @include mobile {

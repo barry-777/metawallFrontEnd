@@ -26,50 +26,58 @@ const { showAlertText, showAlertCls } = modalStore
 <style scoped lang="scss">
 @import '../../assets/scss/base/variables';
 @import '../../assets/scss/base/mixins';
+
 .alert-box {
   position: fixed;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
+
   &.success {
     .alert-inner {
-      background-color: $c-green;
       color: $c-white;
+      background-color: $c-green;
     }
   }
+
   &.error {
     .alert-inner {
-      background-color: $c-red;
       color: $c-white;
+      background-color: $c-red;
     }
   }
 }
+
 .alert-container {
   width: auto;
   height: auto;
-  .alert-inner {
-    width: auto;
-    height: auto;
-    display: flex;
-    align-content: center;
-    padding: 12px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba($c-black, 0.5);
-  }
-  p {
-    font-size: px(18);
-    font-weight: $medium;
-    margin: 3px;
-    letter-spacing: 1.2px;
-    line-height: 1.4;
-    &:not(:first-child)::before {
-      content: ', ';
-    }
-  }
+
   @include mobile {
     p {
       font-size: px(12);
+    }
+  }
+
+  .alert-inner {
+    display: flex;
+    padding: 12px;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba($c-black, 0.5);
+    align-content: center;
+  }
+
+  p {
+    margin: 3px;
+    font-size: px(18);
+    font-weight: $medium;
+    letter-spacing: 1.2px;
+    line-height: 1.4;
+
+    &:not(:first-child)::before {
+      content: ', ';
     }
   }
 }

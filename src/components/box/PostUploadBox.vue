@@ -294,120 +294,138 @@ const patchSubmit = async () => {
 <style scoped lang="scss">
 @import '../../assets/scss/base/mixins';
 @import '../../assets/scss/base/variables';
+
 .main-inner {
   width: 100%;
   max-width: 1200px;
 }
+
 .full-title {
   margin: 0 auto 25px;
 }
+
 .inner-content {
-  width: 100%;
-  padding: 30px 25px;
   margin: 0 auto;
-  border-radius: 8px;
-  border: 2px solid var(--dark);
-  border-bottom: 6px solid var(--dark);
+  padding: 30px 25px;
+  width: 100%;
   background-color: var(--light);
-  box-shadow: 0 2px 10px rgba(var(--dark), .25);
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgb(var(--dark) 0.25);
+  border-bottom: 6px solid var(--dark);
+
   @include mobile {
     padding: 30px 15px;
   }
 }
+
 .wrap {
   margin-bottom: 40px;
-  &:last-child {
-    margin: 0;
-    padding-bottom: 15px;
-    padding-top: 30px;
-  }
-  p {
-    font-size: px(18);
-    font-weight: $medium;
-    margin-bottom: 20px;
-    color: var(--dark);
-  }
+
   @include mobile {
     p {
       font-size: px(16);
     }
   }
+
+  &:last-child {
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 20px;
+    font-size: px(18);
+    font-weight: $medium;
+    color: var(--dark);
+  }
 }
+
 .image-section {
   .buttons {
-    width: 100%;
     display: flex;
+    width: 100%;
     align-content: center;
   }
 }
+
 .control-section {
   > * {
     &:not(:first-child) {
       margin-top: 15px;
     }
   }
+
   a {
     display: block;
   }
 }
+
 .images {
   display: flex;
   flex-wrap: wrap;
   margin-top: 15px;
-  img {
-    width: 150px;
-    height: auto;
-    margin: 5px;
-  }
+
   @include mobile-s {
     img {
       width: 100px;
     }
   }
+
+  img {
+    margin: 5px;
+    width: 150px;
+    height: auto;
+  }
 }
+
 .image-add {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 120px;
   height: 40px;
+  color: var(--light);
+  background-color: var(--dark);
+  border-radius: 4px;
   line-height: 1.4;
   letter-spacing: 1.5px;
-  background-color: var(--dark);
-  color: var(--light);
-  border-radius: 4px;
-  position: relative;
+
   label {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    cursor: pointer;
     user-select: none;
+    cursor: pointer;
   }
+
   input {
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
+    opacity: 0;
     pointer-events: none;
     user-select: none;
-    opacity: 0;
   }
 }
+
 .image-clear {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 10px;
   width: 120px;
   height: 40px;
+  color: $c-white;
+  background-color: $c-red;
+  border-radius: 4px;
+  user-select: none;
+  cursor: pointer;
   line-height: 1.4;
   letter-spacing: 1.5px;
-  margin-left: 10px;
-  background-color: $c-red;
-  color: $c-white;
-  border-radius: 4px;
-  cursor: pointer;
-  user-select: none;
 }
 </style>

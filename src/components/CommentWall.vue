@@ -235,8 +235,8 @@ li {
   button {
     font-weight: $medium;
     color: var(--gray);
-    cursor: pointer;
     user-select: none;
+    cursor: pointer;
 
     &:not(:first-child) {
       margin-left: 8px;

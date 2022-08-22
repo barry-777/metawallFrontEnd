@@ -170,8 +170,8 @@ onMounted(() => {
   left: 0;
   width: 100vw;
   color: var(--dark);
-  z-index: 20;
   transition: transform 0.4s;
+  z-index: 20;
 
   &::after {
     position: absolute;
@@ -181,8 +181,8 @@ onMounted(() => {
     height: 100%;
     background-color: var(--light);
     opacity: 0.5;
-    z-index: 0;
     box-shadow: 0 2px 10px var(--dark2);
+    z-index: 0;
     backdrop-filter: blur(3px);
     content: '';
   }
@@ -243,10 +243,10 @@ onMounted(() => {
   i {
     position: relative;
     font-size: px(25);
-    transition: 0.4s;
-    cursor: pointer;
-    flex-shrink: 0;
     user-select: none;
+    cursor: pointer;
+    transition: 0.4s;
+    flex-shrink: 0;
 
     &:hover {
       color: $c-first;
@@ -263,9 +263,9 @@ onMounted(() => {
   width: 100vw;
   height: 100vh;
   opacity: 0;
-  z-index: 21;
-  transition: opacity 0.2s;
   pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 21;
 
   &.active {
     opacity: 1;
@@ -291,15 +291,15 @@ onMounted(() => {
 
   .bars-inner {
     position: relative;
-    overflow-y: auto;
     padding: 10vh 20px;
     width: 90%;
     max-width: 300px;
     color: var(--dark);
     background-color: var(--light2);
     opacity: 0;
-    z-index: 1;
+    overflow-y: auto;
     transition: opacity 0.2s, transform 0.2s;
+    z-index: 1;
     transform: translateX(100%);
 
     > div {
@@ -353,9 +353,9 @@ onMounted(() => {
     padding: 10px 15px;
     font-size: px(16);
     text-align: center;
-    transition: 0.4s;
-    cursor: pointer;
     user-select: none;
+    cursor: pointer;
+    transition: 0.4s;
 
     &:hover {
       color: $c-first;

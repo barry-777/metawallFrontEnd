@@ -209,8 +209,8 @@ onMounted(() => {
 .post-control {
   position: relative;
   margin-left: auto;
-  cursor: pointer;
   user-select: none;
+  cursor: pointer;
 
   @include mobile {
     li {
@@ -233,18 +233,18 @@ onMounted(() => {
   }
 
   ul {
-    overflow: hidden;
     width: 100%;
     border-radius: 8px;
+    overflow: hidden;
     box-shadow: 0 2px 8px var(--dark);
   }
 
   li {
     padding: 10px 15px;
     width: 100%;
-    white-space: nowrap;
     color: $c-black;
     background-color: var(--gray);
+    white-space: nowrap;
     transition: background-color 0.6s;
 
     &:hover {
@@ -281,11 +281,11 @@ onMounted(() => {
 
   .img-control {
     position: relative;
-    overflow: hidden;
     margin: 5px;
     width: 33.333%;
     border: 2px solid var(--dark);
     border-radius: 10px;
+    overflow: hidden;
 
     > img {
       width: 100%;
@@ -307,11 +307,11 @@ onMounted(() => {
     padding: 10px;
     color: var(--dark);
     border-radius: 10px;
-    align-self: flex-end;
+    user-select: none;
     cursor: pointer;
+    align-self: flex-end;
     flex-direction: column;
     flex-shrink: 0;
-    user-select: none;
 
     p {
       font-size: px(12);

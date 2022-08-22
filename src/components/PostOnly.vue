@@ -73,9 +73,9 @@ onBeforeUnmount(() => {
   width: 100%;
 
   .back {
-    cursor: pointer;
     font-size: px(24);
     user-select: none;
+    cursor: pointer;
   }
 }
 </style>

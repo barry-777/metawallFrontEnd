@@ -179,10 +179,10 @@ const editor = useEditor({
   display: inline-flex;
 
   > div {
-    align-content: center;
-    cursor: pointer;
     display: inline-flex;
     user-select: none;
+    cursor: pointer;
+    align-content: center;
   }
 
   .look {
@@ -245,11 +245,11 @@ const editor = useEditor({
     color: $c-white;
     background-color: $c-first;
     border: 2px solid var(--dark);
+    user-select: none;
+    cursor: pointer;
     transition: background-color 0.6s, color 0.2s, transform 0.4s;
     border-left: unset;
-    cursor: pointer;
     flex-shrink: 0;
-    user-select: none;
 
     &:hover {
       background-color: rgba($c-first, 0.95);

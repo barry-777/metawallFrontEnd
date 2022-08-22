@@ -41,9 +41,6 @@ module.exports = {
       "justify-content",
       "float",
       "clear",
-      "overflow",
-      "overflow-x",
-      "overflow-y",
       "margin",
       "margin-top",
       "margin-right",
@@ -68,7 +65,6 @@ module.exports = {
       "text-indent",
       "text-overflow",
       "text-decoration",
-      "white-space",
       "color",
       "background",
       "background-position",
@@ -98,11 +94,18 @@ module.exports = {
       "list-style",
       "outline",
       "visibility",
-      "z-index",
+      "overflow",
+      "overflow-x",
+      "overflow-y",
+      "white-space",
       "box-shadow",
       "text-shadow",
       "resize",
-      "transition"
+      "pointer-events",
+      "user-select",
+      "cursor",
+      "transition",
+      "z-index",
     ]
   }
 }

@@ -70,9 +70,9 @@ input {
   background-color: $c-first;
   border: 2px solid var(--dark);
   border-radius: 0 8px 15px 0;
-  border-left: unset;
-  cursor: pointer;
   user-select: none;
+  cursor: pointer;
+  border-left: unset;
 
   &:hover {
     background-color: rgba($c-first, 0.95);

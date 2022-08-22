@@ -68,24 +68,28 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 @import '../../assets/scss/base/variables';
+
 .swiper-slide {
   padding: 35px;
 }
+
 .close-button {
+  position: relative;
   margin-bottom: 5px;
   color: $c-white;
-  position: relative;
   z-index: 2;
 }
+
 .images-inner {
   width: 100%;
   max-width: 800px;
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    box-shadow: 0 3px 15px rgba($c-black, .5);
+    box-shadow: 0 3px 15px rgba($c-black, 0.5);
   }
 }
 </style>

@@ -145,8 +145,8 @@ onBeforeUnmount(() => {
 
 .look-more,
 .heart {
-  cursor: pointer;
   user-select: none;
+  cursor: pointer;
 }
 
 .look-more {

@@ -306,10 +306,10 @@ onMounted(async () => {
     background-color: var(--light);
     border: 2px solid var(--dark);
     border-radius: 8px 8px 0 0;
+    user-select: none;
+    cursor: pointer;
     transition: 0.5s;
     border-bottom: unset;
-    cursor: pointer;
-    user-select: none;
 
     &.active {
       color: var(--light);
@@ -357,8 +357,8 @@ onMounted(async () => {
     justify-content: center;
     width: 100%;
     height: 100%;
-    cursor: pointer;
     user-select: none;
+    cursor: pointer;
   }
 
   input {

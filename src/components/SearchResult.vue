@@ -151,9 +151,9 @@ const switchPage = (n) => {
     margin-right: 30px;
     font-size: px(24);
     color: var(--dark);
+    user-select: none;
     cursor: pointer;
     flex-shrink: 0;
-    user-select: none;
   }
 
   .tabs {
@@ -170,9 +170,9 @@ const switchPage = (n) => {
     background-color: var(--light);
     border: 2px solid var(--dark);
     border-radius: 8px;
-    transition: 0.5s;
-    cursor: pointer;
     user-select: none;
+    cursor: pointer;
+    transition: 0.5s;
 
     &.active {
       color: var(--light);
