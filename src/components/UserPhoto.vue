@@ -2,7 +2,7 @@
   <Transition name="fade">
     <img
       v-if="/\.(png|jpg|jpe?g)$/i.test(photo?.link)"
-      :src="photo?.link"
+      v-lazy="photo?.link"
     >
     <div v-else>
       <i class="fa-solid fa-face-smile" />

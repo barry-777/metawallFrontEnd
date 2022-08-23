@@ -14,20 +14,22 @@
         </div>
         <div class="images-inner">
           <swiper
-            :modules="[Navigation, Pagination, EffectFade]"
+            :modules="[Lazy, Navigation, Pagination, EffectFade]"
             :speed="1000"
             :space-between="20"
             :pagination="{ clickable: true }"
             :navigation="true"
             :effect="'fade'"
-            :fade-effect="{crossFade: true}"
+            :fade-effect="{ crossFade: true }"
+            :lazy="{ loadPrevNext: true }"
           >
             <swiper-slide
               v-for="(image, index) in showImagesTemp"
               :key="'image' + index"
             >
               <img
-                :src="image.link"
+                class="swiper-lazy"
+                :data-src="image.link"
                 alt=""
               >
             </swiper-slide>
@@ -43,7 +45,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
-import { Navigation, Pagination, EffectFade } from 'swiper'
+import { Lazy, Navigation, Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { useModalStore } from '@/stores/modal'
 import { onMounted, onBeforeUnmount } from 'vue'

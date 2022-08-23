@@ -50,7 +50,7 @@
             class="img-control"
           >
             <img
-              :src="props.post.images[0].link"
+              v-lazy="props.post.images[0].link"
               alt=""
             >
           </div>
@@ -59,7 +59,7 @@
             class="img-control"
           >
             <img
-              :src="props.post.images[1].link"
+              v-lazy="props.post.images[1].link"
               alt=""
             >
           </div>
@@ -68,7 +68,7 @@
             class="img-control"
           >
             <img
-              :src="props.post.images[2].link"
+              v-lazy="props.post.images[2].link"
               alt=""
             >
           </div>

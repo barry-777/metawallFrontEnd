@@ -3,6 +3,7 @@ import App from './App.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import AOS from 'aos'
+import VueLazyLoad from 'vue3-lazyload'
 import router from './router'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
@@ -23,5 +24,6 @@ AOS.init({
 app.use(VueAxios, axios)
 app.use(router)
 app.use(pinia)
+app.use(VueLazyLoad, {})
 
 app.mount('#app')

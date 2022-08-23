@@ -28,6 +28,21 @@ body {
   overflow-x: hidden;
 }
 
+img[lazy='loading'] {
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+img[lazy='error'] {
+  opacity: 1;
+  transition: opacity 0.8s;
+}
+
+img[lazy='loaded'] {
+  opacity: 1;
+  transition: opacity 0.8s;
+}
+
 // swiper
 :root {
   --swiper-navigation-size: 32px !important;
