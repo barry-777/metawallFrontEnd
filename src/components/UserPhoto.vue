@@ -4,10 +4,9 @@
       v-if="/\.(png|jpg|jpe?g)$/i.test(photo?.link)"
       :src="photo?.link"
     >
-    <img
-      v-else
-      src="@img/user_default.jpg"
-    >
+    <div v-else>
+      <i class="fa-solid fa-face-smile" />
+    </div>
   </Transition>
 </template>
 

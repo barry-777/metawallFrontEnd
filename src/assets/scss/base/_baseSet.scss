@@ -149,7 +149,11 @@ body {
     font-size: px(40);
 
     @include pad {
-      font-size: px(30);
+      font-size: px(25);
+    }
+
+    @include mobile-s {
+      font-size: px(20);
     }
   }
 
@@ -168,7 +172,7 @@ body {
   justify-content: center;
   padding: 130px 5vw;
   width: 100%;
-  min-height: 100vh;
+  min-height: 120vh;
 
   @include pad {
     padding: 90px 5vw 130px;
@@ -369,10 +373,18 @@ textarea {
       padding: 10px;
     }
 
+    .top-control {
+      margin-bottom: 20px;
+    }
+
     .main-inner {
-      padding: 30px 10px 40px;
-      border: 2px solid $c-black;
-      border-top: 4px solid $c-black;
+      padding: 20px 10px 40px;
+      border: 2px solid var(--dark);
+      border-top: 4px solid var(--dark);
+    }
+
+    .full-title {
+      font-size: px(18);
     }
   }
 }
@@ -435,7 +447,8 @@ textarea {
   overflow: hidden;
   flex-shrink: 0;
 
-  img {
+  img,
+  div {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -445,6 +458,34 @@ textarea {
     object-fit: cover;
     object-position: center;
     transform: translate(-50%, -50%);
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+    background: linear-gradient(to right, var(--light) 8%, var(--light2) 18%, var(--light) 33%);
+    background-size: 200px 100px;
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: move;
+    animation-timing-function: linear;
+
+    i {
+      font-size: px(25);
+    }
+  }
+
+  @keyframes move {
+    0% {
+      background-position: -50px 0;
+    }
+
+    100% {
+      background-position: 50px 0;
+    }
   }
 }
 

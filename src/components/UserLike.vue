@@ -96,15 +96,21 @@ const postsData = ref([])
 const nowUser = ref([])
 
 const getLikePostsHandler = async (params_id) => {
-  openLoading()
+  if (localStorage.getItem('postlikes') !== null) {
+    postsData.value = Object.assign([], JSON.parse(localStorage.getItem('postlikes')))
+  } else {
+    openLoading()
+  }
   const { data: userData } = await getUserInfo(params_id)
   nowUser.value = userData.data
   const { data } = await getLikePosts(params_id)
   if (!data.data) router.push('/notfound')
-  postsData.value = data.data
+  postsData.value.length = 0
+  postsData.value = Object.assign([], data.data)
   postsData.value.forEach((post) => {
     post.isLiked = true
   })
+  localStorage.setItem('postlikes', JSON.stringify(postsData.value))
   closeLoading()
 }
 

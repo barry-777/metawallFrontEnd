@@ -315,7 +315,7 @@ canvas {
     width: 100%;
     max-width: 870px;
     border: 2px solid $c-black;
-    box-shadow: 0 0 15px #FFF;
+    box-shadow: 0 2px 12px #FFF;
 
     &::before {
       position: absolute;
@@ -323,7 +323,7 @@ canvas {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba($c-gray-1, 0.8);
+      background-color: rgba($c-gray-1, 0.7);
       z-index: 0;
       content: '';
       backdrop-filter: blur(3px);
@@ -351,7 +351,7 @@ canvas {
   }
 
   h2 {
-    margin: 12px 0 25px;
+    margin: 15px 0 30px;
     font-size: px(20);
     color: $c-black;
     line-height: 1.4;

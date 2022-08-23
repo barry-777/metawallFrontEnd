@@ -11,7 +11,7 @@
       <ul>
         <li>
           <router-link :to="`/user/info/${userStore.user_id}`">
-            <div>
+            <div class="circle">
               <div class="user-photo-outer">
                 <UserPhoto :photo="userStore.avatar" />
               </div>
@@ -26,7 +26,7 @@
         </li>
         <li>
           <router-link :to="`/user/likes/${userStore.user_id}`">
-            <div>
+            <div class="circle">
               <i class="fa-solid fa-heart" />
             </div>
             <p>我收藏的貼文</p>
@@ -34,7 +34,7 @@
         </li>
         <li>
           <router-link :to="`/user/comments/${userStore.user_id}`">
-            <div>
+            <div class="circle">
               <i class="fa-solid fa-comment" />
             </div>
             <p>我留言的貼文</p>
@@ -42,7 +42,7 @@
         </li>
         <li>
           <router-link to="/user/more">
-            <div>
+            <div class="circle">
               <i class="fa-solid fa-user" />
             </div>
             <p>找朋友吧</p>
@@ -151,7 +151,7 @@ const { openPostUploadBox } = modalStore
       }
     }
 
-    div {
+    .circle {
       position: relative;
       display: flex;
       align-items: center;
@@ -164,6 +164,10 @@ const { openPostUploadBox } = modalStore
       border: 2px solid var(--dark);
       border-radius: 50%;
       overflow: hidden;
+    }
+
+    .user-photo-outer {
+      border: unset;
     }
 
     i {

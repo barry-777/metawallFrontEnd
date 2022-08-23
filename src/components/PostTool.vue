@@ -115,7 +115,7 @@ const patchLikesHandler = async (post_id) => {
 
 // 顯示收藏會員燈箱
 const likesListHandler = async (post_id) => {
-  openLoading('取得收藏會員中！')
+  openLoading()
   const { data } = await getPostLikesList(post_id)
   closeLoading()
   openPostLikesBox(true, data.data.post_list.likes)

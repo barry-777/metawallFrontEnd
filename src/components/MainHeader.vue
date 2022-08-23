@@ -183,12 +183,13 @@
 
 <script setup>
 import UserPhoto from '@/components/UserPhoto.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
 import { getPostsByRoute, getPostsById, getFollowsList } from '@/fetch/fetch'
 import { dateFormat } from '@/services/helper'
+import router from '@/router/index'
 
 const appTitle = ref(import.meta.env.VITE_APP_NAME)
 const userStore = useUserStore()
@@ -210,7 +211,6 @@ const menuSwitch = (type) => {
 }
 
 // 通知資料
-const noticeTemp = ref([])
 const noticeNew = ref([])
 const getNotice = async () => {
   if (localStorage.getItem('notice') !== null) {
@@ -218,17 +218,17 @@ const getNotice = async () => {
   } else {
     openLoading()
   }
-  noticeTemp.value.length = 0
   const checkTime = (time) => Math.abs(new Date(time) - new Date()) < 1000 * 60 * 60 * 24 * 7
   const { data: newPosts } = await getPostsByRoute({ l: 10 })
   const { data: userPosts } = await getPostsById(user_id.value, {})
   const { data: followsData } = await getFollowsList(user_id.value)
+  noticeNew.value.length = 0
 
   // 貼文 (取得追蹤中的新貼文通知)
   newPosts.data.forEach(post => {
     const hasFollow = followsData.data.followings.some(item => item.user._id === post.user._id)
     if (hasFollow) {
-      noticeTemp.value.push({
+      noticeNew.value.push({
         post_id: post._id,
         name: post.user.name,
         time: post.createdAt,
@@ -238,31 +238,33 @@ const getNotice = async () => {
   })
   // 留言 (取得使用者貼文新的留言通知)
   userPosts.data.forEach(post => {
-    post.comments.forEach((comment) => {
-      if (checkTime(comment.createdAt)) {
-        noticeTemp.value.push({
-          post_id: post._id,
-          name: comment.user.name,
-          time: comment.createdAt,
-          type: 'comment'
-        })
-      }
-      comment.commentReplies.forEach((reply) => {
-        if (checkTime(reply.createdAt)) {
-          noticeTemp.value.push({
+    if (post.user._id !== user_id.value) {
+      post.comments.forEach((comment) => {
+        if (checkTime(comment.createdAt)) {
+          noticeNew.value.push({
             post_id: post._id,
-            name: reply.user.name,
-            time: reply.createdAt,
+            name: comment.user.name,
+            time: comment.createdAt,
             type: 'comment'
           })
         }
+        comment.commentReplies.forEach((reply) => {
+          if (checkTime(reply.createdAt)) {
+            noticeNew.value.push({
+              post_id: post._id,
+              name: reply.user.name,
+              time: reply.createdAt,
+              type: 'comment'
+            })
+          }
+        })
       })
-    })
+    }
   })
   // 追蹤
   followsData.data.followings.forEach(item => {
     if (checkTime(item.createdAt)) {
-      noticeTemp.value.push({
+      noticeNew.value.push({
         user_id: item.user._id,
         name: item.user.name,
         time: item.createdAt,
@@ -271,13 +273,11 @@ const getNotice = async () => {
     }
   })
 
-  noticeTemp.value = noticeTemp.value.sort(function (a, b) {
+  noticeNew.value = noticeNew.value.sort(function (a, b) {
     return b.time - a.time
   })
 
-  noticeNew.value.length = 0
-  noticeNew.value = Object.assign([], noticeTemp.value)
-  localStorage.setItem('notice', JSON.stringify(noticeTemp.value))
+  localStorage.setItem('notice', JSON.stringify(noticeNew.value))
   closeLoading()
 }
 
@@ -337,6 +337,12 @@ onMounted(() => {
     darkMode.value = !darkMode.value
   })
 })
+
+watch(() => router.currentRoute.value.fullPath, () => {
+  const target = document.querySelector('.main-header')
+  target.classList.remove('scroll-down')
+  target.classList.remove('scroll-up')
+})
 </script>
 
 <style scoped lang="scss">
@@ -359,7 +365,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     background-color: var(--light);
-    opacity: 0.5;
+    opacity: 0.7;
     box-shadow: 0 2px 10px var(--dark2);
     z-index: 0;
     backdrop-filter: blur(3px);
@@ -383,13 +389,17 @@ onMounted(() => {
   z-index: 1;
 
   @include pad {
-    padding: 12px 25px;
+    padding: 12px 15px;
   }
 }
 
 .other {
   display: flex;
   align-items: center;
+}
+
+.main-title {
+  margin-bottom: 5px;
 }
 
 .quick-icon {
@@ -410,6 +420,14 @@ onMounted(() => {
 
     &:last-child {
       margin: 0;
+    }
+  }
+
+  @include pad {
+    margin-right: 15px;
+
+    a {
+      margin-right: 8px;
     }
   }
 }
@@ -485,10 +503,6 @@ onMounted(() => {
     }
   }
 
-  .close-button {
-    margin-bottom: 30px;
-  }
-
   .name {
     position: relative;
     margin-top: 15px;
@@ -512,6 +526,7 @@ onMounted(() => {
 .bars-content.menu {
   .user-photo-outer {
     margin: 0;
+    margin-top: 30px;
     width: 60px;
     height: 60px;
   }
@@ -541,6 +556,10 @@ onMounted(() => {
 }
 
 .bars-content.notice {
+  .name {
+    margin-top: 25px;
+  }
+
   ul {
     width: 100%;
   }
