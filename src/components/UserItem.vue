@@ -2,6 +2,7 @@
   <div
     v-if="hasData"
     class="user"
+    data-aos="fade"
   >
     <div class="user-inner">
       <router-link :to="`/user/info/${props.user._id}`">
@@ -33,6 +34,8 @@
   <div
     v-else
     class="no-data"
+    data-aos="fade"
+    data-aos-delay="1200"
   >
     <div class="top-bar">
       <div />

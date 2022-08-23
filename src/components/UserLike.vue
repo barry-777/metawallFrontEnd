@@ -1,6 +1,10 @@
 <template>
   <div class="user-like">
-    <div class="common-title">
+    <div
+      class="common-title"
+      data-aos="fade"
+      data-aos-delay="800"
+    >
       <p v-if="user_id === nowUser._id">
         我收藏的貼文
       </p>
@@ -14,6 +18,7 @@
           <li
             v-for="data in postsData"
             :key="data._id"
+            data-aos="fade"
           >
             <div class="info">
               <div class="user-photo-outer">
@@ -65,7 +70,11 @@
           </li>
         </template>
         <template v-else>
-          <li class="no-data">
+          <li
+            class="no-data"
+            data-aos="fade"
+            data-aos-delay="1200"
+          >
             目前尚無收藏的貼文！
           </li>
         </template>

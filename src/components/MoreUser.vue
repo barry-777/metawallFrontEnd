@@ -2,6 +2,8 @@
   <div class="more-user">
     <div
       class="common-title"
+      data-aos="fade"
+      data-aos-delay="800"
     >
       <p>找朋友</p>
     </div>

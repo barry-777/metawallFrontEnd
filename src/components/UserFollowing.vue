@@ -2,6 +2,8 @@
   <div class="user-following">
     <div
       class="common-title"
+      data-aos="fade"
+      data-aos-delay="800"
     >
       <p v-if="user_id === nowUser._id">
         我的追蹤清單
@@ -16,6 +18,7 @@
           <li
             v-for="data in usersData"
             :key="data.user._id"
+            data-aos="fade"
           >
             <div class="info">
               <router-link :to="`/user/info/${data.user._id}`">
@@ -49,6 +52,8 @@
         <div
           v-else
           class="no-data"
+          data-aos="fade"
+          data-aos-delay="1200"
         >
           <div class="top-bar">
             <div />
@@ -98,7 +103,7 @@ const getFollowsHandler = async (params_id) => {
 getFollowsHandler(route.params.user_id)
 
 watch(() => route.params.user_id, () => {
-  const rule = router.currentRoute.value.fullPath.startsWith('/user/follows/')
+  const rule = router.currentRoute.value.fullPath.startsWith('/user/followings/')
   if (!rule) return false
   getFollowsHandler(route.params.user_id)
 })

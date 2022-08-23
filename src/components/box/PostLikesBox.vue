@@ -62,21 +62,27 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @import '../../assets/scss/base/variables';
+@import '../../assets/scss/base/mixins';
 
 .main-inner {
   width: 100%;
   max-width: 600px;
+  text-align: center;
 }
 
 ul {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 30px;
 }
 
 li {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  width: 100%;
   color: var(--dark);
 
   &:last-child {
@@ -97,6 +103,7 @@ li {
   .name {
     font-size: px(18);
     font-weight: $medium;
+    text-align: left;
   }
 }
 </style>

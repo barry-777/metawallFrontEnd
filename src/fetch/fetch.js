@@ -114,10 +114,13 @@ export function getFollowsList (user_id) {
 }
 
 // 追蹤 與 取消追蹤
-export function patchFollows (user_id, mode) {
+export function patchFollows (user_id, mode, target_id) {
   // follow_mode: follow / unfollow
+  let url
+  if (target_id) url = `${apiPath}/api/follows?user_id=${user_id}&follow_mode=${mode}&target_id=${target_id}`
+  else url = `${apiPath}/api/follows?user_id=${user_id}&follow_mode=${mode}`
   return useReq({
-    url: `${apiPath}/api/follows?user_id=${user_id}&follow_mode=${mode}`,
+    url,
     method: 'patch'
   })
 }

@@ -1,13 +1,25 @@
 <template>
   <div class="search-bar">
-    <div class="common-title">
+    <div
+      class="common-title"
+      data-aos="fade"
+      data-aos-delay="800"
+    >
       搜尋
     </div>
-    <div class="base-tools">
+    <div
+      class="base-tools"
+      data-aos="fade"
+      data-aos-delay="1000"
+    >
       <FilterSort v-if="nowSwitch===1" />
       <SearchBar />
     </div>
-    <div class="tool">
+    <div
+      class="tool"
+      data-aos="fade"
+      data-aos-delay="1000"
+    >
       <router-link
         class="back"
         to="/"

@@ -41,6 +41,7 @@
   <div
     class="bars-content menu"
     :class="{'active': menuShow}"
+    @click="menuSwitch(false)"
   >
     <div class="bars-inner">
       <div>
@@ -98,6 +99,7 @@
   <div
     class="bars-content notice"
     :class="{'active': noticeShow}"
+    @click="noticeSwitch(false)"
   >
     <div class="bars-inner">
       <div>
@@ -335,6 +337,13 @@ onMounted(() => {
       body.classList.add('dark-theme')
     }
     darkMode.value = !darkMode.value
+  })
+
+  document.querySelector('.bars-content.notice .bars-inner').addEventListener('click', function (e) {
+    e.stopPropagation()
+  })
+  document.querySelector('.bars-content.menu .bars-inner').addEventListener('click', function (e) {
+    e.stopPropagation()
   })
 })
 

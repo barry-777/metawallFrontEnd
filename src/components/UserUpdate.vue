@@ -2,10 +2,15 @@
   <div class="user-update">
     <div
       class="common-title"
+      data-aos="fade"
+      data-aos-delay="800"
     >
       <p>修改個人資料</p>
     </div>
-    <div class="update-inner">
+    <div
+      class="update-inner"
+      data-aos="fade"
+    >
       <div class="tabs">
         <div
           class="tab"

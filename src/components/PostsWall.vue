@@ -1,6 +1,10 @@
 <template>
   <div class="posts-outer">
-    <div class="base-tools">
+    <div
+      class="base-tools"
+      data-aos="fade"
+      data-aos-delay="1000"
+    >
       <FilterSort />
       <SearchBar />
     </div>

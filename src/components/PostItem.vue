@@ -2,6 +2,7 @@
   <div
     v-if="hasData"
     class="post"
+    data-aos="fade-up"
   >
     <div class="content">
       <div class="top">
@@ -89,6 +90,8 @@
   <div
     v-else
     class="no-data"
+    data-aos="fade"
+    data-aos-delay="1200"
   >
     <div class="top-bar">
       <div />
@@ -235,7 +238,7 @@ onMounted(() => {
   li {
     padding: 10px 15px;
     width: 100%;
-    color: $c-black;
+    color: var(--light);
     background-color: var(--gray);
     white-space: nowrap;
     transition: background-color 0.6s;

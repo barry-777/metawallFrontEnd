@@ -1,6 +1,10 @@
 <template>
   <div class="user-comment">
-    <div class="common-title">
+    <div
+      class="common-title"
+      data-aos="fade"
+      data-aos-delay="800"
+    >
       <p v-if="user_id === nowUser._id">
         我留言的貼文
       </p>

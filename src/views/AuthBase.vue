@@ -2,7 +2,11 @@
   <canvas id="canvas" />
   <section class="auth-base">
     <div class="container-box">
-      <div class="container">
+      <div
+        class="container"
+        data-aos="zoom-in"
+        data-aos-delay="400"
+      >
         <swiper
           class="swiper-no-swiping"
           :speed="1000"

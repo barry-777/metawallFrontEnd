@@ -1,6 +1,10 @@
 <template>
   <div class="user-info">
-    <div class="top-info">
+    <div
+      class="top-info"
+      data-aos="fade-up"
+      data-aos-delay="1000"
+    >
       <div class="status">
         <div class="base">
           <div class="user-photo-outer">
@@ -62,7 +66,11 @@
         </template>
       </div>
     </div>
-    <div class="bottom-posts">
+    <div
+      class="bottom-posts"
+      data-aos="fade"
+      data-aos-delay="1500"
+    >
       <template v-if="posts?.length">
         <PostItem
           v-for="post in posts"

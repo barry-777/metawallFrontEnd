@@ -3,7 +3,9 @@
   <section class="auth-center">
     <div class="container-box">
       <SideBar />
-      <div class="max">
+      <div
+        class="max"
+      >
         <router-view />
       </div>
     </div>
@@ -45,34 +47,38 @@ onMounted(async () => {
 <style scoped lang="scss">
 @import '../assets/scss/base/mixins';
 @import '../assets/scss/base/variables';
+
 .auth-center {
   .container-box {
     align-items: flex-start;
     background-size: 80px 80px;
   }
+
   .max {
     width: 100%;
     max-width: 950px;
   }
 }
+
 body {
   &.light-theme {
     .auth-center {
       .container-box {
         background-color: var(--light2);
         background-image:
-          linear-gradient(to right, rgba(0, 0, 0, .25) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(0, 0, 0, .25) 1px, transparent 1px);
+          linear-gradient(to right, rgb(0 0 0 / 25%) 1px, transparent 1px),
+          linear-gradient(to bottom, rgb(0 0 0 / 25%) 1px, transparent 1px);
       }
     }
   }
+
   &.dark-theme {
     .auth-center {
       .container-box {
         background-color: var(--light2);
         background-image:
-          linear-gradient(to right, rgba(255, 255, 255, .25) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255, 255, 255, .25) 1px, transparent 1px);
+          linear-gradient(to right, rgb(255 255 255 / 25%) 1px, transparent 1px),
+          linear-gradient(to bottom, rgb(255 255 255 / 25%) 1px, transparent 1px);
       }
     }
   }
