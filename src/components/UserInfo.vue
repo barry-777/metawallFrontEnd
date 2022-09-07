@@ -97,7 +97,7 @@ import { ref, onBeforeUnmount, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router/index'
 import { dateFormat } from '@/services/helper'
-import { getPostsById, getUserInfo, patchFollows } from '@/fetch/fetch'
+import { getUserProfile, patchFollows } from '@/fetch/fetch'
 import { useModalStore } from '@/stores/modal'
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/post'
@@ -108,23 +108,21 @@ const modalStore = useModalStore()
 const userStore = useUserStore()
 const postStore = usePostStore()
 const { user_id } = storeToRefs(userStore)
-const { posts, routeQuery } = storeToRefs(postStore)
+const { posts } = storeToRefs(postStore)
 const { openAlert, openLoading, closeLoading } = modalStore
-const { patchPosts, resetPosts, patchQuery } = postStore
+const { patchPosts, resetPosts } = postStore
 
 const nowUser = ref([])
 const followMode = ref(false)
 
 const getInfoHandler = async (params_id) => {
   openLoading()
-  const { data: userData } = await getUserInfo(params_id)
-  if (!userData.data) router.push('/notfound')
-  nowUser.value = userData.data
+  const { data: profileData } = await getUserProfile(params_id)
+  if (!profileData.data.user) router.push('/notfound')
+  nowUser.value = profileData.data.user
   followMode.value = nowUser.value.followers.some(item => item.user === user_id.value)
-  await patchQuery([route.query])
-  const { data } = await getPostsById(params_id, routeQuery.value)
-  if (!data.data) router.push('/notfound')
-  await patchPosts(data.data)
+  if (!profileData.data.post) router.push('/notfound')
+  await patchPosts(profileData.data.post)
   closeLoading()
 }
 

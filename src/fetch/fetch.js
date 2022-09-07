@@ -57,6 +57,14 @@ export function checkToken () {
   })
 }
 
+// 取得個人牆資料
+export function getUserProfile (user_id) {
+  return useReq({
+    url: `${apiPath}/api/user/profile/${user_id}`,
+    method: 'get'
+  })
+}
+
 // 隨機取得使用者
 export function getRandomUsers () {
   return useReq({
