@@ -431,10 +431,12 @@ textarea {
 }
 
 .base-tools {
+  position: relative;
   display: flex;
   align-items: stretch;
   margin-bottom: 40px;
   width: 100%;
+  z-index: 10;
 
   .filter-select {
     flex-shrink: 0;
