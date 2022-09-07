@@ -65,6 +65,14 @@ export function getUserProfile (user_id) {
   })
 }
 
+// 取得個人通知
+export function getUserNotice () {
+  return useReq({
+    url: `${apiPath}/api/user/notice`,
+    method: 'get'
+  })
+}
+
 // 隨機取得使用者
 export function getRandomUsers () {
   return useReq({

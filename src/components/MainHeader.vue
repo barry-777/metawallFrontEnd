@@ -189,7 +189,7 @@ import { ref, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useModalStore } from '@/stores/modal'
-import { getPostsByRoute, getPostsById, getFollowsList } from '@/fetch/fetch'
+import { getUserNotice } from '@/fetch/fetch'
 import { dateFormat } from '@/services/helper'
 import router from '@/router/index'
 
@@ -220,16 +220,15 @@ const getNotice = async () => {
   } else {
     openLoading()
   }
-  const checkTime = (time) => Math.abs(new Date(time) - new Date()) < 1000 * 60 * 60 * 24 * 7
-  const { data: newPosts } = await getPostsByRoute({ l: 10 })
-  const { data: userPosts } = await getPostsById(user_id.value, {})
-  const { data: followsData } = await getFollowsList(user_id.value)
+
+  const { data: noticeData } = await getUserNotice()
+
   noticeNew.value.length = 0
 
-  // 貼文 (取得追蹤中的新貼文通知)
-  newPosts.data.forEach(post => {
-    const hasFollow = followsData.data.followings.some(item => item.user._id === post.user._id)
-    if (hasFollow) {
+  const checkTime = (time) => Math.abs(new Date(time) - new Date()) < 1000 * 60 * 60 * 24 * 7
+
+  noticeData.data.postData.forEach(post => {
+    if (checkTime(post.createdAt)) {
       noticeNew.value.push({
         post_id: post._id,
         name: post.user.name,
@@ -238,39 +237,36 @@ const getNotice = async () => {
       })
     }
   })
-  // 留言 (取得使用者貼文新的留言通知)
-  userPosts.data.forEach(post => {
-    if (post.user._id !== user_id.value) {
-      post.comments.forEach((comment) => {
-        if (checkTime(comment.createdAt)) {
-          noticeNew.value.push({
-            post_id: post._id,
-            name: comment.user.name,
-            time: comment.createdAt,
-            type: 'comment'
-          })
-        }
-        comment.commentReplies.forEach((reply) => {
-          if (checkTime(reply.createdAt)) {
-            noticeNew.value.push({
-              post_id: post._id,
-              name: reply.user.name,
-              time: reply.createdAt,
-              type: 'comment'
-            })
-          }
-        })
+
+  noticeData.data.followerData.forEach(follower => {
+    if (checkTime(follower.createdAt)) {
+      noticeNew.value.push({
+        user_id: follower.user._id,
+        name: follower.user.name,
+        time: follower.createdAt,
+        type: 'follow'
       })
     }
   })
-  // 追蹤
-  followsData.data.followings.forEach(item => {
-    if (checkTime(item.createdAt)) {
+
+  noticeData.data.commentsData.forEach(comment => {
+    if (checkTime(comment.createdAt)) {
       noticeNew.value.push({
-        user_id: item.user._id,
-        name: item.user.name,
-        time: item.createdAt,
-        type: 'follow'
+        post_id: comment.post,
+        name: comment.user.name,
+        time: comment.createdAt,
+        type: 'comment'
+      })
+    }
+  })
+
+  noticeData.data.repliesData.forEach(reply => {
+    if (checkTime(reply.createdAt)) {
+      noticeNew.value.push({
+        post_id: reply.post,
+        name: reply.user.name,
+        time: reply.createdAt,
+        type: 'comment'
       })
     }
   })
