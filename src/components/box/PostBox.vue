@@ -1,18 +1,12 @@
 <template>
   <Transition name="fade">
-    <ImagesBox
-      v-if="showImagesBox"
-    />
+    <ImagesBox v-if="showImagesBox" />
   </Transition>
   <Transition name="fade-model">
-    <PostLikesBox
-      v-if="showPostLikesBox"
-    />
+    <PostLikesBox v-if="showPostLikesBox" />
   </Transition>
   <Transition name="fade-model">
-    <CommentEditorBox
-      v-if="showCommentEditorBox"
-    />
+    <CommentEditorBox v-if="showCommentEditorBox" />
   </Transition>
 </template>
 

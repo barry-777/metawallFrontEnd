@@ -3,7 +3,7 @@ import useReq from '../services/useReq'
 const apiPath = import.meta.env.VITE_APP_API
 
 // 上傳圖片 to imgur
-export function postUploadImage (data) {
+export function postUploadImage(data) {
   return useReq({
     url: `${apiPath}/api/upload`,
     method: 'post',
@@ -15,7 +15,7 @@ export function postUploadImage (data) {
 }
 
 // 刪除圖片 to imgur
-export function deleteUploadImage (hash) {
+export function deleteUploadImage(hash) {
   return useReq({
     url: `${apiPath}/api/delete_upload/${hash}`,
     method: 'delete'
@@ -23,7 +23,7 @@ export function deleteUploadImage (hash) {
 }
 
 // 登入
-export function postLogin (data) {
+export function postLogin(data) {
   return useReq({
     url: `${apiPath}/api/auth/login`,
     method: 'post',
@@ -32,7 +32,7 @@ export function postLogin (data) {
 }
 
 // 註冊
-export function postSignUp (data) {
+export function postSignUp(data) {
   return useReq({
     url: `${apiPath}/api/auth/signup`,
     method: 'post',
@@ -41,7 +41,7 @@ export function postSignUp (data) {
 }
 
 // 更新密碼
-export function patchPassword (data) {
+export function patchPassword(data) {
   return useReq({
     url: `${apiPath}/api/auth/reset_password`,
     method: 'patch',
@@ -50,7 +50,7 @@ export function patchPassword (data) {
 }
 
 // 驗證 token
-export function checkToken () {
+export function checkToken() {
   return useReq({
     url: `${apiPath}/api/auth/check`,
     method: 'get'
@@ -58,7 +58,7 @@ export function checkToken () {
 }
 
 // 取得個人牆資料
-export function getUserProfile (user_id) {
+export function getUserProfile(user_id) {
   return useReq({
     url: `${apiPath}/api/user/profile/${user_id}`,
     method: 'get'
@@ -66,7 +66,7 @@ export function getUserProfile (user_id) {
 }
 
 // 取得個人通知
-export function getUserNotice () {
+export function getUserNotice() {
   return useReq({
     url: `${apiPath}/api/user/notice`,
     method: 'get'
@@ -74,7 +74,7 @@ export function getUserNotice () {
 }
 
 // 隨機取得使用者
-export function getRandomUsers () {
+export function getRandomUsers() {
   return useReq({
     url: `${apiPath}/api/random_users`,
     method: 'get'
@@ -82,7 +82,7 @@ export function getRandomUsers () {
 }
 
 // 搜尋個人資料
-export function getUsersByRoute (query) {
+export function getUsersByRoute(query) {
   // q 搜尋使用者名稱
   let sendUrl = `${apiPath}/api/users`
   const keys = Object.keys(query)
@@ -97,7 +97,7 @@ export function getUsersByRoute (query) {
 }
 
 // 取得個人資料
-export function getUserInfo (user_id) {
+export function getUserInfo(user_id) {
   return useReq({
     url: `${apiPath}/api/user/${user_id}`,
     method: 'get'
@@ -105,7 +105,7 @@ export function getUserInfo (user_id) {
 }
 
 // 編輯個人資料
-export function patchUserInfo (user_id, data) {
+export function patchUserInfo(user_id, data) {
   return useReq({
     url: `${apiPath}/api/user/${user_id}`,
     method: 'patch',
@@ -114,7 +114,7 @@ export function patchUserInfo (user_id, data) {
 }
 
 // 刪除個人資料
-export function deleteUserInfo (user_id) {
+export function deleteUserInfo(user_id) {
   return useReq({
     url: `${apiPath}/api/user/${user_id}`,
     method: 'delete'
@@ -122,7 +122,7 @@ export function deleteUserInfo (user_id) {
 }
 
 // 取得追蹤列表
-export function getFollowsList (user_id) {
+export function getFollowsList(user_id) {
   return useReq({
     url: `${apiPath}/api/follows_list?user_id=${user_id}`,
     method: 'get'
@@ -130,7 +130,7 @@ export function getFollowsList (user_id) {
 }
 
 // 追蹤 與 取消追蹤
-export function patchFollows (user_id, mode, target_id) {
+export function patchFollows(user_id, mode, target_id) {
   // follow_mode: follow / unfollow
   let url
   if (target_id) url = `${apiPath}/api/follows?user_id=${user_id}&follow_mode=${mode}&target_id=${target_id}`
@@ -142,7 +142,7 @@ export function patchFollows (user_id, mode, target_id) {
 }
 
 // 取得收藏貼文的使用者
-export function getPostLikesList (post_id) {
+export function getPostLikesList(post_id) {
   return useReq({
     url: `${apiPath}/api/likes?post_id=${post_id}`,
     method: 'get'
@@ -150,7 +150,7 @@ export function getPostLikesList (post_id) {
 }
 
 // 收藏 與 取消收藏
-export function patchPostLikes (post_id, mode) {
+export function patchPostLikes(post_id, mode) {
   // like_mode: add / remove
   return useReq({
     url: `${apiPath}/api/likes?post_id=${post_id}&like_mode=${mode}`,
@@ -159,7 +159,7 @@ export function patchPostLikes (post_id, mode) {
 }
 
 // 取得使用者收藏的貼文
-export function getLikePosts (user_id) {
+export function getLikePosts(user_id) {
   return useReq({
     url: `${apiPath}/api/posts/likes/${user_id}`,
     method: 'get'
@@ -167,7 +167,7 @@ export function getLikePosts (user_id) {
 }
 
 // 取得使用者留言的貼文
-export function getCommentPosts (user_id) {
+export function getCommentPosts(user_id) {
   return useReq({
     url: `${apiPath}/api/posts/comments/${user_id}`,
     method: 'get'
@@ -175,7 +175,7 @@ export function getCommentPosts (user_id) {
 }
 
 // 取得單一貼文
-export function getPostOnly (post_id) {
+export function getPostOnly(post_id) {
   return useReq({
     url: `${apiPath}/api/post/1/${post_id}`,
     method: 'get'
@@ -183,7 +183,7 @@ export function getPostOnly (post_id) {
 }
 
 // 取得使用者貼文 -> user_id
-export function getPostsById (user_id, query) {
+export function getPostsById(user_id, query) {
   // q => 搜尋項目
   // s => 資料排序
   // p => 限制則數
@@ -201,7 +201,7 @@ export function getPostsById (user_id, query) {
 }
 
 // 取得所有貼文 -> route query
-export function getPostsByRoute (query) {
+export function getPostsByRoute(query) {
   // q => 搜尋項目
   // s => 資料排序
   // p => 限制則數
@@ -219,7 +219,7 @@ export function getPostsByRoute (query) {
 }
 
 // 新增貼文
-export function postOnePost (data) {
+export function postOnePost(data) {
   return useReq({
     url: `${apiPath}/api/post/1`,
     method: 'post',
@@ -228,7 +228,7 @@ export function postOnePost (data) {
 }
 
 // 編輯貼文
-export function patchOnePost (data) {
+export function patchOnePost(data) {
   const { _id, content, images } = data
   return useReq({
     url: `${apiPath}/api/post/1/${_id}`,
@@ -241,7 +241,7 @@ export function patchOnePost (data) {
 }
 
 // 刪除貼文
-export function deleteOnePost (post_id) {
+export function deleteOnePost(post_id) {
   return useReq({
     url: `${apiPath}/api/post/1/${post_id}`,
     method: 'delete'
@@ -249,7 +249,7 @@ export function deleteOnePost (post_id) {
 }
 
 // 新增留言
-export function postOneComment (post_id, data) {
+export function postOneComment(post_id, data) {
   return useReq({
     url: `${apiPath}/api/comment/1/${post_id}`,
     method: 'post',
@@ -258,7 +258,7 @@ export function postOneComment (post_id, data) {
 }
 
 // 編輯留言
-export function patchOneComment (comment_id, data) {
+export function patchOneComment(comment_id, data) {
   return useReq({
     url: `${apiPath}/api/comment/1/${comment_id}`,
     method: 'patch',
@@ -267,7 +267,7 @@ export function patchOneComment (comment_id, data) {
 }
 
 // 刪除留言
-export function deleteOneComment (comment_id) {
+export function deleteOneComment(comment_id) {
   return useReq({
     url: `${apiPath}/api/comment/1/${comment_id}`,
     method: 'delete'
@@ -275,7 +275,7 @@ export function deleteOneComment (comment_id) {
 }
 
 // 新增回覆留言
-export function postOneReply (post_id, comment_id, data) {
+export function postOneReply(post_id, comment_id, data) {
   return useReq({
     url: `${apiPath}/api/comment/reply/1/${post_id}/${comment_id}`,
     method: 'post',
@@ -284,7 +284,7 @@ export function postOneReply (post_id, comment_id, data) {
 }
 
 // 編輯回覆留言
-export function patchOneReply (reply_id, data) {
+export function patchOneReply(reply_id, data) {
   return useReq({
     url: `${apiPath}/api/comment/reply/1/${reply_id}`,
     method: 'patch',
@@ -293,7 +293,7 @@ export function patchOneReply (reply_id, data) {
 }
 
 // 刪除回覆留言
-export function deleteOneReply (reply_id, data) {
+export function deleteOneReply(reply_id, data) {
   return useReq({
     url: `${apiPath}/api/comment/reply/1/${reply_id}`,
     method: 'delete',

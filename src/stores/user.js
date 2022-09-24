@@ -15,7 +15,7 @@ export const useUserStore = defineStore('userStore', {
   // methods
   actions: {
     // 登入測試
-    tryLogin () {
+    tryLogin() {
       const token = localStorage.getItem('token')
       const tokenExpiration = localStorage.getItem('tokenExpiration')
       const expiresIn = +tokenExpiration - new Date().getTime()
@@ -30,7 +30,7 @@ export const useUserStore = defineStore('userStore', {
       }
     },
     // 設定登入訊息
-    setAuth (payload) {
+    setAuth(payload) {
       const expiresIn = 1000 * 3600 * 24
       const expirationDate = new Date().getTime() + expiresIn
       const { token } = payload
@@ -42,14 +42,14 @@ export const useUserStore = defineStore('userStore', {
       this.isLogin = true
     },
     // 登出會員
-    logoutAuth () {
+    logoutAuth() {
       localStorage.removeItem('token')
       localStorage.removeItem('tokenExpiration')
       this.token = null
       this.isLogin = false
     },
     // 更新會員資料
-    patchUser (payload) {
+    patchUser(payload) {
       this.$patch({
         ...payload
       })

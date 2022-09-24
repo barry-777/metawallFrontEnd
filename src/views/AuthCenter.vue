@@ -3,9 +3,7 @@
   <section class="auth-center">
     <div class="container-box">
       <SideBar />
-      <div
-        class="max"
-      >
+      <div class="max">
         <router-view />
       </div>
     </div>
@@ -65,8 +63,7 @@ body {
     .auth-center {
       .container-box {
         background-color: var(--light2);
-        background-image:
-          linear-gradient(to right, rgb(0 0 0 / 25%) 1px, transparent 1px),
+        background-image: linear-gradient(to right, rgb(0 0 0 / 25%) 1px, transparent 1px),
           linear-gradient(to bottom, rgb(0 0 0 / 25%) 1px, transparent 1px);
       }
     }
@@ -76,8 +73,7 @@ body {
     .auth-center {
       .container-box {
         background-color: var(--light2);
-        background-image:
-          linear-gradient(to right, rgb(255 255 255 / 25%) 1px, transparent 1px),
+        background-image: linear-gradient(to right, rgb(255 255 255 / 25%) 1px, transparent 1px),
           linear-gradient(to bottom, rgb(255 255 255 / 25%) 1px, transparent 1px);
       }
     }

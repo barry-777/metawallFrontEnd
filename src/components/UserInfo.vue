@@ -1,10 +1,6 @@
 <template>
   <div class="user-info">
-    <div
-      class="top-info"
-      data-aos="fade-up"
-      data-aos-delay="1000"
-    >
+    <div class="top-info" data-aos="fade-up" data-aos-delay="1000">
       <div class="status">
         <div class="base">
           <div class="user-photo-outer">
@@ -14,9 +10,7 @@
             <div class="name">
               {{ nowUser.name }}
             </div>
-            <div class="create">
-              創立日期： {{ dateFormat(nowUser.createdAt) }}
-            </div>
+            <div class="create">創立日期： {{ dateFormat(nowUser.createdAt) }}</div>
           </div>
         </div>
         <div class="detail">
@@ -38,50 +32,24 @@
           </div>
         </div>
       </div>
-      <router-link
-        v-if="user_id === nowUser._id"
-        class="base-button file"
-        to="/user/update"
-      >
+      <router-link v-if="user_id === nowUser._id" class="base-button file" to="/user/update">
         編輯個人檔案
       </router-link>
       <div class="tool">
         <template v-if="user_id !== nowUser._id">
-          <button
-            v-if="followMode"
-            class="base-button"
-            type="button"
-            @click="patchFollowsHandler(nowUser._id)"
-          >
+          <button v-if="followMode" class="base-button" type="button" @click="patchFollowsHandler(nowUser._id)">
             取消追蹤
           </button>
-          <button
-            v-else
-            class="base-button"
-            type="button"
-            @click="patchFollowsHandler(nowUser._id)"
-          >
-            追蹤
-          </button>
+          <button v-else class="base-button" type="button" @click="patchFollowsHandler(nowUser._id)">追蹤</button>
         </template>
       </div>
     </div>
-    <div
-      class="bottom-posts"
-      data-aos="fade"
-      data-aos-delay="1500"
-    >
+    <div class="bottom-posts" data-aos="fade" data-aos-delay="1500">
       <template v-if="posts?.length">
-        <PostItem
-          v-for="post in posts"
-          :key="post._id"
-          :post="post"
-        />
+        <PostItem v-for="post in posts" :key="post._id" :post="post" />
       </template>
       <template v-else>
-        <PostItem
-          :post="{}"
-        />
+        <PostItem :post="{}" />
       </template>
       <PostBox />
     </div>
@@ -120,7 +88,7 @@ const getInfoHandler = async (params_id) => {
   const { data: profileData } = await getUserProfile(params_id)
   if (!profileData.data.user) router.push('/notfound')
   nowUser.value = profileData.data.user
-  followMode.value = nowUser.value.followers.some(item => item.user === user_id.value)
+  followMode.value = nowUser.value.followers.some((item) => item.user === user_id.value)
   if (!profileData.data.post) router.push('/notfound')
   await patchPosts(profileData.data.post)
   closeLoading()
@@ -128,11 +96,14 @@ const getInfoHandler = async (params_id) => {
 
 getInfoHandler(route.params.user_id)
 
-watch(() => route.params.user_id, () => {
-  const rule = router.currentRoute.value.fullPath.startsWith('/user/info/')
-  if (!rule) return false
-  getInfoHandler(route.params.user_id)
-})
+watch(
+  () => route.params.user_id,
+  () => {
+    const rule = router.currentRoute.value.fullPath.startsWith('/user/info/')
+    if (!rule) return false
+    getInfoHandler(route.params.user_id)
+  }
+)
 
 onBeforeUnmount(() => {
   nowUser.value = []
@@ -148,7 +119,7 @@ const patchFollowsHandler = async (params_id) => {
   await patchFollows(params_id, mode)
 
   if (mode === 'unfollow') {
-    const aryIndex = nowUser.value.followers.findIndex(s => s.user === user_id)
+    const aryIndex = nowUser.value.followers.findIndex((s) => s.user === user_id)
     nowUser.value.followers.splice(aryIndex, 1)
   } else {
     nowUser.value.followers.push(user_id)

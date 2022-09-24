@@ -20,27 +20,27 @@ export const useModalStore = defineStore('modalStore', {
   }),
   // methods
   actions: {
-    lockScroll () {
+    lockScroll() {
       const body = document.querySelector('body')
       body.style.overflow = 'hidden'
     },
-    unLockScroll () {
+    unLockScroll() {
       const body = document.querySelector('body')
       body.style.removeProperty('overflow')
     },
-    openLoading (text) {
+    openLoading(text) {
       if (text) this.showLoadingText = text
       this.showLoading = true
     },
-    closeLoading () {
+    closeLoading() {
       this.showLoadingText = '載入中'
       this.showLoading = false
     },
-    openAlert (cls, ...info) {
+    openAlert(cls, ...info) {
       if (this.showAlert) return
       this.showAlert = true
       this.showAlertCls = cls
-      info.forEach(t => {
+      info.forEach((t) => {
         this.showAlertText.push(t)
       })
       setTimeout(() => {
@@ -49,7 +49,7 @@ export const useModalStore = defineStore('modalStore', {
         this.showAlertText = []
       }, 2000)
     },
-    openImagesBox (control, data) {
+    openImagesBox(control, data) {
       if (control) {
         this.lockScroll()
         this.showImagesBox = true
@@ -60,7 +60,7 @@ export const useModalStore = defineStore('modalStore', {
         this.showImagesTemp = null
       }
     },
-    openPostUploadBox (control, data) {
+    openPostUploadBox(control, data) {
       if (control) {
         this.lockScroll()
         this.showPostUploadBox = true
@@ -71,7 +71,7 @@ export const useModalStore = defineStore('modalStore', {
         this.showPostUploadTemp = null
       }
     },
-    openPostLikesBox (control, data) {
+    openPostLikesBox(control, data) {
       if (control) {
         this.lockScroll()
         this.showPostLikesBox = true
@@ -82,7 +82,7 @@ export const useModalStore = defineStore('modalStore', {
         this.showPostLikesTemp = null
       }
     },
-    openCommentEditorBox (control, type, data) {
+    openCommentEditorBox(control, type, data) {
       // type: patchComment, postReply, patchReply
       if (control) {
         this.lockScroll()

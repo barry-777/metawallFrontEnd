@@ -1,14 +1,7 @@
 <template>
   <div class="search-bar">
-    <input
-      v-model="searchContent"
-      type="text"
-      placeholder="搜尋 ..."
-    >
-    <div
-      class="search-btn"
-      @click="searchHandler"
-    >
+    <input v-model="searchContent" type="text" placeholder="搜尋 ..." />
+    <div class="search-btn" @click="searchHandler">
       <i class="fa-solid fa-magnifying-glass" />
     </div>
   </div>
@@ -29,11 +22,14 @@ const { patchQuery } = postStore
 const searchContent = ref(null)
 if (route.query?.q) searchContent.value = route.query.q
 const searchHandler = async () => {
-  await patchQuery([route.query, {
-    q: searchContent.value,
-    s: 'new',
-    p: null
-  }])
+  await patchQuery([
+    route.query,
+    {
+      q: searchContent.value,
+      s: 'new',
+      p: null
+    }
+  ])
   await router.push({
     path: '/search',
     query: routeQuery.value

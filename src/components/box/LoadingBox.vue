@@ -38,7 +38,7 @@ const { showLoadingText } = storeToRefs(modalStore)
   top: 33px;
   width: 13px;
   height: 13px;
-  background: #FFF;
+  background: #fff;
   border-radius: 50%;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }

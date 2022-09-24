@@ -7,7 +7,7 @@ export const checkConsole = (text, ...response) => {
   }
 }
 
-export const dateFormat = dateTimeStamp => {
+export const dateFormat = (dateTimeStamp) => {
   const minute = 1000 * 60
   const hour = minute * 60
   const day = hour * 24

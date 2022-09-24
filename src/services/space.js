@@ -45,9 +45,8 @@ export const drawSpace = () => {
   scene.add(starPoints)
   requestAnimationFrame(draw)
 
-  function draw () {
-    if (canvas.height !== canvas.clientHeight ||
-      canvas.width !== canvas.clientWidth) {
+  function draw() {
+    if (canvas.height !== canvas.clientHeight || canvas.width !== canvas.clientWidth) {
       camera.aspect = canvas.clientWidth / canvas.clientHeight
       camera.updateProjectionMatrix()
       renderer.setSize(canvas.clientWidth, canvas.clientHeight, false)

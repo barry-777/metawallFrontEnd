@@ -1,17 +1,7 @@
 <template>
-  <aside
-    class="side-bar"
-    data-aos="fade-up"
-    data-aos-delay="1000"
-  >
+  <aside class="side-bar" data-aos="fade-up" data-aos-delay="1000">
     <div class="container">
-      <button
-        class="base-button blue"
-        type="button"
-        @click="openPostUploadBox(true)"
-      >
-        新增動態
-      </button>
+      <button class="base-button blue" type="button" @click="openPostUploadBox(true)">新增動態</button>
       <ul>
         <li>
           <router-link :to="`/user/info/${userStore.user_id}`">
@@ -23,9 +13,7 @@
             <p v-if="userStore.name">
               {{ userStore.name }}
             </p>
-            <p v-else>
-              使用者名稱
-            </p>
+            <p v-else>使用者名稱</p>
           </router-link>
         </li>
         <li>
@@ -56,11 +44,7 @@
     </div>
   </aside>
 
-  <aside
-    class="mobile-bar"
-    data-aos="fade"
-    data-aos-delay="1000"
-  >
+  <aside class="mobile-bar" data-aos="fade" data-aos-delay="1000">
     <ul>
       <li>
         <router-link to="/">
@@ -75,10 +59,7 @@
         </router-link>
       </li>
       <li class="add">
-        <a
-          href="javascript:;"
-          @click.prevent="openPostUploadBox(true)"
-        >
+        <a href="javascript:;" @click.prevent="openPostUploadBox(true)">
           <i class="fa-solid fa-circle-plus" />
         </a>
       </li>
@@ -98,10 +79,8 @@
   </aside>
 
   <Transition name="fade-model">
-    <PostUploadBox
-      v-if="showPostUploadBox"
-    />
-  </transition>
+    <PostUploadBox v-if="showPostUploadBox" />
+  </Transition>
 </template>
 
 <script setup>

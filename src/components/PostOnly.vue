@@ -1,24 +1,15 @@
 <template>
   <div class="post-only">
     <div class="tool">
-      <a
-        class="back"
-        @click.prevent="router.back()"
-      >
+      <a class="back" @click.prevent="router.back()">
         <i class="fa-solid fa-circle-arrow-left" />
       </a>
     </div>
     <template v-if="posts?.length">
-      <PostItem
-        v-for="post in posts"
-        :key="post._id"
-        :post="post"
-      />
+      <PostItem v-for="post in posts" :key="post._id" :post="post" />
     </template>
     <template v-else>
-      <PostItem
-        :post="{}"
-      />
+      <PostItem :post="{}" />
     </template>
   </div>
   <PostBox />
@@ -53,11 +44,14 @@ const getPostHandler = async (post_id) => {
 
 getPostHandler(route.params.post_id)
 
-watch(() => route.params.post_id, () => {
-  const rule = router.currentRoute.value.fullPath.startsWith('/post/')
-  if (!rule) return false
-  getPostHandler(route.params.post_id)
-})
+watch(
+  () => route.params.post_id,
+  () => {
+    const rule = router.currentRoute.value.fullPath.startsWith('/post/')
+    if (!rule) return false
+    getPostHandler(route.params.post_id)
+  }
+)
 
 onBeforeUnmount(() => {
   resetPosts()

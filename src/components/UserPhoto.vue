@@ -1,9 +1,6 @@
 <template>
   <Transition name="fade">
-    <img
-      v-if="/\.(png|jpg|jpe?g)$/i.test(photo?.link)"
-      v-lazy="photo?.link"
-    >
+    <img v-if="/\.(png|jpg|jpe?g)$/i.test(photo?.link)" v-lazy="photo?.link" />
     <div v-else>
       <i class="fa-solid fa-face-smile" />
     </div>

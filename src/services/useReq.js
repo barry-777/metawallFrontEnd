@@ -17,20 +17,20 @@ axios.defaults.retry = 4
 axios.defaults.retryDelay = 1000
 
 useReq.interceptors.request.use(
-  config => {
+  (config) => {
     if (localStorage.getItem('token')) {
       config.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
     }
     return config
   },
-  request => {
+  (request) => {
     request.method.toUpperCase()
     return request
   },
-  config => {
+  (config) => {
     return config
   },
-  error => {
+  (error) => {
     closeLoading()
     if (isDev) console.error(`❌ 發生錯誤：${error}`)
     return Promise.reject(error)
@@ -38,14 +38,14 @@ useReq.interceptors.request.use(
 )
 
 useReq.interceptors.response.use(
-  response => {
+  (response) => {
     const result = {
       ...response,
       target: response?.data?.data || {}
     }
     return result
   },
-  error => {
+  (error) => {
     closeLoading()
 
     if (isDev) {
@@ -89,7 +89,7 @@ useReq.interceptors.response.use(
         .then(() => {
           return axios(config)
         })
-        .catch(error => {
+        .catch((error) => {
           openAlert('error', '系統錯誤，請洽系統管理員')
           console.error(error)
         })
